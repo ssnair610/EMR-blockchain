@@ -13,22 +13,15 @@ func main() {
         { Message: "A sent E 5 coins" },
         { Message: "A sent F 5 coins" },
         { Message: "A sent G 5 coins" } }
+	
+	bc := model.NewBlockchain(2)
+	bc.AddBlock(transactions)
 
-	genesis := model.GenesisBlock()
-
-	newBlock := model.NewBlock(transactions, genesis.Hash)
-
-	if genesis.IsValid() {
-		genesis.Print()
-	} else {
-		fmt.Println("Genesis block is invalid")
+	for _, block := range bc.Chain.Links() {
+		if block.IsValid() {
+			block.Print()
+		}
+		
+		fmt.Println()
 	}
-
-	newBlock.Transactions = append(newBlock.Transactions, model.Transaction{ Message : "A sent Z 100 coins" })
-
-	if newBlock.IsValid() {
-        newBlock.Print()
-    } else {
-        fmt.Println("New block is invalid")
-    }
 }
