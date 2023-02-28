@@ -7,6 +7,12 @@ import (
 	"strconv"
 )
 
+// A Blockchain facilitates processing of transactions through consensus of blocks.
+// @property Chain - This is the chain of blocks that make up the blockchain.
+// @property {int} difficulty - The number of leading zeros that the hash of a block must have.
+// @property {[]Transaction} transactionBuffer - This is a slice of transactions that are waiting to be
+// added to the blockchain.
+// @property {CurrencyType} reward - The amount of currency that is rewarded to the miner of a block.
 type Blockchain struct {
 	Chain             *ChainLinks
 	difficulty        int
@@ -14,6 +20,7 @@ type Blockchain struct {
 	reward            CurrencyType
 }
 
+// `NewBlockchain` creates a new blockchain with a genesis block and returns a pointer to it
 func NewBlockchain(difficulty int) *Blockchain {
 	blockchain := &Blockchain{
 		Chain:             NewChain(),
@@ -25,12 +32,14 @@ func NewBlockchain(difficulty int) *Blockchain {
 	return blockchain
 }
 
+// Adding a block to the blockchain.
 func (blockchain *Blockchain) addBlock(blockData []Transaction) {
 	statement := NewBlock(blockData, blockchain.Chain.Latest.Hash)
 	statement.Mine(blockchain.difficulty)
 	blockchain.Chain.Add(statement)
 }
 
+// Adding transactions to the blockchain.
 func (blockchain *Blockchain) AddTransactions(transactionData []Transaction) error {
 	if len(transactionData) == 100 {
         return errors.New("transactionBuffer is full. Try processing pending transactions")
@@ -41,6 +50,7 @@ func (blockchain *Blockchain) AddTransactions(transactionData []Transaction) err
 	return nil
 }
 
+// Processing the pending transactions. (Currently only supports PoW)
 func (blockchain *Blockchain) ProcessPendingTransactions(rewardAddress walletType) {
 	rewardTx := Transaction{ "genesis rewards " + strconv.FormatFloat(float64(blockchain.reward), 'f', 2, 64) + " coin(s) to " + hex.EncodeToString(rewardAddress) }
 	blockchain.transactionBuffer = append(blockchain.transactionBuffer, rewardTx)
@@ -49,6 +59,7 @@ func (blockchain *Blockchain) ProcessPendingTransactions(rewardAddress walletTyp
 	blockchain.transactionBuffer = blockchain.transactionBuffer[:0]
 }
 
+// Checking if the blockchain is valid.
 func (blockchain *Blockchain) IsChainValid() bool {
 	prevHash := []byte{}
 

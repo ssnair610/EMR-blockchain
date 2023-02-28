@@ -11,6 +11,12 @@ import (
 type hashcode []byte
 type noncecode []byte
 
+// A Block is a collection of Transactions, a timestamp, a hash, a previous hash, and a nonce.
+// @property {[]Transaction} Transactions - An array of transactions that are included in the block.
+// @property Timestamp - The time at which the block was created.
+// @property {hashcode} Hash - The hash of the block.
+// @property {hashcode} PrevHash - The hash of the previous block in the chain.
+// @property {noncecode} Nonce - A random number that is used to mine the block.
 type Block struct {
 
 	Transactions []Transaction `json:"transactions"`
@@ -20,6 +26,8 @@ type Block struct {
 	Nonce noncecode `json:"nonce"`
 }
 
+// It creates a the first block, sets the timestamp, previous hash, and nonce to empty values, and then
+// generates the hash for the block
 func GenesisBlock() *Block {
 	block := new(Block)
     block.Transactions = []Transaction{}
@@ -31,6 +39,7 @@ func GenesisBlock() *Block {
     return block
 }
 
+// NewBlock creates a new block with the given transactions and previous block's hash
 func NewBlock(transactions []Transaction, previousHash hashcode) *Block {
 	block := new(Block)
     block.Transactions = transactions
@@ -41,6 +50,7 @@ func NewBlock(transactions []Transaction, previousHash hashcode) *Block {
     return block
 }
 
+// Generating a hash for the block.
 func (block *Block) generateHash() hashcode {
 	input := append(block.Nonce, block.PrevHash...)
 	input = append(input, block.Timestamp.String()...)
@@ -54,6 +64,7 @@ func (block *Block) generateHash() hashcode {
 	return hash[:]
 }
 
+// If the first `depth` bytes of `solution` are all zero, then return true, otherwise return false
 func isSolved(solution []byte, depth int) bool {
 	for index, solutionByte := range solution {
 
@@ -69,6 +80,7 @@ func isSolved(solution []byte, depth int) bool {
     return true
 }
 
+// Generates a hashcode for the given difficulty
 func (block *Block) Mine(difficulty int) {
 	// This is the mining process. It is generating a random number and assigning it to the nonce when the hash remains unsolved.
 	for ! isSolved(block.Hash, difficulty) {
@@ -91,6 +103,7 @@ func (block *Block) Print() {
     }
 }
 
+// Checks for altered contents within the block's transactions
 func (block *Block) IsValid() bool {
 	return bytes.Equal(block.Hash, block.generateHash())
 }
