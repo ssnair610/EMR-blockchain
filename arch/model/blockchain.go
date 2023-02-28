@@ -2,6 +2,7 @@ package model
 
 import (
 	"bytes"
+	"errors"
 )
 
 type currency float32
@@ -17,28 +18,34 @@ func NewBlockchain(difficulty int) *Blockchain {
 	blockchain := &Blockchain{
 		Chain:             NewChain(),
 		difficulty:        difficulty,
-		transactionBuffer: make([]Transaction, 100),
+		transactionBuffer: make([]Transaction, 0),
 		reward:            currency(1),
 	}
 
 	return blockchain
 }
 
-func (blockchain *Blockchain) AddBlock(blockData []Transaction) {
+func (blockchain *Blockchain) addBlock(blockData []Transaction) {
 	statement := NewBlock(blockData, blockchain.Chain.Latest.Hash)
-	// prove statement
+	statement.Mine(blockchain.difficulty)
 	blockchain.Chain.Add(statement)
 }
 
-func (blockchain *Blockchain) AddTransaction(transactionData []Transaction) {
+func (blockchain *Blockchain) AddTransactions(transactionData []Transaction) error {
+	if len(transactionData) == 100 {
+        return errors.New("transactionBuffer is full. Try processing pending transactions")
+    }
+
 	blockchain.transactionBuffer = append(blockchain.transactionBuffer, transactionData...)
+
+	return nil
 }
 
 func (blockchain *Blockchain) ProcessPendingTransactions(rewardAddress []byte) {
 	rewardTx := Transaction{ "genesis rewards " + string(rewardAddress) }
 	blockchain.transactionBuffer = append(blockchain.transactionBuffer, rewardTx)
 
-	blockchain.AddBlock(blockchain.transactionBuffer)
+	blockchain.addBlock(blockchain.transactionBuffer)
 	blockchain.transactionBuffer = blockchain.transactionBuffer[:0]
 }
 

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"model"
+	"time"
 )
 
 func main() {
@@ -14,8 +15,11 @@ func main() {
         { Message: "A sent F 5 coins" },
         { Message: "A sent G 5 coins" } }
 	
-	bc := model.NewBlockchain(2)
-	bc.AddBlock(transactions)
+	bc := model.NewBlockchain(3)
+	bc.AddTransactions(transactions)
+	clock := time.Now()
+	bc.ProcessPendingTransactions([]byte("wallet"))
+	fmt.Println(time.Since(clock))
 
 	for _, block := range bc.Chain.Links() {
 		if block.IsValid() {
