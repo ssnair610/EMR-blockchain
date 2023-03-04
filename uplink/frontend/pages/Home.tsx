@@ -1,13 +1,18 @@
 // Home Page React Component
 
-
 import * as React from "react";
-import { Link } from "react-router-dom";
+import NavBar from "./Props-TypeScript/NavBar";
 
 export default function Home() {
-  return (
-    <div>
-      <Link to="/login">About page</Link>
-    </div>
-  );
+    return (
+
+        <>
+
+            <NavBar mode={''}/>
+
+
+        </>
+
+    );
 }
+

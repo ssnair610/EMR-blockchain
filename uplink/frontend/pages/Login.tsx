@@ -1,5 +1,4 @@
 // Login Page React Component
-
 import {
     Button,
     Card,
@@ -8,30 +7,83 @@ import {
     Flex,
     Heading,
     HStack,
+    Input,
+    InputGroup,
+    InputLeftAddon,
+    InputRightElement,
     Text,
     useColorModeValue,
+    useToast,
     VStack,
+    Link,
 } from '@chakra-ui/react';
 import * as React from 'react';
-import {FaFacebook, FaGithub, FaGoogle} from 'react-icons/all';
-
-import EmailInput from "./Props-TypeScript/EmailInput";
-import PasswordInput from './Props-TypeScript/PasswordInput';
-import NavBar from './Props-TypeScript/NavBar';
-import Footer from "./Props-TypeScript/Footer";
-
-function ButtonCustom() {
-    // Need to add isLoading when the button is pressed .
-    return (<Button size='md' w='full' colorScheme='brand'>Login</Button>
-    );
-}
-
+import {SyntheticEvent, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import NavBar from "./Props-TypeScript/NavBar";
+import {FaFacebook, FaGithub, FaGoogle} from "react-icons/all";
 
 export default function Login() {
     const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
+    const toast = useToast()
+    const navigate = useNavigate();
+
+
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
+    const [show, setShow] = React.useState(false);
+
+
+    const handleClick = () => setShow(!show);
+
+    let Toast
+
+
+    const submit = async (e: SyntheticEvent) => {
+
+
+        e.preventDefault();
+        const response = await fetch('http://localhost:3000/api/login', {
+            body: JSON.stringify({
+                    Email,
+                    Password
+                }
+            ),
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            method: 'POST'
+        });
+
+        if (response.status === 202) {
+            Toast = (toast({
+                title: 'Successfully Logged In',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            }))
+
+            return navigate("/MainPage");
+
+        } else if (response.status === 400) {
+            Toast = (
+                toast({
+                    title: 'Error',
+                    description: 'Email or Password is incorrect!',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            )
+        }
+
+
+    }
+
+
     return (
         <>
-            <NavBar/>
+            <NavBar mode={''}/>
             <Container maxW='container.xl'>
                 <Flex>
                     <Container maxW='container.xl' centerContent py={55}>
@@ -40,11 +92,38 @@ export default function Login() {
                                 <Card p={3}>
                                     <VStack spacing={4}>
                                         <Heading mb={4}>Login</Heading>
+                                        <form onSubmit={submit}>
+                                            <VStack w='full' h='full' spacing={4} px={2} alignItems='flex-start'>
 
-                                        <EmailInput/>
-                                        <PasswordInput placeHolder='Enter your Password'/>
-                                        <ButtonCustom/>
-                                        <Divider/>
+                                                <InputGroup>
+                                                    <InputLeftAddon children={'@'}/>
+                                                    <Input type='email' focusBorderColor='red.300'
+                                                           placeholder='Enter Email Address'
+                                                           onChange={e => setEmail(e.target.value)}/>
+                                                </InputGroup>
+                                                <InputGroup size='md'>
+                                                    <Input
+                                                        pr='4.5rem'
+                                                        type={show ? 'text' : 'password'}
+                                                        placeholder="Enter your password"
+                                                        focusBorderColor='red.300'
+                                                        onChange={e => setPassword(e.target.value)}
+                                                    />
+                                                    <InputRightElement width='4.5rem'>
+                                                        <Button h='1.75rem' size='sm' onClick={handleClick}>
+                                                            {show ? 'Hide' : 'Show'}
+                                                        </Button>
+                                                    </InputRightElement>
+                                                </InputGroup>
+                                                {/*<PasswordInput placeHolder='Confirm your Password'/>*/}
+                                                <Button size='md' w='full' colorScheme='brand'
+                                                        type='submit' onClick={() => {
+                                                    Toast
+                                                }}> Login </Button>
+                                                <Link href='/signUp'>Dont have a account , signup here !!</Link>
+                                                <Divider/>
+                                            </VStack>
+                                        </form>
                                         <Text>Or</Text>
                                         <HStack>
                                             <Button colorScheme='facebook' leftIcon={<FaFacebook/>}>
@@ -65,7 +144,6 @@ export default function Login() {
                     </Container>
                 </Flex>
             </Container>
-            <Footer/>
         </>
     );
 

@@ -19,9 +19,11 @@ import {
     useColorMode,
     useColorModeValue,
     useDisclosure,
+    useToast,
 } from '@chakra-ui/react';
 import {CloseIcon, HamburgerIcon, MoonIcon, SunIcon} from '@chakra-ui/icons';
 import {Logo} from "./Logo";
+import {useNavigate} from "react-router-dom";
 
 const Links = ['Dashboard', 'Projects', 'Team'];
 
@@ -39,9 +41,72 @@ const NavLink = ({children}: { children: ReactNode }) => (
     </Link>
 );
 
-export default function withAction() {
+export default function withAction(props: { mode: string }) {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const {colorMode, toggleColorMode} = useColorMode();
+    const toast = useToast()
+
+
+    const navigate = useNavigate();
+    let Toast;
+    const logOut = async () => {
+        const response = await fetch('http://localhost:3000/api/logout', {
+
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            method: 'POST'
+        });
+
+        toast({
+            title: 'Successfully Logged Out',
+            status: 'success',
+            duration: 5000,
+            isClosable: true,
+        })
+
+        navigate("/login");
+
+    }
+
+    function handleClick() {
+        navigate("/login");
+    }
+
+
+    let menu;
+    if (props.mode === '' || props.mode === undefined) {
+        menu = (
+            <Button type='button' onClick={handleClick} size='md' w='full'
+                    colorScheme='brand'>Login</Button>
+        )
+    } else {
+        menu = (
+            <Menu>
+                <MenuButton
+                    as={Button}
+                    rounded={'full'}
+                    variant={'link'}
+                    cursor={'pointer'}
+                    minW={0}>
+                    <Avatar
+                        size={'sm'}
+                        src={
+                            'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                        }
+                    />
+                </MenuButton>
+                <MenuList>
+                    <MenuItem>Link 1</MenuItem>
+                    <MenuItem>Link 2</MenuItem>
+                    <MenuDivider/>
+                    <MenuItem>
+                        <Button colorScheme='brand' w='full' onClick={logOut}>Logout</Button>
+                    </MenuItem>
+                </MenuList>
+            </Menu>
+
+        )
+    }
 
     return (
         <>
@@ -70,27 +135,7 @@ export default function withAction() {
                         <Button onClick={toggleColorMode}>
                             {colorMode === 'light' ? <MoonIcon/> : <SunIcon/>}
                         </Button>
-                        <Menu>
-                            <MenuButton
-                                as={Button}
-                                rounded={'full'}
-                                variant={'link'}
-                                cursor={'pointer'}
-                                minW={0}>
-                                <Avatar
-                                    size={'sm'}
-                                    src={
-                                        'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                                    }
-                                />
-                            </MenuButton>
-                            <MenuList>
-                                <MenuItem>Link 1</MenuItem>
-                                <MenuItem>Link 2</MenuItem>
-                                <MenuDivider/>
-                                <MenuItem>Link 3</MenuItem>
-                            </MenuList>
-                        </Menu>
+                        {menu}
                     </Flex>
                 </Flex>
 

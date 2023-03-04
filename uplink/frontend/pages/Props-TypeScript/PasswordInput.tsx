@@ -15,6 +15,7 @@ export default function PasswordInput(props) {
                 type={show ? 'text' : 'password'}
                 placeholder={props.placeHolder}
                 focusBorderColor='red.300'
+                required={true}
             />
             <InputRightElement width='4.5rem'>
                 <Button h='1.75rem' size='sm' onClick={handleClick}>
