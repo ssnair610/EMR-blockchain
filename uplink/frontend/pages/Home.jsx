@@ -6,7 +6,7 @@ var NavBar_1 = require("./Props-TypeScript/NavBar");
 function Home() {
     return (<>
 
-            <NavBar_1.default mode={''}/>
+            <NavBar_1.default name={''}/>
 
 
         </>);

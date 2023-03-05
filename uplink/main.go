@@ -13,7 +13,7 @@ import (
 
 func init() {
 	initializers.LoadEnvVars() // Loading the environment variables before the main function is executed.
-	initializers.ConnectToDb() // Connect to the database
+	//initializers.ConnectToDb() // Connect to the database
 }
 
 func main() {

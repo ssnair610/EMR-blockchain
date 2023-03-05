@@ -31,7 +31,6 @@ export default function Login() {
 
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('');
-    const [redirect, setRedirect] = useState(false);
     const [show, setShow] = React.useState(false);
 
 
@@ -83,7 +82,7 @@ export default function Login() {
 
     return (
         <>
-            <NavBar mode={''}/>
+            <NavBar name={''}/>
             <Container maxW='container.xl'>
                 <Flex>
                     <Container maxW='container.xl' centerContent py={55}>

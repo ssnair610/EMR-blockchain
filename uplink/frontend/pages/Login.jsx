@@ -50,8 +50,7 @@ function Login() {
     var navigate = (0, react_router_dom_1.useNavigate)();
     var _a = (0, react_2.useState)(''), Email = _a[0], setEmail = _a[1];
     var _b = (0, react_2.useState)(''), Password = _b[0], setPassword = _b[1];
-    var _c = (0, react_2.useState)(false), redirect = _c[0], setRedirect = _c[1];
-    var _d = React.useState(false), show = _d[0], setShow = _d[1];
+    var _c = React.useState(false), show = _c[0], setShow = _c[1];
     var handleClick = function () { return setShow(!show); };
     var Toast;
     var submit = function (e) { return __awaiter(_this, void 0, void 0, function () {
@@ -94,7 +93,7 @@ function Login() {
         });
     }); };
     return (<>
-            <NavBar_1.default mode={''}/>
+            <NavBar_1.default name={''}/>
             <react_1.Container maxW='container.xl'>
                 <react_1.Flex>
                     <react_1.Container maxW='container.xl' centerContent py={55}>

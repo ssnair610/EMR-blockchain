@@ -42,7 +42,7 @@ var react_1 = require("@chakra-ui/react");
 var icons_1 = require("@chakra-ui/icons");
 var Logo_1 = require("./Logo");
 var react_router_dom_1 = require("react-router-dom");
-var Links = ['Dashboard', 'Projects', 'Team'];
+var Links = ['Home', 'About Us', 'Team'];
 var NavLink = function (_a) {
     var children = _a.children;
     return (<react_1.Link px={2} py={1} rounded={'md'} _hover={{
@@ -58,6 +58,9 @@ function withAction(props) {
     var _b = (0, react_1.useColorMode)(), colorMode = _b.colorMode, toggleColorMode = _b.toggleColorMode;
     var toast = (0, react_1.useToast)();
     var navigate = (0, react_router_dom_1.useNavigate)();
+    var handleClick = function () {
+        navigate("/login");
+    };
     var Toast;
     var logOut = function () { return __awaiter(_this, void 0, void 0, function () {
         var response;
@@ -72,20 +75,18 @@ function withAction(props) {
                     response = _a.sent();
                     toast({
                         title: 'Successfully Logged Out',
+                        description: 'Have a great day',
                         status: 'success',
                         duration: 5000,
                         isClosable: true,
                     });
-                    navigate("/login");
+                    handleClick();
                     return [2 /*return*/];
             }
         });
     }); };
-    function handleClick() {
-        navigate("/login");
-    }
     var menu;
-    if (props.mode === '' || props.mode === undefined) {
+    if (props.name === '' || props.name === undefined) {
         menu = (<react_1.Button type='button' onClick={handleClick} size='md' w='full' colorScheme='brand'>Login</react_1.Button>);
     }
     else {
@@ -94,8 +95,8 @@ function withAction(props) {
                     <react_1.Avatar size={'sm'} src={'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'}/>
                 </react_1.MenuButton>
                 <react_1.MenuList>
-                    <react_1.MenuItem>Link 1</react_1.MenuItem>
-                    <react_1.MenuItem>Link 2</react_1.MenuItem>
+                    <react_1.MenuItem><react_1.Link href={'/profile/'}>Profile</react_1.Link></react_1.MenuItem>
+                    <react_1.MenuItem><react_1.Link href={'/settings'}>Settings</react_1.Link></react_1.MenuItem>
                     <react_1.MenuDivider />
                     <react_1.MenuItem>
                         <react_1.Button colorScheme='brand' w='full' onClick={logOut}>Logout</react_1.Button>

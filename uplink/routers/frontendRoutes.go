@@ -11,7 +11,7 @@ func FrontEndRoutes(app *fiber.App) {
 		"/login",
 		"/signUp",
 		"/error_404",
-		"/edit_info",
+		"/profile",
 		"/mainPage",
 	}
 
@@ -22,6 +22,7 @@ func FrontEndRoutes(app *fiber.App) {
 	app.Post("/api/regeister", controllers.Regeister)
 	app.Post("/api/login", controllers.Login)
 	app.Get("/api/user", controllers.User)
+	app.Get("/api/getUserDetails", controllers.GetUserDetails)
 	app.Post("/api/logOut", controllers.LogOut)
 
 }

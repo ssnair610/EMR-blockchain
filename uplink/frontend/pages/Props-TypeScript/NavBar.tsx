@@ -25,7 +25,7 @@ import {CloseIcon, HamburgerIcon, MoonIcon, SunIcon} from '@chakra-ui/icons';
 import {Logo} from "./Logo";
 import {useNavigate} from "react-router-dom";
 
-const Links = ['Dashboard', 'Projects', 'Team'];
+const Links = ['Home', 'About Us', 'Team'];
 
 const NavLink = ({children}: { children: ReactNode }) => (
     <Link
@@ -41,13 +41,21 @@ const NavLink = ({children}: { children: ReactNode }) => (
     </Link>
 );
 
-export default function withAction(props: { mode: string }) {
+
+
+export default function withAction(props: { name: string }) {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const {colorMode, toggleColorMode} = useColorMode();
     const toast = useToast()
-
-
     const navigate = useNavigate();
+
+
+    const handleClick = () => {
+        navigate("/login");
+    }
+
+
+
     let Toast;
     const logOut = async () => {
         const response = await fetch('http://localhost:3000/api/logout', {
@@ -59,22 +67,18 @@ export default function withAction(props: { mode: string }) {
 
         toast({
             title: 'Successfully Logged Out',
+            description: 'Have a great day',
             status: 'success',
             duration: 5000,
             isClosable: true,
         })
 
-        navigate("/login");
+        handleClick();
 
     }
-
-    function handleClick() {
-        navigate("/login");
-    }
-
 
     let menu;
-    if (props.mode === '' || props.mode === undefined) {
+    if (props.name === '' || props.name === undefined) {
         menu = (
             <Button type='button' onClick={handleClick} size='md' w='full'
                     colorScheme='brand'>Login</Button>
@@ -96,8 +100,8 @@ export default function withAction(props: { mode: string }) {
                     />
                 </MenuButton>
                 <MenuList>
-                    <MenuItem>Link 1</MenuItem>
-                    <MenuItem>Link 2</MenuItem>
+                    <MenuItem><Link href={'/profile/'}>Profile</Link></MenuItem>
+                    <MenuItem><Link href={'/settings'}>Settings</Link></MenuItem>
                     <MenuDivider/>
                     <MenuItem>
                         <Button colorScheme='brand' w='full' onClick={logOut}>Logout</Button>

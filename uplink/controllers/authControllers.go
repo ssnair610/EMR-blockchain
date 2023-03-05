@@ -137,6 +137,41 @@ func User(app *fiber.Ctx) error {
 	return app.JSON(user)
 }
 
+func GetUserDetails(app *fiber.Ctx) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	var user models.User
+
+	defer cancel()
+
+	cookie := app.Cookies("jwt-token")
+	token, err := jwt.ParseWithClaims(cookie, &jwt.RegisteredClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(secretKey), nil
+	})
+
+	if err != nil {
+		return app.Status(fiber.StatusUnauthorized).JSON(responses.UserResponse{Status: fiber.StatusUnauthorized, Message: "User is Unauthenticated"})
+	}
+
+	claims := token.Claims.(*jwt.RegisteredClaims)
+	objectId, err := primitive.ObjectIDFromHex(claims.Issuer)
+	if err != nil {
+		return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Document not found in Database", Data: &fiber.Map{"data": err.Error()}})
+	}
+	filter := bson.M{"_id": objectId}
+
+	if err = userCollection.FindOne(ctx, filter).Decode(&user); err != nil {
+		if err == mongo.ErrNoDocuments {
+
+			// This error means your query did not match any documents.
+			return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Account doesnt exist wow	", Data: &fiber.Map{"data": err.Error()}})
+
+		}
+		log.Fatal(err)
+	}
+
+	return app.JSON(user)
+}
+
 func LogOut(app *fiber.Ctx) error {
 
 	nowTime := time.Now()

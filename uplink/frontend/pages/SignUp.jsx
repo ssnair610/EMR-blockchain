@@ -106,7 +106,7 @@ function Details() {
         });
     }); };
     return (<>
-            <NavBar_1.default mode={''}/>
+            <NavBar_1.default name={''}/>
 
             <react_1.Container centerContent py={35}>
                 <react_1.Card bg={bgColor} p={25}>
