@@ -5,8 +5,6 @@ import {useToast} from "@chakra-ui/react";
 
 const Cookie = (url: string) => {
 
-    console.log("Cookie is called")
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
@@ -24,8 +22,6 @@ const Cookie = (url: string) => {
                 const content = await response.json();
                 setName(content.Name);
                 setEmail(content.Email);
-                console.log(name)
-                console.log(email)
 
                 if (name === undefined) {
                     toast({

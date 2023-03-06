@@ -40,7 +40,6 @@ var react_1 = require("react");
 var react_router_dom_1 = require("react-router-dom");
 var react_2 = require("@chakra-ui/react");
 var Cookie = function (url) {
-    console.log("Cookie is called");
     var _a = (0, react_1.useState)(''), name = _a[0], setName = _a[1];
     var _b = (0, react_1.useState)(''), email = _b[0], setEmail = _b[1];
     var navigate = (0, react_router_dom_1.useNavigate)();
@@ -61,8 +60,6 @@ var Cookie = function (url) {
                         content = _a.sent();
                         setName(content.Name);
                         setEmail(content.Email);
-                        console.log(name);
-                        console.log(email);
                         if (name === undefined) {
                             toast({
                                 title: 'Not authorized',

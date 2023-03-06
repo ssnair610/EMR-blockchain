@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var NavBar_1 = require("./Props-TypeScript/NavBar");
-var cookie_1 = require("./Props-TypeScript/cookie");
+var Cookie_1 = require("./Props-TypeScript/Cookie");
 var MainPage = function () {
     var url = 'http://localhost:3000/api/user';
-    var name = (0, cookie_1.default)(url).name;
+    var name = (0, Cookie_1.default)(url).name;
     return (<>
             <NavBar_1.default name={name}/>
 

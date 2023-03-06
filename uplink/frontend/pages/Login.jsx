@@ -118,9 +118,7 @@ function Login() {
                                                     </react_1.InputRightElement>
                                                 </react_1.InputGroup>
                                                 {/*<PasswordInput placeHolder='Confirm your Password'/>*/}
-                                                <react_1.Button size='md' w='full' colorScheme='brand' type='submit' onClick={function () {
-            Toast;
-        }}> Login </react_1.Button>
+                                                <react_1.Button size='md' w='full' colorScheme='brand' type='submit'> Login </react_1.Button>
                                                 <react_1.Link href='/signUp'>Dont have a account , signup here !!</react_1.Link>
                                                 <react_1.Divider />
                                             </react_1.VStack>

@@ -116,9 +116,7 @@ export default function Login() {
                                                 </InputGroup>
                                                 {/*<PasswordInput placeHolder='Confirm your Password'/>*/}
                                                 <Button size='md' w='full' colorScheme='brand'
-                                                        type='submit' onClick={() => {
-                                                    Toast
-                                                }}> Login </Button>
+                                                        type='submit'> Login </Button>
                                                 <Link href='/signUp'>Dont have a account , signup here !!</Link>
                                                 <Divider/>
                                             </VStack>
