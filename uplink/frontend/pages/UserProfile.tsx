@@ -27,18 +27,6 @@ import Cookie from "./Props-TypeScript/Cookie";
 
 export default function UserProfile() {
 
-    const [Name, setName] = useState(``),
-        [Email, setEmail] = useState(''),
-        [Address, setAddress] = useState(''),
-        [PhoneNumber, setPhoneNumber] = useState(''),
-        [DoctorsName, setDoctorsName] = useState(''),
-        [Medication, setMedication] = useState(''),
-        [Ailments, setAilments] = useState(''),
-        [PatientStatus, setPatientStatus] = useState(''),
-        [Gender, setGender] = useState(``),
-        [Age, setAge] = useState(``),
-        toast = useToast();
-
     const url = 'http://localhost:3000/api/getUserDetails'
     let {
         name,
@@ -54,16 +42,17 @@ export default function UserProfile() {
 
     } = Cookie(url);
 
-    console.log(name,
-        email,
-        address,
-        phoneNumber,
-        doctorsName,
-        medication,
-        ailments,
-        patientStatus,
-        gender,
-        age)
+    const [Name, setName] = useState(name),
+        [Address, setAddress] = useState(address),
+        [PhoneNumber, setPhoneNumber] = useState(phoneNumber),
+        [DoctorsName, setDoctorsName] = useState(doctorsName),
+        [Medication, setMedication] = useState(medication),
+        [Ailments, setAilments] = useState(ailments),
+        [PatientStatus, setPatientStatus] = useState(''),
+        [Gender, setGender] = useState(gender),
+        [Age, setAge] = useState(age),
+        toast = useToast();
+
 
     let Toast
 
@@ -84,51 +73,56 @@ export default function UserProfile() {
     }
     const submit = async (e: SyntheticEvent) => {
 
-        // console.log("submit is called")
-        //
-        // e.preventDefault();
-        // const response = await fetch('http://localhost:3000/api/updateUserDetails', {
-        //     body: JSON.stringify({
-        //             Name,
-        //             Email,
-        //             Age,
-        //             PhoneNumber,
-        //             DoctorsName,
-        //             Ailments,
-        //             Medication,
-        //             Address,
-        //             PatientStatus,
-        //             Gender,
-        //         }
-        //     ),
-        //     credentials: 'include',
-        //     headers: {'Content-Type': 'application/json'},
-        //     method: 'POST'
-        // });
-        // //
-        // if (response.status === 200) {
-        //
-        //     Toast = (toast({
-        //         title: 'Everything worked',
-        //         description: 'Account Details are updated',
-        //         status: 'success',
-        //         duration: 5000,
-        //         isClosable: true,
-        //     }))
-        //
-        //
-        // } else if (response.status === 400) {
-        //
-        //     Toast = (toast({
-        //         title: 'Error',
-        //         description: 'Something went wrong , please try again later.',
-        //         status: 'error',
-        //         duration: 5000,
-        //         isClosable: true,
-        //     }))
-        // }
+        console.log("submit is called")
+        e.preventDefault();
 
 
+        if (inputDisabled === true) {
+
+            const response = await fetch('http://localhost:3000/api/updateUserDetails', {
+                body: JSON.stringify({
+                        Name,
+                        Age,
+                        PhoneNumber,
+                        DoctorsName,
+                        Ailments,
+                        Medication,
+                        Address,
+                        PatientStatus,
+                        Gender,
+                    }
+                ),
+                // credentials: 'include',
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+
+            console.log(response);
+
+            //
+            if (response.status === 200) {
+
+                Toast = (toast({
+                    title: 'Everything worked',
+                    description: 'Account Details are updated',
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                }))
+
+
+            } else if (response.status === 400) {
+
+                Toast = (toast({
+                    title: 'Error',
+                    description: 'Something went wrong , please try again later.',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                }))
+            }
+
+        }
     }
 
 
@@ -234,7 +228,7 @@ export default function UserProfile() {
 
 
                                                         <GridItem colSpan={1}>
-                                                            <Button size='md' w='full' colorScheme='brand'
+                                                            <Button size='md' w='full' colorScheme='brand' type='submit'
                                                                     onClick={updateDetails}> {buttonData} </Button>
                                                         </GridItem>
 

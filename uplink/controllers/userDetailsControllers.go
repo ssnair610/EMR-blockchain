@@ -20,10 +20,8 @@ var (
 	userDetails = initializers.GetCollection(initializers.DB, "user", "details")
 )
 
-// GetUserDetails Needs to modified
+// GetUserDetails
 func GetUserDetails(app *fiber.Ctx) error {
-
-	fmt.Println("GetUserDetails is called")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var user models.UserDetails
@@ -63,14 +61,14 @@ func GetUserDetails(app *fiber.Ctx) error {
 
 func UpdateUserDetails(app *fiber.Ctx) error {
 
-	fmt.Println("UpdateUserDetails is called")
-
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var setData map[string]string
 
-	//var user models.UserDetails
-
 	defer cancel()
+
+	if err := app.BodyParser(&setData); err != nil {
+		return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": err.Error()}})
+	}
 
 	cookie := app.Cookies("jwt-token")
 	token, err := jwt.ParseWithClaims(cookie, &jwt.RegisteredClaims{}, func(token *jwt.Token) (interface{}, error) {
@@ -83,6 +81,7 @@ func UpdateUserDetails(app *fiber.Ctx) error {
 
 	claims := token.Claims.(*jwt.RegisteredClaims)
 	objectId, err := primitive.ObjectIDFromHex(claims.Issuer)
+
 	if err != nil {
 		return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Document not found in Database", Data: &fiber.Map{"data": err.Error()}})
 	}
@@ -93,28 +92,28 @@ func UpdateUserDetails(app *fiber.Ctx) error {
 
 	setUserData := bson.D{
 		{
-			"Name", setData["Name"],
+			"name", setData["Name"],
 		},
 		{
-			"PhoneNumber", setData["PhoneNumber"],
+			"phoneNumber", setData["PhoneNumber"],
 		},
 		{
-			"DoctorsName", setData["DoctorName"],
+			"doctorsName", setData["DoctorName"],
 		},
 		{
-			"Ailments", ailments,
+			"ailments", ailments,
 		},
 		{
-			"Medication", medication,
+			"medication", medication,
 		},
 		{
-			"Address", setData["Address"],
+			"address", setData["Address"],
 		},
 		{
-			"PatientStatus", setData["PatientStatus"],
+			"patientStatus", setData["PatientStatus"],
 		},
 		{
-			"Gender", setData["Gender"],
+			"gender", setData["Gender"],
 		},
 		{
 			"Age", age,

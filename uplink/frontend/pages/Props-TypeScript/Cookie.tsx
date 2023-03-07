@@ -44,7 +44,7 @@ const Cookie = (url: string) => {
                 getAge(content.Age)
 
 
-                if (content.Name === undefined) {
+                if (content.ID === undefined) {
                     toast({
                         title: 'Not authorized',
                         description: 'You must be logged in',
@@ -61,17 +61,6 @@ const Cookie = (url: string) => {
         )();
     }, []);
 
-
-    console.log(name,
-        email,
-        address,
-        phoneNumber,
-        doctorsName,
-        medication,
-        ailments,
-        patientStatus,
-        gender,
-        age)
 
     return {
         name: name,

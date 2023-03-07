@@ -65,7 +65,7 @@ var Cookie = function (url) {
                         getPatientStatus(content.PatientStatus);
                         getGender(content.Gender);
                         getAge(content.Age);
-                        if (content.Name === undefined) {
+                        if (content.ID === undefined) {
                             toast({
                                 title: 'Not authorized',
                                 description: 'You must be logged in',
@@ -80,7 +80,6 @@ var Cookie = function (url) {
             });
         }); })();
     }, []);
-    console.log(name, email, address, phoneNumber, doctorsName, medication, ailments, patientStatus, gender, age);
     return {
         name: name,
         email: email,

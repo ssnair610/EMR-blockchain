@@ -43,13 +43,12 @@ var NavBar_1 = require("./Props-TypeScript/NavBar");
 var Cookie_1 = require("./Props-TypeScript/Cookie");
 function UserProfile() {
     var _this = this;
-    var _a = (0, react_2.useState)(""), Name = _a[0], setName = _a[1], _b = (0, react_2.useState)(''), Email = _b[0], setEmail = _b[1], _c = (0, react_2.useState)(''), Address = _c[0], setAddress = _c[1], _d = (0, react_2.useState)(''), PhoneNumber = _d[0], setPhoneNumber = _d[1], _e = (0, react_2.useState)(''), DoctorsName = _e[0], setDoctorsName = _e[1], _f = (0, react_2.useState)(''), Medication = _f[0], setMedication = _f[1], _g = (0, react_2.useState)(''), Ailments = _g[0], setAilments = _g[1], _h = (0, react_2.useState)(''), PatientStatus = _h[0], setPatientStatus = _h[1], _j = (0, react_2.useState)(""), Gender = _j[0], setGender = _j[1], _k = (0, react_2.useState)(""), Age = _k[0], setAge = _k[1], toast = (0, react_1.useToast)();
     var url = 'http://localhost:3000/api/getUserDetails';
-    var _l = (0, Cookie_1.default)(url), name = _l.name, email = _l.email, address = _l.address, phoneNumber = _l.phoneNumber, doctorsName = _l.doctorsName, medication = _l.medication, ailments = _l.ailments, patientStatus = _l.patientStatus, gender = _l.gender, age = _l.age;
-    console.log(name, email, address, phoneNumber, doctorsName, medication, ailments, patientStatus, gender, age);
+    var _a = (0, Cookie_1.default)(url), name = _a.name, email = _a.email, address = _a.address, phoneNumber = _a.phoneNumber, doctorsName = _a.doctorsName, medication = _a.medication, ailments = _a.ailments, patientStatus = _a.patientStatus, gender = _a.gender, age = _a.age;
+    var _b = (0, react_2.useState)(name), Name = _b[0], setName = _b[1], _c = (0, react_2.useState)(address), Address = _c[0], setAddress = _c[1], _d = (0, react_2.useState)(phoneNumber), PhoneNumber = _d[0], setPhoneNumber = _d[1], _e = (0, react_2.useState)(doctorsName), DoctorsName = _e[0], setDoctorsName = _e[1], _f = (0, react_2.useState)(medication), Medication = _f[0], setMedication = _f[1], _g = (0, react_2.useState)(ailments), Ailments = _g[0], setAilments = _g[1], _h = (0, react_2.useState)(''), PatientStatus = _h[0], setPatientStatus = _h[1], _j = (0, react_2.useState)(gender), Gender = _j[0], setGender = _j[1], _k = (0, react_2.useState)(age), Age = _k[0], setAge = _k[1], toast = (0, react_1.useToast)();
     var Toast;
-    var _m = (0, react_2.useState)(true), inputDisabled = _m[0], isInputDisabled = _m[1];
-    var _o = (0, react_2.useState)('Update details'), buttonData = _o[0], setButtonData = _o[1];
+    var _l = (0, react_2.useState)(true), inputDisabled = _l[0], isInputDisabled = _l[1];
+    var _m = (0, react_2.useState)('Update details'), buttonData = _m[0], setButtonData = _m[1];
     var bgColor = (0, react_1.useColorModeValue)('gray.200', 'gray.700');
     var updateDetails = function () {
         if (inputDisabled === true) {
@@ -62,8 +61,54 @@ function UserProfile() {
         }
     };
     var submit = function (e) { return __awaiter(_this, void 0, void 0, function () {
+        var response;
         return __generator(this, function (_a) {
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0:
+                    console.log("submit is called");
+                    e.preventDefault();
+                    if (!(inputDisabled === true)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, fetch('http://localhost:3000/api/updateUserDetails', {
+                            body: JSON.stringify({
+                                Name: Name,
+                                Age: Age,
+                                PhoneNumber: PhoneNumber,
+                                DoctorsName: DoctorsName,
+                                Ailments: Ailments,
+                                Medication: Medication,
+                                Address: Address,
+                                PatientStatus: PatientStatus,
+                                Gender: Gender,
+                            }),
+                            // credentials: 'include',
+                            headers: { 'Content-Type': 'application/json' },
+                            method: 'POST'
+                        })];
+                case 1:
+                    response = _a.sent();
+                    console.log(response);
+                    //
+                    if (response.status === 200) {
+                        Toast = (toast({
+                            title: 'Everything worked',
+                            description: 'Account Details are updated',
+                            status: 'success',
+                            duration: 5000,
+                            isClosable: true,
+                        }));
+                    }
+                    else if (response.status === 400) {
+                        Toast = (toast({
+                            title: 'Error',
+                            description: 'Something went wrong , please try again later.',
+                            status: 'error',
+                            duration: 5000,
+                            isClosable: true,
+                        }));
+                    }
+                    _a.label = 2;
+                case 2: return [2 /*return*/];
+            }
         });
     }); };
     return (<>
@@ -155,7 +200,7 @@ function UserProfile() {
 
 
                                                         <react_1.GridItem colSpan={1}>
-                                                            <react_1.Button size='md' w='full' colorScheme='brand' onClick={updateDetails}> {buttonData} </react_1.Button>
+                                                            <react_1.Button size='md' w='full' colorScheme='brand' type='submit' onClick={updateDetails}> {buttonData} </react_1.Button>
                                                         </react_1.GridItem>
 
 
