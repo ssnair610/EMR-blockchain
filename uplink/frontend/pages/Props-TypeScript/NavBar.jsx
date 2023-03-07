@@ -95,8 +95,8 @@ function withAction(props) {
                     <react_1.Avatar size={'sm'} src={'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'}/>
                 </react_1.MenuButton>
                 <react_1.MenuList>
-                    <react_1.MenuItem><react_1.Link href={'/profile/'}>Profile</react_1.Link></react_1.MenuItem>
-                    <react_1.MenuItem><react_1.Link href={'/settings'}>Settings</react_1.Link></react_1.MenuItem>
+                    <react_1.Link href={'/profile/'}><react_1.MenuItem>Profile</react_1.MenuItem></react_1.Link>
+                    <react_1.Link href={'/settings'}><react_1.MenuItem>Settings</react_1.MenuItem></react_1.Link>
                     <react_1.MenuDivider />
                     <react_1.MenuItem>
                         <react_1.Button colorScheme='brand' w='full' onClick={logOut}>Logout</react_1.Button>

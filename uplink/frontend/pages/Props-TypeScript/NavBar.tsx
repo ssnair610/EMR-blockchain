@@ -100,8 +100,8 @@ export default function withAction(props: { name: string }) {
                     />
                 </MenuButton>
                 <MenuList>
-                    <MenuItem><Link href={'/profile/'}>Profile</Link></MenuItem>
-                    <MenuItem><Link href={'/settings'}>Settings</Link></MenuItem>
+                    <Link href={'/profile/'}><MenuItem>Profile</MenuItem></Link>
+                    <Link href={'/settings'}><MenuItem>Settings</MenuItem></Link>
                     <MenuDivider/>
                     <MenuItem>
                         <Button colorScheme='brand' w='full' onClick={logOut}>Logout</Button>

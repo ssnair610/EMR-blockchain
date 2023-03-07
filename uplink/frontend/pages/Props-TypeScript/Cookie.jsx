@@ -40,10 +40,7 @@ var react_1 = require("react");
 var react_router_dom_1 = require("react-router-dom");
 var react_2 = require("@chakra-ui/react");
 var Cookie = function (url) {
-    var _a = (0, react_1.useState)(''), name = _a[0], setName = _a[1];
-    var _b = (0, react_1.useState)(''), email = _b[0], setEmail = _b[1];
-    var navigate = (0, react_router_dom_1.useNavigate)();
-    var toast = (0, react_2.useToast)();
+    var navigate = (0, react_router_dom_1.useNavigate)(), toast = (0, react_2.useToast)(), _a = (0, react_1.useState)(""), name = _a[0], getName = _a[1], _b = (0, react_1.useState)(''), email = _b[0], getEmail = _b[1], _c = (0, react_1.useState)(''), address = _c[0], getAddress = _c[1], _d = (0, react_1.useState)(''), phoneNumber = _d[0], getPhoneNumber = _d[1], _e = (0, react_1.useState)(''), doctorsName = _e[0], getDoctorsName = _e[1], _f = (0, react_1.useState)(''), medication = _f[0], getMedication = _f[1], _g = (0, react_1.useState)(''), ailments = _g[0], getAilments = _g[1], _h = (0, react_1.useState)(''), patientStatus = _h[0], getPatientStatus = _h[1], _j = (0, react_1.useState)(""), gender = _j[0], getGender = _j[1], _k = (0, react_1.useState)(""), age = _k[0], getAge = _k[1];
     (0, react_1.useEffect)(function () {
         (function () { return __awaiter(void 0, void 0, void 0, function () {
             var response, content;
@@ -58,9 +55,17 @@ var Cookie = function (url) {
                         return [4 /*yield*/, response.json()];
                     case 2:
                         content = _a.sent();
-                        setName(content.Name);
-                        setEmail(content.Email);
-                        if (name === undefined) {
+                        getName(content.Name);
+                        getEmail(content.Email);
+                        getPhoneNumber(content.PhoneNumber);
+                        getDoctorsName(content.DoctorsName);
+                        getAddress(content.Address);
+                        getMedication(content.Medication);
+                        getAilments(content.Ailments);
+                        getPatientStatus(content.PatientStatus);
+                        getGender(content.Gender);
+                        getAge(content.Age);
+                        if (content.Name === undefined) {
                             toast({
                                 title: 'Not authorized',
                                 description: 'You must be logged in',
@@ -74,10 +79,19 @@ var Cookie = function (url) {
                 }
             });
         }); })();
-    });
+    }, []);
+    console.log(name, email, address, phoneNumber, doctorsName, medication, ailments, patientStatus, gender, age);
     return {
         name: name,
-        email: email
+        email: email,
+        address: address,
+        phoneNumber: phoneNumber,
+        doctorsName: doctorsName,
+        medication: medication,
+        ailments: ailments,
+        patientStatus: patientStatus,
+        gender: gender,
+        age: age,
     };
 };
 exports.default = Cookie;

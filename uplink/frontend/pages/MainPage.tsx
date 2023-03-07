@@ -4,7 +4,7 @@ import Cookie from "./Props-TypeScript/Cookie";
 
 const MainPage = () => {
     const url = 'http://localhost:3000/api/user'
-    let {name} = Cookie(url);
+    let {name:name} = Cookie(url);
 
     return (
         <>

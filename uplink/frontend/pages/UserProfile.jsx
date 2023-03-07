@@ -43,10 +43,14 @@ var NavBar_1 = require("./Props-TypeScript/NavBar");
 var Cookie_1 = require("./Props-TypeScript/Cookie");
 function UserProfile() {
     var _this = this;
+    var _a = (0, react_2.useState)(""), Name = _a[0], setName = _a[1], _b = (0, react_2.useState)(''), Email = _b[0], setEmail = _b[1], _c = (0, react_2.useState)(''), Address = _c[0], setAddress = _c[1], _d = (0, react_2.useState)(''), PhoneNumber = _d[0], setPhoneNumber = _d[1], _e = (0, react_2.useState)(''), DoctorsName = _e[0], setDoctorsName = _e[1], _f = (0, react_2.useState)(''), Medication = _f[0], setMedication = _f[1], _g = (0, react_2.useState)(''), Ailments = _g[0], setAilments = _g[1], _h = (0, react_2.useState)(''), PatientStatus = _h[0], setPatientStatus = _h[1], _j = (0, react_2.useState)(""), Gender = _j[0], setGender = _j[1], _k = (0, react_2.useState)(""), Age = _k[0], setAge = _k[1], toast = (0, react_1.useToast)();
     var url = 'http://localhost:3000/api/getUserDetails';
-    var _a = (0, Cookie_1.default)(url), name = _a.name, email = _a.email;
-    var _b = (0, react_2.useState)(true), inputDisabled = _b[0], isInputDisabled = _b[1];
-    var _c = (0, react_2.useState)('Update details'), buttonData = _c[0], setButtonData = _c[1];
+    var _l = (0, Cookie_1.default)(url), name = _l.name, email = _l.email, address = _l.address, phoneNumber = _l.phoneNumber, doctorsName = _l.doctorsName, medication = _l.medication, ailments = _l.ailments, patientStatus = _l.patientStatus, gender = _l.gender, age = _l.age;
+    console.log(name, email, address, phoneNumber, doctorsName, medication, ailments, patientStatus, gender, age);
+    var Toast;
+    var _m = (0, react_2.useState)(true), inputDisabled = _m[0], isInputDisabled = _m[1];
+    var _o = (0, react_2.useState)('Update details'), buttonData = _o[0], setButtonData = _o[1];
+    var bgColor = (0, react_1.useColorModeValue)('gray.200', 'gray.700');
     var updateDetails = function () {
         if (inputDisabled === true) {
             isInputDisabled(false);
@@ -64,32 +68,137 @@ function UserProfile() {
     }); };
     return (<>
             <NavBar_1.default name={'name'}/>
+            <react_1.Container maxW='container.xl' px={5} py={2}>
+                <react_1.Container maxW='container.lg' py={35} px={100}>
+                    <react_1.Card bg={bgColor} p={15}>
 
-            <react_1.Container maxW='container.xl'>
-                <react_1.Flex>
-                    <form onSubmit={submit}>
-                        <react_1.FormControl isDisabled={inputDisabled}>
-                            <react_1.SimpleGrid columnGap={3} rowGap={5} columns={2}>
+                        <react_1.Wrap spacing={5}>
 
-
-                                <react_1.GridItem colSpan={1}>
-                                    <react_1.FormLabel>Name</react_1.FormLabel>
-                                    <react_1.Input type='text' defaultValue={name}/>
-                                </react_1.GridItem>
-                                <react_1.GridItem colSpan={1}>
-                                    <react_1.FormLabel>Email address</react_1.FormLabel>
-                                    <react_1.Input type='email' defaultValue={email}/>
-                                </react_1.GridItem>
-                                <react_1.GridItem colSpan={1}>
-                                    <react_1.Button size='md' w='full' colorScheme='brand' onClick={updateDetails}> {buttonData} </react_1.Button>
-                                </react_1.GridItem>
+                            <react_1.WrapItem>
 
 
-                            </react_1.SimpleGrid>
-                        </react_1.FormControl>
-                    </form>
+                                <react_1.Box maxW='full'>
+                                    <react_1.Heading mb={4}>Update your profile</react_1.Heading>
+                                    <react_1.Text fontSize='lg'>
+                                        Keep your profile up to date so your doctors can get to know more about your
+                                        ailments
+                                        and help you out even faster.
+                                    </react_1.Text>
+                                </react_1.Box>
 
-                </react_1.Flex>
+                            </react_1.WrapItem>
+
+
+                            <react_1.Divider w={'full'}/>
+
+
+                            <react_1.WrapItem>
+
+                                <react_1.SimpleGrid spacing={3} columns={2} columnGap={45}>
+                                    <react_1.GridItem colSpan={1}>
+                                        <react_1.Flex>
+                                            <form onSubmit={submit}>
+                                                <react_1.FormControl isDisabled={inputDisabled}>
+                                                    <react_1.SimpleGrid p={2} columnGap={100} rowGap={5} columns={2}>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Name</react_1.FormLabel>
+                                                            <react_1.Input type='text' defaultValue={name} w='auto' onChange={function (e) { return setName(e.target.value); }}/>
+                                                        </react_1.GridItem>
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Email address</react_1.FormLabel>
+                                                            <react_1.Input type='email' defaultValue={email} w='auto'/>
+                                                        </react_1.GridItem>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Age</react_1.FormLabel>
+                                                            <react_1.Input type='number' defaultValue={age} w='auto' onChange={function (e) { return setAge(e.target.value); }}/>
+                                                        </react_1.GridItem>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Phone Number</react_1.FormLabel>
+                                                            <react_1.Input type='text' defaultValue={phoneNumber} w='auto' onChange={function (e) { return setPhoneNumber(e.target.value); }}/>
+                                                        </react_1.GridItem>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Gender</react_1.FormLabel>
+                                                            <react_1.Input type='text' defaultValue={gender} w='auto' onChange={function (e) { return setGender(e.target.value); }}/>
+                                                        </react_1.GridItem>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Doctor's Name</react_1.FormLabel>
+                                                            <react_1.Input type='text' defaultValue={doctorsName} w='auto' onChange={function (e) { return setDoctorsName(e.target.value); }}/>
+                                                        </react_1.GridItem>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Ailments</react_1.FormLabel>
+                                                            <react_1.Input type='text' defaultValue={ailments} w='auto' onChange={function (e) { return setAilments(e.target.value); }}/>
+                                                        </react_1.GridItem>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Medications</react_1.FormLabel>
+                                                            <react_1.Input type='text' defaultValue={medication} w='auto' onChange={function (e) { return setMedication(e.target.value); }}/>
+                                                        </react_1.GridItem>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Address</react_1.FormLabel>
+                                                            <react_1.Input type='text' defaultValue={address} w='auto' onChange={function (e) { return setAddress(e.target.value); }}/>
+                                                        </react_1.GridItem>
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.FormLabel>Status</react_1.FormLabel>
+                                                            <react_1.Select>
+                                                                <option>Alive</option>
+                                                                <option>Dead 💀</option>
+                                                            </react_1.Select>
+                                                        </react_1.GridItem>
+
+
+                                                        <react_1.GridItem colSpan={1}>
+                                                            <react_1.Button size='md' w='full' colorScheme='brand' onClick={updateDetails}> {buttonData} </react_1.Button>
+                                                        </react_1.GridItem>
+
+
+                                                    </react_1.SimpleGrid>
+                                                </react_1.FormControl>
+                                            </form>
+
+                                        </react_1.Flex>
+                                    </react_1.GridItem>
+
+
+                                    <react_1.GridItem colSpan={1}>
+                                        <react_1.Container maxW='container.xl' px={180}>
+                                            <react_1.Flex>
+
+
+                                                <react_1.VStack align={'center'}>
+
+                                                    <react_1.WrapItem>
+                                                        <react_1.Avatar size='xl' name='Christian Nwamba' src='https://bit.ly/code-beast'/>{' '}
+                                                    </react_1.WrapItem>
+                                                    <react_1.Text>{name}</react_1.Text>
+                                                    <react_1.Text>{email}</react_1.Text>
+                                                    <react_1.Text>{phoneNumber}</react_1.Text>
+                                                    <react_1.Divider orientation='horizontal' w={100}/>
+                                                    <react_1.Button py={4} size='md' w='full' colorScheme='brand'>
+                                                        Generate Report
+                                                    </react_1.Button>
+
+                                                </react_1.VStack>
+                                            </react_1.Flex>
+                                        </react_1.Container>
+
+
+                                    </react_1.GridItem>
+                                </react_1.SimpleGrid>
+                            </react_1.WrapItem>
+
+
+                        </react_1.Wrap>
+                    </react_1.Card>
+
+                </react_1.Container>
             </react_1.Container>
 
         </>);

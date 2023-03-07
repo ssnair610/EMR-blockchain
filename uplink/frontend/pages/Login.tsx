@@ -11,11 +11,11 @@ import {
     InputGroup,
     InputLeftAddon,
     InputRightElement,
+    Link,
     Text,
     useColorModeValue,
     useToast,
     VStack,
-    Link,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import {SyntheticEvent, useState} from 'react';
@@ -24,17 +24,13 @@ import NavBar from "./Props-TypeScript/NavBar";
 import {FaFacebook, FaGithub, FaGoogle} from "react-icons/all";
 
 export default function Login() {
-    const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
-    const toast = useToast()
-    const navigate = useNavigate();
-
-
-    const [Email, setEmail] = useState('');
-    const [Password, setPassword] = useState('');
-    const [show, setShow] = React.useState(false);
-
-
-    const handleClick = () => setShow(!show);
+    const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50'),
+        toast = useToast(),
+        navigate = useNavigate(),
+        [Email, setEmail] = useState(''),
+        [Password, setPassword] = useState(''),
+        [show, setShow] = React.useState(false),
+        handleClick = () => setShow(!show);
 
     let Toast
 
@@ -74,6 +70,8 @@ export default function Login() {
                     isClosable: true,
                 })
             )
+
+
         }
 
 
@@ -116,7 +114,9 @@ export default function Login() {
                                                 </InputGroup>
                                                 {/*<PasswordInput placeHolder='Confirm your Password'/>*/}
                                                 <Button size='md' w='full' colorScheme='brand'
-                                                        type='submit'> Login </Button>
+                                                        type='submit'
+                                                > Login
+                                                </Button>
                                                 <Link href='/signUp'>Dont have a account , signup here !!</Link>
                                                 <Divider/>
                                             </VStack>

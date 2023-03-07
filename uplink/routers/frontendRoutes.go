@@ -23,6 +23,7 @@ func FrontEndRoutes(app *fiber.App) {
 	app.Post("/api/login", controllers.Login)
 	app.Get("/api/user", controllers.User)
 	app.Get("/api/getUserDetails", controllers.GetUserDetails)
+	app.Get("/api/updateUserDetails", controllers.UpdateUserDetails)
 	app.Post("/api/logOut", controllers.LogOut)
 
 }
