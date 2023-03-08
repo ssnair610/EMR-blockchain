@@ -25,7 +25,6 @@ func main() {
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
-
 	// Configure app
 	app.Static("/", "./public") // Configuring the app so that it can retrieve js and .css files from public directory
 

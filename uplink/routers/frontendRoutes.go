@@ -13,6 +13,7 @@ func FrontEndRoutes(app *fiber.App) {
 		"/error_404",
 		"/profile",
 		"/mainPage",
+		"/settings",
 	}
 
 	for _, route := range frontendRoutes { // for loop iterates through those valid paths

@@ -5,10 +5,11 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Error_404 from "./pages/Error_404";
+// import Error_404 from "./pages/Error_404";
 import UserProfile from "./pages/UserProfile";
 import MainPage from "./pages/MainPage";
 import Footer from "./pages/Props-TypeScript/Footer";
+import Settings from "./pages/Settings";
 
 const App = () => {
 
@@ -24,9 +25,10 @@ const App = () => {
                         <Route index element={<Home/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signUp" element={<SignUp/>}/>
-                        <Route path="/error_404" element={<Error_404/>}/>
+                        {/*<Route path="/error_404" element={<Error_404/>}/>*/}
                         <Route path="/mainPage" element={<MainPage/>}/>
                         <Route path="/profile" element={<UserProfile/>}/>
+                        <Route path="/settings" element={<Settings/>}/>
                     </Routes>
 
                     <Footer/>

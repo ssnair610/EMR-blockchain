@@ -7,10 +7,11 @@ var react_router_dom_1 = require("react-router-dom");
 var Home_1 = require("./pages/Home");
 var Login_1 = require("./pages/Login");
 var SignUp_1 = require("./pages/SignUp");
-var Error_404_1 = require("./pages/Error_404");
+// import Error_404 from "./pages/Error_404";
 var UserProfile_1 = require("./pages/UserProfile");
 var MainPage_1 = require("./pages/MainPage");
 var Footer_1 = require("./pages/Props-TypeScript/Footer");
+var Settings_1 = require("./pages/Settings");
 var App = function () {
     return (<>
 
@@ -22,9 +23,10 @@ var App = function () {
                         <react_router_dom_1.Route index element={<Home_1.default />}/>
                         <react_router_dom_1.Route path="/login" element={<Login_1.default />}/>
                         <react_router_dom_1.Route path="/signUp" element={<SignUp_1.default />}/>
-                        <react_router_dom_1.Route path="/error_404" element={<Error_404_1.default />}/>
+                        {/*<Route path="/error_404" element={<Error_404/>}/>*/}
                         <react_router_dom_1.Route path="/mainPage" element={<MainPage_1.default />}/>
                         <react_router_dom_1.Route path="/profile" element={<UserProfile_1.default />}/>
+                        <react_router_dom_1.Route path="/settings" element={<Settings_1.default />}/>
                     </react_router_dom_1.Routes>
 
                     <Footer_1.default />
