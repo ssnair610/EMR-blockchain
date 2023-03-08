@@ -42,7 +42,6 @@ const NavLink = ({children}: { children: ReactNode }) => (
 );
 
 
-
 export default function withAction(props: { name: string }) {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const {colorMode, toggleColorMode} = useColorMode();
@@ -53,7 +52,6 @@ export default function withAction(props: { name: string }) {
     const handleClick = () => {
         navigate("/login");
     }
-
 
 
     let Toast;
@@ -100,8 +98,8 @@ export default function withAction(props: { name: string }) {
                     />
                 </MenuButton>
                 <MenuList>
-                    <Link href={'/profile/'}><MenuItem>Profile</MenuItem></Link>
-                    <Link href={'/settings'}><MenuItem>Settings</MenuItem></Link>
+                    <Link href={'/profile/'} style={{textDecoration: 'none'}}><MenuItem>Profile</MenuItem></Link>
+                    <Link href={'/settings'} style={{textDecoration: 'none'}}><MenuItem>Settings</MenuItem></Link>
                     <MenuDivider/>
                     <MenuItem>
                         <Button colorScheme='brand' w='full' onClick={logOut}>Logout</Button>

@@ -98,7 +98,7 @@ func UpdateUserDetails(app *fiber.Ctx) error {
 			"phoneNumber", setData["PhoneNumber"],
 		},
 		{
-			"doctorsName", setData["DoctorName"],
+			"doctorsName", setData["DoctorsName"],
 		},
 		{
 			"ailments", ailments,

@@ -41,11 +41,12 @@ var React = require("react");
 var react_2 = require("react");
 var NavBar_1 = require("./Props-TypeScript/NavBar");
 var Cookie_1 = require("./Props-TypeScript/Cookie");
+var SideDrawer_1 = require("./Props-TypeScript/SideDrawer");
 function UserProfile() {
     var _this = this;
     var url = 'http://localhost:3000/api/getUserDetails';
     var _a = (0, Cookie_1.default)(url), name = _a.name, email = _a.email, address = _a.address, phoneNumber = _a.phoneNumber, doctorsName = _a.doctorsName, medication = _a.medication, ailments = _a.ailments, patientStatus = _a.patientStatus, gender = _a.gender, age = _a.age;
-    var _b = (0, react_2.useState)(name), Name = _b[0], setName = _b[1], _c = (0, react_2.useState)(address), Address = _c[0], setAddress = _c[1], _d = (0, react_2.useState)(phoneNumber), PhoneNumber = _d[0], setPhoneNumber = _d[1], _e = (0, react_2.useState)(doctorsName), DoctorsName = _e[0], setDoctorsName = _e[1], _f = (0, react_2.useState)(medication), Medication = _f[0], setMedication = _f[1], _g = (0, react_2.useState)(ailments), Ailments = _g[0], setAilments = _g[1], _h = (0, react_2.useState)(''), PatientStatus = _h[0], setPatientStatus = _h[1], _j = (0, react_2.useState)(gender), Gender = _j[0], setGender = _j[1], _k = (0, react_2.useState)(age), Age = _k[0], setAge = _k[1], toast = (0, react_1.useToast)();
+    var _b = (0, react_2.useState)(''), Name = _b[0], setName = _b[1], _c = (0, react_2.useState)(''), Address = _c[0], setAddress = _c[1], _d = (0, react_2.useState)(''), PhoneNumber = _d[0], setPhoneNumber = _d[1], _e = (0, react_2.useState)(''), DoctorsName = _e[0], setDoctorsName = _e[1], _f = (0, react_2.useState)(''), Medication = _f[0], setMedication = _f[1], _g = (0, react_2.useState)(''), Ailments = _g[0], setAilments = _g[1], _h = (0, react_2.useState)(''), PatientStatus = _h[0], setPatientStatus = _h[1], _j = (0, react_2.useState)(''), Gender = _j[0], setGender = _j[1], _k = (0, react_2.useState)(''), Age = _k[0], setAge = _k[1], toast = (0, react_1.useToast)();
     var Toast;
     var _l = (0, react_2.useState)(true), inputDisabled = _l[0], isInputDisabled = _l[1];
     var _m = (0, react_2.useState)('Update details'), buttonData = _m[0], setButtonData = _m[1];
@@ -65,7 +66,6 @@ function UserProfile() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log("submit is called");
                     e.preventDefault();
                     if (!(inputDisabled === true)) return [3 /*break*/, 2];
                     return [4 /*yield*/, fetch('http://localhost:3000/api/updateUserDetails', {
@@ -113,6 +113,7 @@ function UserProfile() {
     }); };
     return (<>
             <NavBar_1.default name={'name'}/>
+            <SideDrawer_1.default></SideDrawer_1.default>
             <react_1.Container maxW='container.xl' px={5} py={2}>
                 <react_1.Container maxW='container.lg' py={35} px={100}>
                     <react_1.Card bg={bgColor} p={15}>

@@ -24,6 +24,7 @@ import *as React from 'react';
 import {SyntheticEvent, useState} from 'react';
 import NavBar from "./Props-TypeScript/NavBar"
 import Cookie from "./Props-TypeScript/Cookie";
+import SideDrawer from "./Props-TypeScript/SideDrawer";
 
 export default function UserProfile() {
 
@@ -42,15 +43,15 @@ export default function UserProfile() {
 
     } = Cookie(url);
 
-    const [Name, setName] = useState(name),
-        [Address, setAddress] = useState(address),
-        [PhoneNumber, setPhoneNumber] = useState(phoneNumber),
-        [DoctorsName, setDoctorsName] = useState(doctorsName),
-        [Medication, setMedication] = useState(medication),
-        [Ailments, setAilments] = useState(ailments),
+    const [Name, setName] = useState(''),
+        [Address, setAddress] = useState(''),
+        [PhoneNumber, setPhoneNumber] = useState(''),
+        [DoctorsName, setDoctorsName] = useState(''),
+        [Medication, setMedication] = useState(''),
+        [Ailments, setAilments] = useState(''),
         [PatientStatus, setPatientStatus] = useState(''),
-        [Gender, setGender] = useState(gender),
-        [Age, setAge] = useState(age),
+        [Gender, setGender] = useState(''),
+        [Age, setAge] = useState(''),
         toast = useToast();
 
 
@@ -73,9 +74,7 @@ export default function UserProfile() {
     }
     const submit = async (e: SyntheticEvent) => {
 
-        console.log("submit is called")
         e.preventDefault();
-
 
         if (inputDisabled === true) {
 
@@ -130,6 +129,7 @@ export default function UserProfile() {
 
         <>
             <NavBar name={'name'}/>
+            <SideDrawer></SideDrawer>
             <Container maxW='container.xl' px={5} py={2}>
                 <Container maxW='container.lg' py={35} px={100}>
                     <Card bg={bgColor} p={15}>
