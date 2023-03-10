@@ -10,6 +10,7 @@ import UserProfile from "./pages/UserProfile";
 import MainPage from "./pages/MainPage";
 import Footer from "./pages/Props-TypeScript/Footer";
 import Settings from "./pages/Settings";
+import UpLoadData from "./pages/upLoadData";
 
 const App = () => {
 
@@ -28,6 +29,7 @@ const App = () => {
                         {/*<Route path="/error_404" element={<Error_404/>}/>*/}
                         <Route path="/mainPage" element={<MainPage/>}/>
                         <Route path="/profile" element={<UserProfile/>}/>
+                        <Route path="/upLoadData" element={<UpLoadData/>}/>
                         <Route path="/settings" element={<Settings/>}/>
                     </Routes>
 

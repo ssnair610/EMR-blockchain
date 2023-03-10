@@ -20,7 +20,7 @@ var Settings = function () {
     return (<>
             <NavBar_1.default name={name}/>
 
-            <SideDrawer_1.default></SideDrawer_1.default>
+            <SideDrawer_1.default />
 
             <react_1.Container maxW='container.xl' p={5} centerContent>
 

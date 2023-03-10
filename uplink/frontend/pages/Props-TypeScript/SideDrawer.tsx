@@ -64,19 +64,22 @@ const SideDrawer = () => {
                                                                                                       w='full'>Home</Button></Link>
                                 </GridItem>
 
+
                                 <GridItem colSpan={1}>
-                                    <Link href={'/settings'} style={{textDecoration: 'none'}}><Button size='lg'
-                                                                                                      w='full'>Settings</Button></Link>
+                                    <Link href={'/upLoadData'} style={{textDecoration: 'none'}}><Button size='lg' w='full'>Upload
+                                        Data</Button></Link>
                                 </GridItem>
+
 
                                 <GridItem colSpan={1}>
                                     <Link href={'/profile'} style={{textDecoration: 'none'}}><Button size='lg'
                                                                                                      w='full'>Profile</Button></Link>
                                 </GridItem>
 
+
                                 <GridItem colSpan={1}>
-                                    <Link href={'/aboutUs'} style={{textDecoration: 'none'}}><Button size='lg' w='full'>About
-                                        Us</Button></Link>
+                                    <Link href={'/settings'} style={{textDecoration: 'none'}}><Button size='lg'
+                                                                                                      w='full'>Settings</Button></Link>
                                 </GridItem>
 
 

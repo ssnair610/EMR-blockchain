@@ -41,7 +41,7 @@ const Settings = () => {
         <>
             <NavBar name={name}/>
 
-            <SideDrawer></SideDrawer>
+            <SideDrawer/>
 
             <Container maxW='container.xl' p={5} centerContent>
 

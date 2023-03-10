@@ -12,6 +12,7 @@ var UserProfile_1 = require("./pages/UserProfile");
 var MainPage_1 = require("./pages/MainPage");
 var Footer_1 = require("./pages/Props-TypeScript/Footer");
 var Settings_1 = require("./pages/Settings");
+var upLoadData_1 = require("./pages/upLoadData");
 var App = function () {
     return (<>
 
@@ -26,6 +27,7 @@ var App = function () {
                         {/*<Route path="/error_404" element={<Error_404/>}/>*/}
                         <react_router_dom_1.Route path="/mainPage" element={<MainPage_1.default />}/>
                         <react_router_dom_1.Route path="/profile" element={<UserProfile_1.default />}/>
+                        <react_router_dom_1.Route path="/upLoadData" element={<upLoadData_1.default />}/>
                         <react_router_dom_1.Route path="/settings" element={<Settings_1.default />}/>
                     </react_router_dom_1.Routes>
 

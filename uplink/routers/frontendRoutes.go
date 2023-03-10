@@ -14,6 +14,7 @@ func FrontEndRoutes(app *fiber.App) {
 		"/profile",
 		"/mainPage",
 		"/settings",
+		"/upLoadData",
 	}
 
 	for _, route := range frontendRoutes { // for loop iterates through those valid paths

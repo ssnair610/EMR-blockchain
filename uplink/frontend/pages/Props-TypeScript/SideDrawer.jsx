@@ -35,17 +35,20 @@ var SideDrawer = function () {
                                     <react_1.Link href={'/mainPage'} style={{ textDecoration: 'none' }}><react_1.Button size='lg' w='full'>Home</react_1.Button></react_1.Link>
                                 </react_1.GridItem>
 
+
                                 <react_1.GridItem colSpan={1}>
-                                    <react_1.Link href={'/settings'} style={{ textDecoration: 'none' }}><react_1.Button size='lg' w='full'>Settings</react_1.Button></react_1.Link>
+                                    <react_1.Link href={'/upLoadData'} style={{ textDecoration: 'none' }}><react_1.Button size='lg' w='full'>Upload
+                                        Data</react_1.Button></react_1.Link>
                                 </react_1.GridItem>
+
 
                                 <react_1.GridItem colSpan={1}>
                                     <react_1.Link href={'/profile'} style={{ textDecoration: 'none' }}><react_1.Button size='lg' w='full'>Profile</react_1.Button></react_1.Link>
                                 </react_1.GridItem>
 
+
                                 <react_1.GridItem colSpan={1}>
-                                    <react_1.Link href={'/aboutUs'} style={{ textDecoration: 'none' }}><react_1.Button size='lg' w='full'>About
-                                        Us</react_1.Button></react_1.Link>
+                                    <react_1.Link href={'/settings'} style={{ textDecoration: 'none' }}><react_1.Button size='lg' w='full'>Settings</react_1.Button></react_1.Link>
                                 </react_1.GridItem>
 
 
