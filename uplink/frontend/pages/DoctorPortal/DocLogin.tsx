@@ -1,4 +1,12 @@
-// Login Page React Component
+/*
+
+Author : Pranav
+Data of Creation : 11-03-2023
+Project Name : tempo
+IDE : IntelliJ IDEA
+
+*/
+
 import {
     Button,
     Card,
@@ -20,10 +28,10 @@ import {
 import * as React from 'react';
 import {SyntheticEvent, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import NavBar from "./Props-TypeScript/NavBar";
+import NavBar from "../Props-TypeScript/NavBar";
 import {FaFacebook, FaGithub, FaGoogle} from "react-icons/all";
+const DocLogin = () => {
 
-export default function Login() {
     const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50'),
         toast = useToast(),
         navigate = useNavigate(),
@@ -35,10 +43,11 @@ export default function Login() {
     let Toast
 
 
+
     const submit = async (e: SyntheticEvent) => {
 
         e.preventDefault();
-        const response = await fetch('http://localhost:3000/api/login', {
+        const response = await fetch('http://localhost:3000/api/docLogin', {
             body: JSON.stringify({
                     Email,
                     Password
@@ -57,7 +66,7 @@ export default function Login() {
                 isClosable: true,
             }))
 
-            return navigate("/MainPage");
+            return navigate("/docMainPage");
 
         } else if (response.status === 400) {
             Toast = (
@@ -87,7 +96,7 @@ export default function Login() {
                             <Card bg={bgColor} p={25}>
                                 <Card p={3}>
                                     <VStack spacing={4}>
-                                        <Heading mb={4}>Login</Heading>
+                                        <Heading mb={4}>Doc Login</Heading>
                                         <form onSubmit={submit}>
                                             <VStack w='full' h='full' spacing={4} px={2} alignItems='flex-start'>
 
@@ -116,7 +125,7 @@ export default function Login() {
                                                         type='submit'
                                                 > Login
                                                 </Button>
-                                                <Link href='/signUp'>Dont have a account , signup here !!</Link>
+                                                <Link href='/docSignUp'><Text>Dont have a account , click here to sign up!!</Text></Link>
                                                 <Divider/>
                                             </VStack>
                                         </form>
@@ -142,6 +151,6 @@ export default function Login() {
             </Container>
         </>
     );
+};
 
-}
-
+export default DocLogin;

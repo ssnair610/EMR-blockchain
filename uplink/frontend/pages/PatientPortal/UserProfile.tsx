@@ -22,9 +22,9 @@ import {
 } from '@chakra-ui/react';
 import *as React from 'react';
 import {SyntheticEvent, useState} from 'react';
-import NavBar from "./Props-TypeScript/NavBar"
-import Cookie from "./Props-TypeScript/Cookie";
-import SideDrawer from "./Props-TypeScript/SideDrawer";
+import NavBar from "../Props-TypeScript/NavBar"
+import Cookie from "../Props-TypeScript/Cookie";
+import SideDrawer from "../Props-TypeScript/SideDrawer";
 
 export default function UserProfile() {
 

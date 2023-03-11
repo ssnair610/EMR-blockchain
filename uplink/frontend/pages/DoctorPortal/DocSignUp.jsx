@@ -40,7 +40,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("@chakra-ui/react");
 var React = require("react");
 var react_2 = require("react");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
 var all_1 = require("react-icons/all");
 var react_router_dom_1 = require("react-router-dom");
 function Details() {
@@ -61,7 +61,7 @@ function Details() {
                 case 0:
                     e.preventDefault();
                     if (!(Name !== '' || Email !== '' || Password !== '')) return [3 /*break*/, 2];
-                    return [4 /*yield*/, fetch('http://localhost:3000/api/regeister', {
+                    return [4 /*yield*/, fetch('http://localhost:3000/api/DocRegeister', {
                             body: JSON.stringify({
                                 Name: Name,
                                 Email: Email,

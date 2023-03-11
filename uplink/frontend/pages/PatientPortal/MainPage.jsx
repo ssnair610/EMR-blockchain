@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
-var Cookie_1 = require("./Props-TypeScript/Cookie");
-var SideDrawer_1 = require("./Props-TypeScript/SideDrawer");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
+var Cookie_1 = require("../Props-TypeScript/Cookie");
+var SideDrawer_1 = require("../Props-TypeScript/SideDrawer");
 var react_1 = require("@chakra-ui/react");
 var MainPage = function () {
     var url = 'http://localhost:3000/api/user';

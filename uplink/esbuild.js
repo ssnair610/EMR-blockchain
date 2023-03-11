@@ -2,6 +2,8 @@
 
 const esbuild = require("esbuild");
 const {sassPlugin} = require("esbuild-sass-plugin");
+const timeNow = new Date();
+
 
 esbuild
     .build({
@@ -13,5 +15,6 @@ esbuild
         plugins: [sassPlugin()],
         loader: {'.js': 'jsx'} // Converting JSX files to JS files.
     })
-    .then(() => console.log("⚡ Build complete! ⚡"))
+    .then(() =>
+        console.log("⚡ Build complete! ⚡ , time : " + timeNow))
     .catch(() => process.exit(1));

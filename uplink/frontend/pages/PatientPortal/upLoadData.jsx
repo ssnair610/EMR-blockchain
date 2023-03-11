@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var react_1 = require("@chakra-ui/react");
 var framer_motion_1 = require("framer-motion");
-var SideDrawer_1 = require("./Props-TypeScript/SideDrawer");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
-var Cookie_1 = require("./Props-TypeScript/Cookie");
+var SideDrawer_1 = require("../Props-TypeScript/SideDrawer");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
+var Cookie_1 = require("../Props-TypeScript/Cookie");
 var first = {
     rest: {
         rotate: "-15deg",

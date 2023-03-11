@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 import * as React from 'react';
 import {SyntheticEvent, useState} from 'react';
-import NavBar from './Props-TypeScript/NavBar';
+import NavBar from '../Props-TypeScript/NavBar';
 import {FaFacebook, FaGithub, FaGoogle} from "react-icons/all";
 import {useNavigate} from "react-router-dom";
 

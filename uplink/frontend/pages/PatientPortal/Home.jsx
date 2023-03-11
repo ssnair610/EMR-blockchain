@@ -2,7 +2,7 @@
 // Home Page React Component
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
 function Home() {
     return (<>
 

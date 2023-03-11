@@ -1,7 +1,7 @@
 import * as React from 'react';
-import NavBar from "./Props-TypeScript/NavBar";
-import Cookie from "./Props-TypeScript/Cookie";
-import SideDrawer from "./Props-TypeScript/SideDrawer";
+import NavBar from "../Props-TypeScript/NavBar";
+import Cookie from "../Props-TypeScript/Cookie";
+import SideDrawer from "../Props-TypeScript/SideDrawer";
 import {Card, Container, Heading, Text, useColorModeValue, Wrap, WrapItem} from "@chakra-ui/react";
 
 

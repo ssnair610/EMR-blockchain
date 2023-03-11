@@ -14,9 +14,9 @@ import {
     useColorModeValue
 } from "@chakra-ui/react";
 import {motion, useAnimation} from "framer-motion";
-import SideDrawer from "./Props-TypeScript/SideDrawer";
-import NavBar from './Props-TypeScript/NavBar';
-import Cookie from "./Props-TypeScript/Cookie";
+import SideDrawer from "../Props-TypeScript/SideDrawer";
+import NavBar from '../Props-TypeScript/NavBar';
+import Cookie from "../Props-TypeScript/Cookie";
 
 
 const first = {

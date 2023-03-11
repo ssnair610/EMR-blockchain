@@ -39,9 +39,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("@chakra-ui/react");
 var React = require("react");
 var react_2 = require("react");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
-var Cookie_1 = require("./Props-TypeScript/Cookie");
-var SideDrawer_1 = require("./Props-TypeScript/SideDrawer");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
+var Cookie_1 = require("../Props-TypeScript/Cookie");
+var SideDrawer_1 = require("../Props-TypeScript/SideDrawer");
 function UserProfile() {
     var _this = this;
     var url = 'http://localhost:3000/api/getUserDetails';

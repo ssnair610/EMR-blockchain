@@ -41,7 +41,7 @@ var react_1 = require("@chakra-ui/react");
 var React = require("react");
 var react_2 = require("react");
 var react_router_dom_1 = require("react-router-dom");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
 var all_1 = require("react-icons/all");
 function Login() {
     var _this = this;

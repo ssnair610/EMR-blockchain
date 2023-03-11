@@ -10,9 +10,9 @@ IDE : IntelliJ IDEA
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var react_1 = require("@chakra-ui/react");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
-var Cookie_1 = require("./Props-TypeScript/Cookie");
-var SideDrawer_1 = require("./Props-TypeScript/SideDrawer");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
+var Cookie_1 = require("../Props-TypeScript/Cookie");
+var SideDrawer_1 = require("../Props-TypeScript/SideDrawer");
 var Settings = function () {
     var url = 'http://localhost:3000/api/user';
     var name = (0, Cookie_1.default)(url).name;

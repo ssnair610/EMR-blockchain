@@ -26,9 +26,9 @@ import {
     Text,
     useColorModeValue,
 } from '@chakra-ui/react'
-import NavBar from "./Props-TypeScript/NavBar";
-import Cookie from "./Props-TypeScript/Cookie";
-import SideDrawer from "./Props-TypeScript/SideDrawer";
+import NavBar from "../Props-TypeScript/NavBar";
+import Cookie from "../Props-TypeScript/Cookie";
+import SideDrawer from "../Props-TypeScript/SideDrawer";
 
 
 const Settings = () => {
