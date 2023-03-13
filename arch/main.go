@@ -8,20 +8,23 @@ import (
 
 func main() {
 	transactions := []model.Transaction{
-		{ Message: "A sent B 5 coins" },
-		{ Message: "A sent C 5 coins" },
-        { Message: "A sent D 5 coins" },
-        { Message: "A sent E 5 coins" },
-        { Message: "A sent F 5 coins" },
-        { Message: "A sent G 5 coins" } }
-	
+		{Message: "A sent B 5 coins"},
+		{Message: "A sent C 5 coins"},
+		{Message: "A sent D 5 coins"},
+		{Message: "A sent E 5 coins"},
+		{Message: "A sent F 5 coins"},
+		{Message: "A sent G 5 coins"}}
+
 	// Creating a new blockchain with a difficulty of 1.
 	bc := model.NewBlockchain(1)
-	
-	bc.AddTransactions(transactions)
-	
+
+	err := bc.AddTransactions(transactions)
+	if err != nil {
+		fmt.Println("Error adding transaction , ", err)
+	}
+
 	clock := time.Now()
-	
+
 	wallet := model.NewWallet()
 
 	// Processing the pending transactions and rewarding walletID.
@@ -32,7 +35,7 @@ func main() {
 		if block.IsValid() {
 			block.Print()
 		}
-		
+
 		fmt.Println()
 	}
 }

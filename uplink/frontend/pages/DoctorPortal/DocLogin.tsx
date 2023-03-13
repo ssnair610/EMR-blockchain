@@ -2,10 +2,10 @@
 
 Author : Pranav
 Data of Creation : 11-03-2023
-Project Name : tempo
 IDE : IntelliJ IDEA
 
 */
+
 
 import {
     Button,
