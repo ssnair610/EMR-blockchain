@@ -35,53 +35,79 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 // Sign Up Page React Component
 var react_1 = require("@chakra-ui/react");
 var React = require("react");
 var react_2 = require("react");
-var Footer_1 = require("./Props-TypeScript/Footer");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
 var all_1 = require("react-icons/all");
-function ButtonCustom() {
-    // Need to add isLoading when the button is pressed .
-    return (<react_1.Button type={"submit"} size='md' w='full' colorScheme='brand'>Login</react_1.Button>);
-}
+var react_router_dom_1 = require("react-router-dom");
 function Details() {
     var _this = this;
     var bgColor = (0, react_1.useColorModeValue)('gray.50', 'whiteAlpha.50');
-    var _a = (0, react_2.useState)(''), name = _a[0], setName = _a[1];
-    var _b = (0, react_2.useState)(''), email = _b[0], setEmail = _b[1];
-    var _c = (0, react_2.useState)(''), password = _c[0], setPassword = _c[1];
+    var _a = (0, react_2.useState)(''), Name = _a[0], setName = _a[1];
+    var _b = (0, react_2.useState)(''), Email = _b[0], setEmail = _b[1];
+    var _c = (0, react_2.useState)(''), Password = _c[0], setPassword = _c[1];
     var _d = React.useState(false), show = _d[0], setShow = _d[1];
+    var navigate = (0, react_router_dom_1.useNavigate)();
+    var toast = (0, react_1.useToast)();
     var handleClick = function () { return setShow(!show); };
+    var Toast;
     var submit = function (e) { return __awaiter(_this, void 0, void 0, function () {
-        var response, content;
+        var response;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     e.preventDefault();
-                    return [4 /*yield*/, fetch('http://localhost:3000/api/regeister', {
+                    if (!(Name !== '' || Email !== '' || Password !== '')) return [3 /*break*/, 2];
+                    return [4 /*yield*/, fetch('http://localhost:3000/api/DocRegeister', {
                             body: JSON.stringify({
-                                email: email,
-                                name: name,
-                                password: password
+                                Name: Name,
+                                Email: Email,
+                                Password: Password
                             }),
                             headers: { 'Content-Type': 'application/json' },
-                            method: 'POST'
+                            method: 'POST',
                         })];
                 case 1:
                     response = _a.sent();
-                    return [4 /*yield*/, response.json()];
+                    if (response.status === 201) {
+                        Toast = (toast({
+                            title: 'Account created.',
+                            description: "We've created your account for you.",
+                            status: 'success',
+                            duration: 5000,
+                            isClosable: true,
+                        }));
+                        return [2 /*return*/, navigate("/login")];
+                    }
+                    else if (response.status === 500) {
+                        Toast = (toast({
+                            title: 'Internal Server Error',
+                            description: 'Please try again!',
+                            status: 'error',
+                            duration: 5000,
+                            isClosable: true,
+                        }));
+                    }
+                    return [3 /*break*/, 3];
                 case 2:
-                    content = _a.sent();
-                    console.log(content);
-                    return [2 /*return*/];
+                    Toast = (toast({
+                        title: 'Error - Incomplete Data',
+                        description: 'Please fill all the data!',
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                    }));
+                    _a.label = 3;
+                case 3: return [2 /*return*/];
             }
         });
     }); };
     return (<>
-            <NavBar_1["default"] />
+            <NavBar_1.default name={''}/>
+
             <react_1.Container centerContent py={35}>
                 <react_1.Card bg={bgColor} p={25}>
                     <react_1.Card py={4}>
@@ -136,7 +162,6 @@ function Details() {
             </react_1.Container>
 
 
-            <Footer_1["default"] />
         </>);
 }
-exports["default"] = Details;
+exports.default = Details;

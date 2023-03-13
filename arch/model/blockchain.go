@@ -20,7 +20,7 @@ type Blockchain struct {
 	reward            CurrencyType
 }
 
-// `NewBlockchain` creates a new blockchain with a genesis block and returns a pointer to it
+// NewBlockchain creates a new blockchain with a genesis block and returns a pointer to it
 func NewBlockchain(difficulty int) *Blockchain {
 	blockchain := &Blockchain{
 		Chain:             NewChain(),
@@ -39,32 +39,32 @@ func (blockchain *Blockchain) addBlock(blockData []Transaction) {
 	blockchain.Chain.Add(statement)
 }
 
-// Adding transactions to the blockchain.
+// AddTransactions Adds transactions to the blockchain.
 func (blockchain *Blockchain) AddTransactions(transactionData []Transaction) error {
 	if len(transactionData) == 100 {
-        return errors.New("transactionBuffer is full. Try processing pending transactions")
-    }
+		return errors.New("transactionBuffer is full. Try processing pending transactions")
+	}
 
 	blockchain.transactionBuffer = append(blockchain.transactionBuffer, transactionData...)
 
 	return nil
 }
 
-// Processing the pending transactions. (Currently only supports PoW)
+// ProcessPendingTransactions  , Processes the pending transactions. (Currently only supports PoW)
 func (blockchain *Blockchain) ProcessPendingTransactions(rewardAddress walletType) {
-	rewardTx := Transaction{ "genesis rewards " + strconv.FormatFloat(float64(blockchain.reward), 'f', 2, 64) + " coin(s) to " + hex.EncodeToString(rewardAddress) }
+	rewardTx := Transaction{"genesis rewards " + strconv.FormatFloat(float64(blockchain.reward), 'f', 2, 64) + " coin(s) to " + hex.EncodeToString(rewardAddress)}
 	blockchain.transactionBuffer = append(blockchain.transactionBuffer, rewardTx)
 
 	blockchain.addBlock(blockchain.transactionBuffer)
 	blockchain.transactionBuffer = blockchain.transactionBuffer[:0]
 }
 
-// Checking if the blockchain is valid.
+// IsChainValid Checking if the blockchain is valid.
 func (blockchain *Blockchain) IsChainValid() bool {
-	prevHash := []byte{}
+	var prevHash []byte
 
 	for _, block := range blockchain.Chain.Links() {
-		if ! block.IsValid() || ! bytes.Equal(prevHash, block.PrevHash) {
+		if !block.IsValid() || !bytes.Equal(prevHash, block.PrevHash) {
 			return false
 		}
 

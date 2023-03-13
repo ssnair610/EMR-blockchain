@@ -15,36 +15,36 @@ type Wallet struct {
 	ballance CurrencyType
 }
 
-// It creates a new wallet with a random ID and a ballance of 0
+// NewWallet It creates a new wallet with a random ID and a ballance of 0
 func NewWallet() *Wallet {
 	wID := make(walletType, 32)
-	
+
 	_, err := rand.Read(wID)
-	if err!= nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 
 	return &Wallet{
-        walletID: wID,
-        ballance: CurrencyType(0) }
+		walletID: wID,
+		ballance: CurrencyType(0)}
 }
 
-// A method that returns the walletID of the wallet.
+// GetWalletID A method that returns the walletID of the wallet.
 func (wallet *Wallet) GetWalletID() walletType {
-    return wallet.walletID
+	return wallet.walletID
 }
 
-// A method that returns the ballance of the wallet.
+// Balance A method that returns the ballance of the wallet.
 func (wallet *Wallet) Balance() CurrencyType {
-    return wallet.ballance
+	return wallet.ballance
 }
 
-// Adding the amount to the ballance of the wallet.
+// Credit Adding the amount to the ballance of the wallet.
 func (wallet *Wallet) Credit(amount CurrencyType) {
-    wallet.ballance += amount
+	wallet.ballance += amount
 }
 
-// Subtracting the amount from the ballance of the wallet.
+// Debit Subtracting the amount from the ballance of the wallet.
 func (wallet *Wallet) Debit(amount CurrencyType) {
-    wallet.ballance -= amount
+	wallet.ballance -= amount
 }

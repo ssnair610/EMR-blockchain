@@ -12,16 +12,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"golang.org/x/crypto/bcrypt"
 	"log"
-	"os"
 	"time"
 )
 
 var (
-	userCollection = initializers.GetCollection(initializers.DB, "user", "credentials")
-	SecretKey      = os.Getenv("SECRET_KEY")
+	docCollection = initializers.GetCollection(initializers.DB, "doctors", "credentials")
 )
 
-func Regeister(app *fiber.Ctx) error {
+func DocRegeister(app *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var newUser map[string]string
 
@@ -39,7 +37,7 @@ func Regeister(app *fiber.Ctx) error {
 		Password: password,
 	}
 
-	result, err := userCollection.InsertOne(ctx, User)
+	result, err := docCollection.InsertOne(ctx, User)
 
 	if err != nil {
 		return app.Status(fiber.StatusInternalServerError).JSON(responses.UserResponse{Status: fiber.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
@@ -47,8 +45,7 @@ func Regeister(app *fiber.Ctx) error {
 
 	return app.Status(fiber.StatusCreated).JSON(responses.UserResponse{Status: fiber.StatusCreated, Message: "success", Data: &fiber.Map{"data": result}})
 }
-
-func Login(app *fiber.Ctx) error {
+func DocLogin(app *fiber.Ctx) error {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var data map[string]string
@@ -62,7 +59,7 @@ func Login(app *fiber.Ctx) error {
 	var newUser models.User
 	filter := bson.D{{"email", data["Email"]}}
 
-	if err := userCollection.FindOne(ctx, filter).Decode(&newUser); err != nil {
+	if err := docCollection.FindOne(ctx, filter).Decode(&newUser); err != nil {
 		if err == mongo.ErrNoDocuments {
 			// This error means your query did not match any documents.
 			return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Account doesnt exist", Data: &fiber.Map{"data": err.Error()}})
@@ -103,7 +100,7 @@ func Login(app *fiber.Ctx) error {
 	//return app.JSON(newUser.ID)
 }
 
-func User(app *fiber.Ctx) error {
+func DocUser(app *fiber.Ctx) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	var user models.User
 
@@ -125,7 +122,7 @@ func User(app *fiber.Ctx) error {
 	}
 	filter := bson.M{"_id": objectId}
 
-	if err = userCollection.FindOne(ctx, filter).Decode(&user); err != nil {
+	if err = docCollection.FindOne(ctx, filter).Decode(&user); err != nil {
 		if err == mongo.ErrNoDocuments {
 
 			// This error means your query did not match any documents.
@@ -136,20 +133,4 @@ func User(app *fiber.Ctx) error {
 	}
 
 	return app.JSON(user)
-}
-
-func LogOut(app *fiber.Ctx) error {
-
-	nowTime := time.Now()
-	expireTime := nowTime.Add(-time.Hour)
-
-	cookie := fiber.Cookie{
-		Name:     "jwt-token",
-		Expires:  expireTime,
-		HTTPOnly: true,
-	}
-
-	app.Cookie(&cookie)
-
-	return app.Status(fiber.StatusOK).JSON(responses.UserResponse{Status: fiber.StatusOK, Message: "Logout Successful"})
 }

@@ -18,36 +18,35 @@ type noncecode []byte
 // @property {hashcode} PrevHash - The hash of the previous block in the chain.
 // @property {noncecode} Nonce - A random number that is used to mine the block.
 type Block struct {
-
 	Transactions []Transaction `json:"transactions"`
-	Timestamp time.Time `json:"timestamp"`
-	Hash hashcode `json:"hash"`
-	PrevHash hashcode `json:"prev_hash"`
-	Nonce noncecode `json:"nonce"`
+	Timestamp    time.Time     `json:"timestamp"`
+	Hash         hashcode      `json:"hash"`
+	PrevHash     hashcode      `json:"prev_hash"`
+	Nonce        noncecode     `json:"nonce"`
 }
 
-// It creates a the first block, sets the timestamp, previous hash, and nonce to empty values, and then
+// GenesisBlock It creates a first block, sets the timestamp, previous hash, and nonce to empty values, and then
 // generates the hash for the block
 func GenesisBlock() *Block {
 	block := new(Block)
-    block.Transactions = []Transaction{}
-    block.Timestamp = time.Now()
-    block.PrevHash = hashcode{}
+	block.Transactions = []Transaction{}
+	block.Timestamp = time.Now()
+	block.PrevHash = hashcode{}
 	block.Nonce = make(noncecode, 32)
 
-    block.Hash = block.generateHash()
-    return block
+	block.Hash = block.generateHash()
+	return block
 }
 
 // NewBlock creates a new block with the given transactions and previous block's hash
 func NewBlock(transactions []Transaction, previousHash hashcode) *Block {
 	block := new(Block)
-    block.Transactions = transactions
-    block.Timestamp = time.Now()
-    block.PrevHash = previousHash
-    block.Hash = block.generateHash()
+	block.Transactions = transactions
+	block.Timestamp = time.Now()
+	block.PrevHash = previousHash
+	block.Hash = block.generateHash()
 	block.Nonce = make(noncecode, 32)
-    return block
+	return block
 }
 
 // Generating a hash for the block.
@@ -56,9 +55,8 @@ func (block *Block) generateHash() hashcode {
 	input = append(input, block.Timestamp.String()...)
 
 	for _, transaction := range block.Transactions {
-        input = append(input, []byte(transaction.Message)...)
-    }
-
+		input = append(input, []byte(transaction.Message)...)
+	}
 
 	hash := sha256.Sum256(input)
 	return hash[:]
@@ -68,24 +66,24 @@ func (block *Block) generateHash() hashcode {
 func isSolved(solution []byte, depth int) bool {
 	for index, solutionByte := range solution {
 
-		if (index >= depth) {
+		if index >= depth {
 			break
 		}
 
-        if solutionByte != 0 {
-            return false
-        }
-    }
+		if solutionByte != 0 {
+			return false
+		}
+	}
 
-    return true
+	return true
 }
 
-// Generates a hashcode for the given difficulty
+// Mine , Generates a hashcode for the given difficulty
 func (block *Block) Mine(difficulty int) {
 	// This is the mining process. It is generating a random number and assigning it to the nonce when the hash remains unsolved.
-	for ! isSolved(block.Hash, difficulty) {
+	for !isSolved(block.Hash, difficulty) {
 		_, err := rand.Read(block.Nonce)
-		if err!= nil {
+		if err != nil {
 			panic(err)
 		}
 
@@ -99,11 +97,11 @@ func (block *Block) Print() {
 	fmt.Printf("\thash: %x\n", block.Hash)
 
 	for _, transaction := range block.Transactions {
-        fmt.Printf("\ttransaction: %v\n", transaction.Message)
-    }
+		fmt.Printf("\ttransaction: %v\n", transaction.Message)
+	}
 }
 
-// Checks for altered contents within the block's transactions
+// IsValid Checks for altered contents within the block's transactions
 func (block *Block) IsValid() bool {
 	return bytes.Equal(block.Hash, block.generateHash())
 }

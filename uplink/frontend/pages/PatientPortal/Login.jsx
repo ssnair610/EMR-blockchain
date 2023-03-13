@@ -41,17 +41,11 @@ var react_1 = require("@chakra-ui/react");
 var React = require("react");
 var react_2 = require("react");
 var react_router_dom_1 = require("react-router-dom");
-var NavBar_1 = require("./Props-TypeScript/NavBar");
+var NavBar_1 = require("../Props-TypeScript/NavBar");
 var all_1 = require("react-icons/all");
 function Login() {
     var _this = this;
-    var bgColor = (0, react_1.useColorModeValue)('gray.50', 'whiteAlpha.50');
-    var toast = (0, react_1.useToast)();
-    var navigate = (0, react_router_dom_1.useNavigate)();
-    var _a = (0, react_2.useState)(''), Email = _a[0], setEmail = _a[1];
-    var _b = (0, react_2.useState)(''), Password = _b[0], setPassword = _b[1];
-    var _c = React.useState(false), show = _c[0], setShow = _c[1];
-    var handleClick = function () { return setShow(!show); };
+    var bgColor = (0, react_1.useColorModeValue)('gray.50', 'whiteAlpha.50'), toast = (0, react_1.useToast)(), navigate = (0, react_router_dom_1.useNavigate)(), _a = (0, react_2.useState)(''), Email = _a[0], setEmail = _a[1], _b = (0, react_2.useState)(''), Password = _b[0], setPassword = _b[1], _c = React.useState(false), show = _c[0], setShow = _c[1], handleClick = function () { return setShow(!show); };
     var Toast;
     var submit = function (e) { return __awaiter(_this, void 0, void 0, function () {
         var response;
@@ -118,7 +112,8 @@ function Login() {
                                                     </react_1.InputRightElement>
                                                 </react_1.InputGroup>
                                                 {/*<PasswordInput placeHolder='Confirm your Password'/>*/}
-                                                <react_1.Button size='md' w='full' colorScheme='brand' type='submit'> Login </react_1.Button>
+                                                <react_1.Button size='md' w='full' colorScheme='brand' type='submit'> Login
+                                                </react_1.Button>
                                                 <react_1.Link href='/signUp'>Dont have a account , signup here !!</react_1.Link>
                                                 <react_1.Divider />
                                             </react_1.VStack>

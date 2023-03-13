@@ -13,6 +13,12 @@ func FrontEndRoutes(app *fiber.App) {
 		"/error_404",
 		"/profile",
 		"/mainPage",
+		"/settings",
+		"/upLoadData",
+		"/docLogin",
+		"/docMainPage",
+		"/DocSignUp",
+		"/docSettings",
 	}
 
 	for _, route := range frontendRoutes { // for loop iterates through those valid paths
@@ -20,9 +26,17 @@ func FrontEndRoutes(app *fiber.App) {
 	}
 
 	app.Post("/api/regeister", controllers.Regeister)
+	app.Post("/api/DocRegeister", controllers.DocRegeister)
+
 	app.Post("/api/login", controllers.Login)
+	app.Post("/api/docLogin", controllers.DocLogin)
+
 	app.Get("/api/user", controllers.User)
+	app.Get("/api/DocUser", controllers.DocUser)
+
 	app.Get("/api/getUserDetails", controllers.GetUserDetails)
+	app.Post("/api/updateUserDetails", controllers.UpdateUserDetails)
+
 	app.Post("/api/logOut", controllers.LogOut)
 
 }

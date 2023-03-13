@@ -11,36 +11,31 @@ import {
     InputGroup,
     InputLeftAddon,
     InputRightElement,
+    Link,
     Text,
     useColorModeValue,
     useToast,
     VStack,
-    Link,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import {SyntheticEvent, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import NavBar from "./Props-TypeScript/NavBar";
+import NavBar from "../Props-TypeScript/NavBar";
 import {FaFacebook, FaGithub, FaGoogle} from "react-icons/all";
 
 export default function Login() {
-    const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
-    const toast = useToast()
-    const navigate = useNavigate();
-
-
-    const [Email, setEmail] = useState('');
-    const [Password, setPassword] = useState('');
-    const [show, setShow] = React.useState(false);
-
-
-    const handleClick = () => setShow(!show);
+    const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50'),
+        toast = useToast(),
+        navigate = useNavigate(),
+        [Email, setEmail] = useState(''),
+        [Password, setPassword] = useState(''),
+        [show, setShow] = React.useState(false),
+        handleClick = () => setShow(!show);
 
     let Toast
 
 
     const submit = async (e: SyntheticEvent) => {
-
 
         e.preventDefault();
         const response = await fetch('http://localhost:3000/api/login', {
@@ -74,6 +69,8 @@ export default function Login() {
                     isClosable: true,
                 })
             )
+
+
         }
 
 
@@ -82,7 +79,7 @@ export default function Login() {
 
     return (
         <>
-            <NavBar name={''}/>
+            <NavBar mode='patient' name={''}/>
             <Container maxW='container.xl'>
                 <Flex>
                     <Container maxW='container.xl' centerContent py={55}>
@@ -116,7 +113,9 @@ export default function Login() {
                                                 </InputGroup>
                                                 {/*<PasswordInput placeHolder='Confirm your Password'/>*/}
                                                 <Button size='md' w='full' colorScheme='brand'
-                                                        type='submit'> Login </Button>
+                                                        type='submit'
+                                                > Login
+                                                </Button>
                                                 <Link href='/signUp'>Dont have a account , signup here !!</Link>
                                                 <Divider/>
                                             </VStack>
