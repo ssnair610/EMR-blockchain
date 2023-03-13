@@ -79,7 +79,7 @@ export default function Login() {
 
     return (
         <>
-            <NavBar name={''}/>
+            <NavBar mode='patient' name={''}/>
             <Container maxW='container.xl'>
                 <Flex>
                     <Container maxW='container.xl' centerContent py={55}>

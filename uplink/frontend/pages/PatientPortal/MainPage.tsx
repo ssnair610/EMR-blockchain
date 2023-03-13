@@ -13,8 +13,8 @@ const MainPage = () => {
 
     return (
         <>
-            <NavBar name={name}/>
-            <SideDrawer></SideDrawer>
+            <NavBar mode='patient' name={name}/>
+            <SideDrawer mode='patient'/>
 
             <Container maxW='container.xl' p={5}>
                 <Wrap spacing={10}>

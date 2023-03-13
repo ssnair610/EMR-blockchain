@@ -3,21 +3,20 @@ import NavBar from "../Props-TypeScript/NavBar";
 import Cookie from "../Props-TypeScript/Cookie";
 import SideDrawer from "../Props-TypeScript/SideDrawer";
 import {
+    Badge,
+    Button,
+    ButtonGroup,
     Card,
     CardBody,
     CardFooter,
     Container,
+    Divider,
     Heading,
-    useColorModeValue,
+    HStack,
     Image,
     Stack,
     Text,
-    ButtonGroup,
-    Divider,
-    Button,
-    Badge,
-    SimpleGrid,
-    HStack,
+    useColorModeValue,
 } from "@chakra-ui/react";
 
 
@@ -29,8 +28,8 @@ const DocMainPage = () => {
 
     return (
         <>
-            <NavBar name={name}/>
-            <SideDrawer></SideDrawer>
+            <NavBar mode='doc' name={name}/>
+            <SideDrawer mode='doc'/>
 
             <Container maxW='container.xl' p={5}>
 
@@ -40,102 +39,107 @@ const DocMainPage = () => {
 
                     <Container maxW='container.lg' centerContent>
 
-                    <HStack spacing={10}>
-                        <Card maxW='sm'>
-                            <CardBody>
-                                <Image
-                                    src='https://asset.vg247.com/wolfenstein_2_the_new_colossus.jpg/BROK/thumbnail/1200x1200/quality/100/wolfenstein_2_the_new_colossus.jpg'
-                                    alt='Green double couch with wooden legs'
-                                    borderRadius='lg'
-                                />
-                                <Stack mt='6' spacing='3'>
-                                    <Heading size='md'>William Joesph Blazkowicz</Heading>
-                                    <Text>
-                                        War veteran , has numerous war injuries and concussions ,
-                                        complains of sever back and neck pain , and gets nightmares
-                                        about the war and large robots attacking him.</Text>
-                                    <Badge w='13%' ml='1' borderRadius='25' colorScheme='green'>
+                        <HStack spacing={10}>
+                            <Card maxW='sm' w='full'>
+                                <CardBody>
+                                    <Image
+                                        src='https://i.redd.it/iaopf8o4dws41.jpg'
+                                        alt='Green double couch with wooden legs'
+                                        borderRadius='sm'
+                                        htmlHeight={400} htmlWidth={519}
+                                    />
+                                    <Stack mt='6' spacing='3'>
+                                        <Heading size='md'>William Joesph Blazkowicz</Heading>
+                                        <Text>
+                                            War veteran , has numerous war injuries and concussions ,
+                                            complains of sever back and neck pain , and gets nightmares
+                                            about the war and large robots attacking him.</Text>
+
+                                    </Stack>
+                                    <Badge w='auto' my={2} borderRadius='25' colorScheme='green'>
                                         New
                                     </Badge>
+                                </CardBody>
+                                <Divider/>
+                                <CardFooter>
+                                    <ButtonGroup spacing='2'>
+                                        <Button variant='solid' colorScheme='blue'>
+                                            More Information
+                                        </Button>
+                                        <Button variant='ghost' colorScheme='blue'>
+                                            Share
+                                        </Button>
+                                    </ButtonGroup>
+                                </CardFooter>
+                            </Card>
+                            <Card maxW='sm' w='full'>
+                                <CardBody>
+                                    <Image
+                                        src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRemcSUY7WgFgYNXY_YUWu5minBkS8BIQiqFSOXowJ7bOBOlhZlZcw2FD0UHT93xusvAaA&usqp=CAU'
+                                        alt='Green double couch with wooden legs'
+                                        htmlHeight={400} htmlWidth={519}
+                                        borderRadius='sm'
 
-                                </Stack>
-                            </CardBody>
-                            <Divider/>
-                            <CardFooter>
-                                <ButtonGroup spacing='2'>
-                                    <Button variant='solid' colorScheme='blue'>
-                                        More Information
-                                    </Button>
-                                    <Button variant='ghost' colorScheme='blue'>
-                                        Share
-                                    </Button>
-                                </ButtonGroup>
-                            </CardFooter>
-                        </Card>
-                        <Card maxW='sm'>
-                            <CardBody>
-                                <Image
-                                    src='https://cdn.wccftech.com/wp-content/uploads/2019/10/WCCFcallofdutymodernwarfare20199.jpg'
-                                    alt='Green double couch with wooden legs'
-                                    borderRadius='lg'
-                                />
-                                <Stack mt='6' spacing='3'>
-                                    <Heading size='md'>Price</Heading>
-                                    <Text>
-                                        War veteran , has numerous war injuries and concussions ,
-                                        complains of staying frosty , and gets nightmares
-                                        about the war and large robots attacking him.</Text>
-                                    <Badge w='13%' ml='1' borderRadius='25' colorScheme='green'>
-                                        New
+                                    />
+                                    <Stack mt='6' spacing='3'>
+                                        <Heading size='md'>Price</Heading>
+                                        <Text>
+                                            War veteran , has numerous war injuries and concussions ,
+                                            complains of staying frosty , and gets nightmares
+                                            about artillery attacks . Has been Shell shocked.</Text>
+
+
+                                    </Stack>
+                                    <Badge w='auto' my={2} borderRadius='25' colorScheme='red'>
+                                        Hospitalized
                                     </Badge>
+                                </CardBody>
+                                <Divider/>
+                                <CardFooter>
+                                    <ButtonGroup spacing='2'>
+                                        <Button variant='solid' colorScheme='blue'>
+                                            More Information
+                                        </Button>
+                                        <Button variant='ghost' colorScheme='blue'>
+                                            Share
+                                        </Button>
+                                    </ButtonGroup>
+                                </CardFooter>
+                            </Card>
+                            <Card maxW='sm' w='full'>
+                                <CardBody>
+                                    <Image
+                                        src='https://www.giantbomb.com/a/uploads/scale_small/15/153607/2895175-mario%2013.png'
+                                        alt='Green double couch with wooden legs'
+                                        borderRadius='sm'
+                                        htmlHeight={400} htmlWidth={519}/>
+                                    <Stack mt='6' spacing='3'>
+                                        <Heading size='md'>Mario</Heading>
+                                        <Text>
+                                            Has a history of head concussions due to high speed racing inchidents .
+                                            Talks in his sleeps about how FIA was unfair to him in more than once
+                                            situation</Text>
 
-                                </Stack>
-                            </CardBody>
-                            <Divider/>
-                            <CardFooter>
-                                <ButtonGroup spacing='2'>
-                                    <Button variant='solid' colorScheme='blue'>
-                                        More Information
-                                    </Button>
-                                    <Button variant='ghost' colorScheme='blue'>
-                                        Share
-                                    </Button>
-                                </ButtonGroup>
-                            </CardFooter>
-                        </Card>
-                        <Card maxW='sm'>
-                            <CardBody>
-                                <Image
-                                    src='https://static.wikia.nocookie.net/callofduty/images/9/93/RonaldRedDaniels_FrontLines_WWII.jpg/revision/latest?cb=20170919155428'
-                                    alt='Green double couch with wooden legs'
-                                    borderRadius='lg'
-                                />
-                                <Stack mt='6' spacing='3'>
-                                    <Heading size='md'>Ronald "Red" Daniels[</Heading>
-                                    <Text>
-                                        War veteran , has numerous war injuries and concussions ,
-                                        has been shell shocked , and gets nightmares
-                                        about the war and the war.</Text>
-                                    <Badge w='13%' ml='1' borderRadius='25' colorScheme='green'>
-                                        New
+
+                                    </Stack>
+                                    <Badge w='auto' my={2} borderRadius='25' colorScheme='purple'>
+                                        Regular
                                     </Badge>
+                                </CardBody>
+                                <Divider/>
+                                <CardFooter>
+                                    <ButtonGroup spacing='2'>
+                                        <Button variant='solid' colorScheme='blue'>
+                                            More Information
+                                        </Button>
+                                        <Button variant='ghost' colorScheme='blue'>
+                                            Share
+                                        </Button>
+                                    </ButtonGroup>
+                                </CardFooter>
+                            </Card>
 
-                                </Stack>
-                            </CardBody>
-                            <Divider/>
-                            <CardFooter>
-                                <ButtonGroup spacing='2'>
-                                    <Button variant='solid' colorScheme='blue'>
-                                        More Information
-                                    </Button>
-                                    <Button variant='ghost' colorScheme='blue'>
-                                        Share
-                                    </Button>
-                                </ButtonGroup>
-                            </CardFooter>
-                        </Card>
-
-                    </HStack>
+                        </HStack>
                     </Container>
 
                 </Card>

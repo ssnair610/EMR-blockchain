@@ -124,8 +124,8 @@ export default function upLoadData() {
     const stopAnimation = () => controls.stop();
     return (
         <>
-            <NavBar name={name}/>
-            <SideDrawer/>
+            <NavBar mode='patient' name={name}/>
+            <SideDrawer mode='patient'/>
 
             <Container maxW='container.lg' w='full' p={5} centerContent>
                 <Card bg={bgColor} w='full' p={5}>

@@ -42,19 +42,28 @@ const NavLink = ({children}: { children: ReactNode }) => (
 );
 
 
-export default function withAction(props: { name: string }) {
+export default function withAction(props: { name: string, mode: string }) {
     const {isOpen, onOpen, onClose} = useDisclosure();
     const {colorMode, toggleColorMode} = useColorMode();
     const toast = useToast()
     const navigate = useNavigate();
 
+    let navMenuLinks;
+    if (props.mode === 'doc') {
+        navMenuLinks = (<>
+            <Link href={'/docProfile/'} style={{textDecoration: 'none'}}><MenuItem>Profile</MenuItem></Link>
+            <Link href={'/docSettings'} style={{textDecoration: 'none'}}><MenuItem>Settings</MenuItem></Link></>)
+    } else if (props.mode === 'patient') {
+        navMenuLinks = (<>
+            <Link href={'/profile/'} style={{textDecoration: 'none'}}><MenuItem>Profile</MenuItem></Link>
+            <Link href={'/settings'} style={{textDecoration: 'none'}}><MenuItem>Settings</MenuItem></Link>
+        </>)
+    }
 
     const handleClick = () => {
         navigate("/login");
     }
 
-
-    let Toast;
     const logOut = async () => {
         const response = await fetch('http://localhost:3000/api/logout', {
 
@@ -98,8 +107,7 @@ export default function withAction(props: { name: string }) {
                     />
                 </MenuButton>
                 <MenuList>
-                    <Link href={'/profile/'} style={{textDecoration: 'none'}}><MenuItem>Profile</MenuItem></Link>
-                    <Link href={'/settings'} style={{textDecoration: 'none'}}><MenuItem>Settings</MenuItem></Link>
+                    {navMenuLinks}
                     <MenuDivider/>
                     <MenuItem>
                         <Button colorScheme='brand' w='full' onClick={logOut}>Logout</Button>
@@ -109,6 +117,7 @@ export default function withAction(props: { name: string }) {
 
         )
     }
+
 
     return (
         <>

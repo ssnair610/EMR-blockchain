@@ -8,7 +8,7 @@ export default function Home() {
     return (
         <>
 
-            <NavBar name={''}/>
+            <NavBar mode='patient' name={''}/>
             <Heading>Hello</Heading>
 
         </>

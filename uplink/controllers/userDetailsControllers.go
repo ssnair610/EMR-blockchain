@@ -20,7 +20,6 @@ var (
 	userDetails = initializers.GetCollection(initializers.DB, "user", "details")
 )
 
-// GetUserDetails
 func GetUserDetails(app *fiber.Ctx) error {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -131,7 +130,7 @@ func UpdateUserDetails(app *fiber.Ctx) error {
 			return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Account doesnt exist wow	", Data: &fiber.Map{"data": err.Error()}})
 
 		}
-		fmt.Println("you shouldnt be here")
+		fmt.Println("you shouldn't be here")
 		log.Fatal(err)
 	}
 

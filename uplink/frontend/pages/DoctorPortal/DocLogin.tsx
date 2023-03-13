@@ -88,7 +88,7 @@ const DocLogin = () => {
 
     return (
         <>
-            <NavBar name={''}/>
+            <NavBar mode='doc' name={''}/>
             <Container maxW='container.xl'>
                 <Flex>
                     <Container maxW='container.xl' centerContent py={55}>

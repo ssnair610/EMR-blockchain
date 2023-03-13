@@ -31,17 +31,17 @@ import Cookie from "../Props-TypeScript/Cookie";
 import SideDrawer from "../Props-TypeScript/SideDrawer";
 
 
-const Settings = () => {
+const DocSettings = () => {
 
-    const url = 'http://localhost:3000/api/user'
+    const url = 'http://localhost:3000/api/DocUser'
     let {name: name} = Cookie(url);
     const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
 
     return (
         <>
-            <NavBar mode='patient' name={name}/>
+            <NavBar mode='doc' name={name}/>
 
-            <SideDrawer mode='patient'/>
+            <SideDrawer mode='doc'/>
 
             <Container maxW='container.xl' p={5} centerContent>
 
@@ -275,4 +275,4 @@ const Settings = () => {
         ;
 };
 
-export default Settings;
+export default DocSettings;

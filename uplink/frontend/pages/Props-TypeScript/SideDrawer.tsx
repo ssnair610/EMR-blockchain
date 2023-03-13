@@ -23,10 +23,72 @@ import {
 import {ArrowRightIcon} from '@chakra-ui/icons';
 import {FaGithub, FaLinkedin, FaTwitter} from "react-icons/fa";
 
-const SideDrawer = () => {
+const SideDrawer = (props: { mode: string }) => {
 
     const {isOpen, onOpen, onClose} = useDisclosure()
     const btnRef = React.useRef()
+    let gridButton
+
+    if (props.mode === "doc") {
+        gridButton = (
+            <>
+                <GridItem colSpan={1}>
+                    <Link href={'/docMainPage'} style={{textDecoration: 'none'}}><Button size='lg'
+                                                                                         w='full'>Home</Button></Link>
+                </GridItem>
+
+
+                {/*<GridItem colSpan={1}>*/}
+                {/*    <Link href={'/upLoadData'} style={{textDecoration: 'none'}}><Button size='lg' w='full'>Upload*/}
+                {/*        Data</Button></Link>*/}
+                {/*</GridItem>*/}
+
+
+                <GridItem colSpan={1}>
+                    <Link href={'/docProfile'} style={{textDecoration: 'none'}}><Button size='lg'
+                                                                                        w='full'>Profile</Button></Link>
+                </GridItem>
+
+
+                <GridItem colSpan={1}>
+                    <Link href={'/docSettings'} style={{textDecoration: 'none'}}><Button size='lg'
+                                                                                         w='full'>Settings</Button></Link>
+                </GridItem>
+            </>
+
+        )
+
+    }
+    else if (props.mode === 'patient') {
+        gridButton = (
+            <>
+                <GridItem colSpan={1}>
+                    <Link href={'/mainPage'} style={{textDecoration: 'none'}}><Button size='lg'
+                                                                                      w='full'>Home</Button></Link>
+                </GridItem>
+
+
+                <GridItem colSpan={1}>
+                    <Link href={'/upLoadData'} style={{textDecoration: 'none'}}><Button size='lg' w='full'>Upload
+                        Data</Button></Link>
+                </GridItem>
+
+
+                <GridItem colSpan={1}>
+                    <Link href={'/profile'} style={{textDecoration: 'none'}}><Button size='lg'
+                                                                                     w='full'>Profile</Button></Link>
+                </GridItem>
+
+
+                <GridItem colSpan={1}>
+                    <Link href={'/settings'} style={{textDecoration: 'none'}}><Button size='lg'
+                                                                                      w='full'>Settings</Button></Link>
+                </GridItem>
+            </>
+
+        )
+
+    }
 
 
     return (
@@ -59,29 +121,7 @@ const SideDrawer = () => {
                         <Container maxW='container.xl' centerContent py={5} px={5}>
                             <SimpleGrid spacing={10} p={5} columns={1} w='full'>
 
-                                <GridItem colSpan={1}>
-                                    <Link href={'/mainPage'} style={{textDecoration: 'none'}}><Button size='lg'
-                                                                                                      w='full'>Home</Button></Link>
-                                </GridItem>
-
-
-                                <GridItem colSpan={1}>
-                                    <Link href={'/upLoadData'} style={{textDecoration: 'none'}}><Button size='lg' w='full'>Upload
-                                        Data</Button></Link>
-                                </GridItem>
-
-
-                                <GridItem colSpan={1}>
-                                    <Link href={'/profile'} style={{textDecoration: 'none'}}><Button size='lg'
-                                                                                                     w='full'>Profile</Button></Link>
-                                </GridItem>
-
-
-                                <GridItem colSpan={1}>
-                                    <Link href={'/settings'} style={{textDecoration: 'none'}}><Button size='lg'
-                                                                                                      w='full'>Settings</Button></Link>
-                                </GridItem>
-
+                                {gridButton}
 
                             </SimpleGrid>
 

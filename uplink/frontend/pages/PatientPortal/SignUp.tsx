@@ -91,7 +91,7 @@ export default function Details() {
 
     return (
         <>
-            <NavBar name={''}/>
+            <NavBar mode='patient' name={''}/>
 
             <Container centerContent py={35}>
                 <Card bg={bgColor} p={25}>

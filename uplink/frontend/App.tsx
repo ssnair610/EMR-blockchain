@@ -14,6 +14,7 @@ import UpLoadData from "./pages/PatientPortal/upLoadData";
 import DocLogin from "./pages/DoctorPortal/DocLogin";
 import DocMainPage from "./pages/DoctorPortal/DocMainPage";
 import DocSignUp from "./pages/DoctorPortal/DocSignUp";
+import DocSettings from "./pages/DoctorPortal/DocSettings";
 
 const App = () => {
 
@@ -37,6 +38,7 @@ const App = () => {
                         <Route path="/profile" element={<UserProfile/>}/>
                         <Route path="/upLoadData" element={<UpLoadData/>}/>
                         <Route path="/settings" element={<Settings/>}/>
+                        <Route path="/docSettings" element={<DocSettings/>}/>
                     </Routes>
 
                     <Footer/>

@@ -128,8 +128,8 @@ export default function UserProfile() {
     return (
 
         <>
-            <NavBar name={'name'}/>
-            <SideDrawer></SideDrawer>
+            <NavBar mode='patient' name={'name'}/>
+            <SideDrawer mode='patient'/>
             <Container maxW='container.xl' px={5} py={2}>
                 <Container maxW='container.lg' py={35} px={100}>
                     <Card bg={bgColor} p={15}>
