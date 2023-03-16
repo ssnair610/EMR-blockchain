@@ -33,7 +33,7 @@ func ConnectToDb() *mongo.Client {
 }
 
 // DB Client instance
-var DB *mongo.Client = ConnectToDb()
+var DB = ConnectToDb()
 
 // GetCollection getting database collections
 func GetCollection(client *mongo.Client, dataBaseName string, collectionName string) *mongo.Collection {
