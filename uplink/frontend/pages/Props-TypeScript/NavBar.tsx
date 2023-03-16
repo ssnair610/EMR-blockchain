@@ -25,7 +25,6 @@ import {CloseIcon, HamburgerIcon, MoonIcon, SunIcon} from '@chakra-ui/icons';
 import {Logo} from "./Logo";
 import {useNavigate} from "react-router-dom";
 
-const Links = ['Home', 'About Us', 'Team'];
 
 const NavLink = ({children}: { children: ReactNode }) => (
     <Link
@@ -137,9 +136,8 @@ export default function withAction(props: { name: string, mode: string }) {
                             as={'nav'}
                             spacing={4}
                             display={{base: 'none', md: 'flex'}}>
-                            {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
-                            ))}
+                            <Link style={{textDecoration: 'none'}} href='/'>Home</Link>
+                            <Link style={{textDecoration: 'none'}} href='/AboutUs'>About Us</Link>
                         </HStack>
                     </HStack>
                     <Flex alignItems={'center'} gap='2'>
@@ -153,9 +151,8 @@ export default function withAction(props: { name: string, mode: string }) {
                 {isOpen ? (
                     <Box pb={4} display={{md: 'none'}}>
                         <Stack as={'nav'} spacing={4}>
-                            {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
-                            ))}
+                            <Link style={{textDecoration: 'none'}} href='/'>Home</Link>
+                            <Link style={{textDecoration: 'none'}} href='/AboutUs'>About Us</Link>
                         </Stack>
                     </Box>
                 ) : null}

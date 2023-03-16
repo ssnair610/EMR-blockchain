@@ -1,9 +1,8 @@
 package initializers
 
 import (
-	"log"
-
 	"github.com/joho/godotenv" // Module required to use .env files in go
+	"log"
 )
 
 func LoadEnvVars() { // Loading  the environment variables file.
