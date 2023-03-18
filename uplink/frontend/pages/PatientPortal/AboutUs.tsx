@@ -12,14 +12,11 @@ import {useEffect, useState} from 'react';
 import NavBar from "../Props-TypeScript/NavBar";
 
 const AboutUs = () => {
-
-
     const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50'),
-        [show, setShow] = useState(false);
-
+        [show, showSet] = useState(false);
 
     useEffect(() => {
-        setShow(true);
+        showSet(true);
     }, [])
 
 
