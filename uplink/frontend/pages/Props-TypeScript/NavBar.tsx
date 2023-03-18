@@ -63,6 +63,7 @@ export default function withAction(props: { name: string, mode: string }) {
         navigate("/login");
     }
 
+    // @ts-ignore
     const logOut = async () => {
         const response = await fetch('http://localhost:3000/api/logout', {
 

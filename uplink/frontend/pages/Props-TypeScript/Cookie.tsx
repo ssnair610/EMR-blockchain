@@ -20,46 +20,47 @@ const Cookie = (url: string) => {
 
 
     useEffect(() => {
-        (
-            async () => {
+            (
+                async () => {
 
 
-                const response = await fetch(url, {
-                    credentials: 'include',
-                    headers: {'Content-Type': 'application/json'},
-                });
+                    const response = await fetch(url, {
+                        credentials: 'include',
+                        headers: {'Content-Type': 'application/json'},
+                    });
 
-                const content = await response.json();
-
-
-                getName(content.Name)
-                getEmail(content.Email)
-                getPhoneNumber(content.PhoneNumber)
-                getDoctorsName(content.DoctorsName)
-                getAddress(content.Address);
-                getMedication(content.Medication)
-                getAilments(content.Ailments)
-                getPatientStatus(content.PatientStatus)
-                getGender(content.Gender)
-                getAge(content.Age)
+                    const content = await response.json();
 
 
-                if (content.ID === undefined) {
-                    toast({
-                        title: 'Not authorized',
-                        description: 'You must be logged in',
-                        status: 'error',
-                        duration: 5000,
-                        isClosable: true,
-                    })
-                    navigate("/login");
+                    getName(content.Name)
+                    getEmail(content.Email)
+                    getPhoneNumber(content.PhoneNumber)
+                    getDoctorsName(content.DoctorsName)
+                    getAddress(content.Address);
+                    getMedication(content.Medication)
+                    getAilments(content.Ailments)
+                    getPatientStatus(content.PatientStatus)
+                    getGender(content.Gender)
+                    getAge(content.Age)
+
+
+                    if (content.ID === undefined) {
+                        toast({
+                            title: 'Not authorized',
+                            description: 'You must be logged in',
+                            status: 'error',
+                            duration: 5000,
+                            isClosable: true,
+                        })
+                        navigate("/login");
+
+                    }
+
 
                 }
-
-
-            }
-        )();
-    }, []);
+            )();
+        },
+        []);
 
 
     return {
