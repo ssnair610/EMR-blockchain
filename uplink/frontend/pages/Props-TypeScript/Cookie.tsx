@@ -21,6 +21,7 @@ const Cookie = (url: string) => {
 
     useEffect(() => {
             (
+                // @ts-ignore
                 async () => {
 
 

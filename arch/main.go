@@ -37,5 +37,6 @@ func main() {
 	//	fmt.Println()
 	//}
 
-	model.EncryptBlock()
+	//model.EncryptBlock()
+	model.JSONToEMR()
 }

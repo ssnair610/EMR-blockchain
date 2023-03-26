@@ -1,6 +1,8 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
 type GenderEnum bool
 
@@ -38,251 +40,261 @@ const (
 )
 
 type Date struct {
-	Year  int
-	Month int
-	Day   int
+	Year  int `json:"Year"`
+	Month int `json:"Month"`
+	Day   int `json:"Day"`
 }
 
-type drugInfo struct {
-	name     string `json:"drug name"`
-	dose     string `json:"dose"`
-	duration string `json:"duration"`
+type DrugInfo struct {
+	Name     string `json:"drug name"`
+	Dose     string `json:"dose"`
+	Duration string `json:"duration"`
 }
 
-type familyMember struct {
-	age                  uint8  `json:"member age"`
-	healthAndPsychiatric string `json:"health and psychiatric"`
-	ageAtDeath           uint8  `json:"age at death"`
-	cause                string `json:"cause"`
+type FamilyMember struct {
+	Age                  uint8  `json:"member age"`
+	HealthAndPsychiatric string `json:"health and psychiatric"`
+	AgeAtDeath           uint8  `json:"age at death"`
+	Cause                string `json:"cause"`
 }
 
-type previousSymptoms struct {
+type PreviousSymptoms struct {
 	// General
-	recentWeightGain float32 `json:"recent weight gain"`
-	fatigue          bool    `json:"fatigue"`
-	weakness         bool    `json:"weakness"`
-	fever            bool    `json:"fever"`
-	nightSweats      bool    `json:"night sweats"`
+	RecentWeightGain float32 `json:"recent weight gain"`
+	Fatigue          bool    `json:"fatigue"`
+	Weakness         bool    `json:"weakness"`
+	Fever            bool    `json:"fever"`
+	NightSweats      bool    `json:"night sweats"`
 
 	// Muscle/Joints/Bones
-	numbness       bool   `json:"numbness"`
-	jointPain      bool   `json:"joint pain"`
-	muscleWeakness bool   `json:"muscle weakness"`
-	jointSwelling  string `json:"joint swelling"`
+	Numbness       bool   `json:"numbness"`
+	JointPain      bool   `json:"joint pain"`
+	MuscleWeakness bool   `json:"muscle weakness"`
+	JointSwelling  string `json:"joint swelling"`
 
 	// Ears
-	ringingInEars bool `json:"ringing in the ears"`
-	lossOfHearing bool `json:"loss of hearing"`
+	RingingInEars bool `json:"ringing in the ears"`
+	LossOfHearing bool `json:"loss of hearing"`
 
 	// Eyes
-	eyePain       bool `json:"eye pain"`
-	eyeRedness    bool `json:"eye redness"`
-	lossOfVision  bool `json:"loss of vision"`
-	blurredVision bool `json:"blurred vision"`
-	eyeDryness    bool `json:"eye dryness"`
+	EyePain       bool `json:"eye pain"`
+	EyeRedness    bool `json:"eye redness"`
+	LossOfVision  bool `json:"loss of vision"`
+	BlurredVision bool `json:"blurred vision"`
+	EyeDryness    bool `json:"eye dryness"`
 
 	// Throat
-	frequentSoreThroats    bool `json:"frequent sore throats"`
-	throatHoarseness       bool `json:"throat hoarseness"`
-	difficultyInSwallowing bool `json:"difficulty in swallowing"`
-	painInJaw              bool `json:"pain in jaw"`
+	FrequentSoreThroats    bool `json:"frequent sore throats"`
+	ThroatHoarseness       bool `json:"throat hoarseness"`
+	DifficultyInSwallowing bool `json:"difficulty in swallowing"`
+	PainInJaw              bool `json:"pain in jaw"`
 
 	// Heart and Lungs
-	chestPain         bool `json:"chest pain"`
-	palpitations      bool `json:"palpitations"`
-	shortnessOfBreath bool `json:"shortness of breath"`
-	fainting          bool `json:"fainting"`
-	swollenLegsOrFeet bool `json:"swollen legs or feet"`
-	cough             bool `json:"cough"`
+	ChestPain         bool `json:"chest pain"`
+	Palpitations      bool `json:"palpitations"`
+	ShortnessOfBreath bool `json:"shortness of breath"`
+	Fainting          bool `json:"fainting"`
+	SwollenLegsOrFeet bool `json:"swollen legs or feet"`
+	Cough             bool `json:"cough"`
 
 	// Nervous System
-	headaches           bool `json:"headaches"`
-	dizziness           bool `json:"dizziness"`
-	lossOfConsciousness bool `json:"loss of consciousness"`
-	tingling            bool `json:"tingling"`
-	memoryLoss          bool `json:"memory loss"`
+	Headaches           bool `json:"headaches"`
+	Dizziness           bool `json:"dizziness"`
+	LossOfConsciousness bool `json:"loss of consciousness"`
+	Tingling            bool `json:"tingling"`
+	MemoryLoss          bool `json:"memory loss"`
 
 	// Stomach and intestines
-	nausea                 bool `json:"nausea"`
-	heartburn              bool `json:"heartburn"`
-	stomachPain            bool `json:"stomach pain"`
-	vomiting               bool `json:"vomiting"`
-	yellowJaundice         bool `json:"yellow jaundice"`
-	increasingConstipation bool `json:"increasing constipation"`
-	persistentDiarrhea     bool `json:"persistent diarrhea"`
-	bloodInStools          bool `json:"blood in stools"`
-	blackStools            bool `json:"black stools"`
+	Nausea                 bool `json:"nausea"`
+	Heartburn              bool `json:"heartburn"`
+	StomachPain            bool `json:"stomach pain"`
+	Vomiting               bool `json:"vomiting"`
+	YellowJaundice         bool `json:"yellow jaundice"`
+	IncreasingConstipation bool `json:"increasing constipation"`
+	PersistentDiarrhea     bool `json:"persistent diarrhea"`
+	BloodInStools          bool `json:"blood in stools"`
+	BlackStools            bool `json:"black stools"`
 
 	// Skin
-	skinRedness  bool `json:"skin redness"`
-	rash         bool `json:"rash"`
-	bumps        bool `json:"bumps"`
-	hairLoss     bool `json:"hair loss"`
-	colorChanges bool `json:"color changes"`
+	SkinRedness  bool `json:"skin redness"`
+	Rash         bool `json:"rash"`
+	Bumps        bool `json:"bumps"`
+	HairLoss     bool `json:"hair loss"`
+	ColorChanges bool `json:"color changes"`
 
 	// Blood
-	anemia bool `json:"anemia"`
-	clots  bool `json:"clots"`
+	Anemia bool `json:"anemia"`
+	Clots  bool `json:"clots"`
 
 	// Kidney/Urine/Bladder
-	frequentUrination bool `json:"frequent urination"`
-	bloodInUrine      bool `json:"blood in urine"`
+	FrequentUrination bool `json:"frequent urination"`
+	BloodInUrine      bool `json:"blood in urine"`
 
 	// Women Only
-	abnormalPapSmear       bool `json:"abnormal pap smear"`
-	irregularPeriods       bool `json:"irregular periods"`
-	bleedingBetweenPeriods bool `json:"bleeding between periods"`
-	pms                    bool `json:"PMS"`
+	AbnormalPapSmear       bool `json:"abnormal pap smear"`
+	IrregularPeriods       bool `json:"irregular periods"`
+	BleedingBetweenPeriods bool `json:"bleeding between periods"`
+	Pms                    bool `json:"PMS"`
 
 	// Psychiatric
-	depression                    bool `json:"depression"`
-	excessiveWorries              bool `json:"excessive worries"`
-	difficultyFallingAsleep       bool `json:"difficulty falling asleep"`
-	difficultyStayingAsleep       bool `json:"difficulty staying asleep"`
-	difficultiesWithSexualArousal bool `json:"difficulties with sexual arousal"`
-	poorAppetite                  bool `json:"poor appetite"`
-	foodCravings                  bool `json:"food cravings"`
-	frequentCrying                bool `json:"frequent crying"`
-	sensitivity                   bool `json:"sensitivity"`
-	suicidalThoughts              bool `json:"suicidal thoughts"`
-	stress                        bool `json:"stress"`
-	irritability                  bool `json:"irritability"`
-	poorConcentration             bool `json:"poor concentration"`
-	racingThoughts                bool `json:"racing thoughts"`
-	hallucinations                bool `json:"hallucinations"`
-	rapidSpeech                   bool `json:"rapid speech"`
-	guiltyThoughts                bool `json:"guilty thoughts"`
-	paranoia                      bool `json:"paranoia"`
-	moodSwings                    bool `json:"mood swings"`
-	anxiety                       bool `json:"anxiety"`
-	riskyBehavior                 bool `json:"risky behavior"`
+	Depression                    bool `json:"depression"`
+	ExcessiveWorries              bool `json:"excessive worries"`
+	DifficultyFallingAsleep       bool `json:"difficulty falling asleep"`
+	DifficultyStayingAsleep       bool `json:"difficulty staying asleep"`
+	DifficultiesWithSexualArousal bool `json:"difficulties with sexual arousal"`
+	PoorAppetite                  bool `json:"poor appetite"`
+	FoodCravings                  bool `json:"food cravings"`
+	FrequentCrying                bool `json:"frequent crying"`
+	Sensitivity                   bool `json:"sensitivity"`
+	SuicidalThoughts              bool `json:"suicidal thoughts"`
+	Stress                        bool `json:"stress"`
+	Irritability                  bool `json:"irritability"`
+	PoorConcentration             bool `json:"poor concentration"`
+	RacingThoughts                bool `json:"racing thoughts"`
+	Hallucinations                bool `json:"hallucinations"`
+	RapidSpeech                   bool `json:"rapid speech"`
+	GuiltyThoughts                bool `json:"guilty thoughts"`
+	Paranoia                      bool `json:"paranoia"`
+	MoodSwings                    bool `json:"mood swings"`
+	Anxiety                       bool `json:"anxiety"`
+	RiskyBehavior                 bool `json:"risky behavior"`
 
-	otherProblems string `json:"other problems"`
+	OtherProblems string `json:"other problems"`
 }
 
-type womensReproductiveHistory struct {
-	ageOfFirstPeriod     uint8 `json:"age of first period"`
-	numberOfPregancies   uint8 `json:"number of pregnancies"`
-	numberOfMiscarriages uint8 `json:"number of miscarriages"`
-	numberOfAbortions    uint8 `json:"number of abortions"`
-	menopauseAge         uint8 `json:"menopause age"`
-	regularPeriods       bool  `json:"regular periods"`
+type WomensReproductiveHistory struct {
+	AgeOfFirstPeriod     uint8 `json:"age of first period"`
+	NumberOfPregancies   uint8 `json:"number of pregnancies"`
+	NumberOfMiscarriages uint8 `json:"number of miscarriages"`
+	NumberOfAbortions    uint8 `json:"number of abortions"`
+	MenopauseAge         uint8 `json:"menopause age"`
+	RegularPeriods       bool  `json:"regular periods"`
 }
 
-type substanceInfo struct {
-	category           string `json:"drug category"`
-	ageOfFirstUsed     uint8  `json:"age when you first used this"`
-	amountAndFrequency string `json:"amount and frequency"`
-	duration           string `json:"duration"`
-	lastUsage          string `json:"last usage"`
-	currentlyUsing     bool   `json:"currently using"`
+type SubstanceInfo struct {
+	Category           string `json:"drug category"`
+	AgeOfFirstUsed     uint8  `json:"age when you first used this"`
+	AmountAndFrequency string `json:"amount and frequency"`
+	Duration           string `json:"duration"`
+	LastUsage          string `json:"last usage"`
+	CurrentlyUsing     bool   `json:"currently using"`
 }
 
-type personalData struct {
-	createdDate time.Time  `json:"creation date"`
-	name        string     `json:"name"`
-	birthdate   Date       `json:"birthdate"`
-	age         uint8      `json:"age"`
-	gender      GenderEnum `json:"gender"`
+type PersonalData struct {
+	CreatedDate time.Time `json:"creation date"`
+	Name        string    `json:"name"`
+	Birthdate   Date      `json:"birthdate"`
+	Age         uint8     `json:"age"`
+	Gender      string    `json:"gender"` // need to change string to genderEnum
 
-	modeOfReach           string `json:"mode of reach"`
-	symptomsBrief         string `json:"symptoms brief"`
-	prevPractitioners     string `json:"previous practitioners"`
-	psychHospitalizations string `json:"psychiatric hospitalizations"`
-	statusECT             bool   `json:"ECT"`
-	statusPsychotherapy   bool   `json:"Psychotherapy"`
+	ModeOfReach           string `json:"mode of reach"`
+	SymptomsBrief         string `json:"symptoms brief"`
+	PrevPractitioners     string `json:"previous practitioners"`
+	PsychHospitalizations string `json:"psychiatric hospitalizations"`
+	StatusECT             bool   `json:"ECT"`
+	StatusPsychotherapy   bool   `json:"Psychotherapy"`
 }
 
-type currentMedications struct {
-	drugAllergies []string   `json:"drug allergies"`
-	medications   []drugInfo `json:"medications"`
+type CurrentMedications struct {
+	DrugAllergies []string   `json:"drug allergies"`
+	Medications   []DrugInfo `json:"medications"`
 }
 
-type pastMedicalHistory struct {
-	diabetes          bool   `json:"diabetes"`
-	highBloodPressure bool   `json:"high blood pressure"`
-	highCholesterol   bool   `json:"high cholesterol"`
-	hypothyroidism    bool   `json:"hypothyroidism"`
-	goiter            bool   `json:"goiter"`
-	cancerType        string `json:"cancer type"`
-	leukemia          bool   `json:"luekemia"`
-	psoriasis         bool   `json:"psoriasis"`
-	angina            bool   `json:"angina"`
-	heartProblems     bool   `json:"heart problems"`
+type PastMedicalHistory struct {
+	Diabetes          bool   `json:"diabetes"`
+	HighBloodPressure bool   `json:"high blood pressure"`
+	HighCholesterol   bool   `json:"high cholesterol"`
+	Hypothyroidism    bool   `json:"hypothyroidism"`
+	Goiter            bool   `json:"goiter"`
+	CancerType        string `json:"cancer type"`
+	Leukemia          bool   `json:"luekemia"`
+	Psoriasis         bool   `json:"psoriasis"`
+	Angina            bool   `json:"angina"`
+	HeartProblems     bool   `json:"heart problems"`
 
-	heartMurmur       bool `json:"heart murmur"`
-	pneumonia         bool `json:"pneumonia"`
-	pulmonaryEmbolism bool `json:"pulmonary embolism"`
-	asthma            bool `json:"asthma"`
-	emphysema         bool `json:"emphysema"`
-	stroke            bool `json:"stroke"`
-	epilepsy          bool `json:"epilepsy"`
-	cataracts         bool `json:"cataracts"`
-	kidneyDisease     bool `json:"kidney disease"`
-	kidneyStones      bool `json:"kidney stones"`
+	HeartMurmur       bool `json:"heart murmur"`
+	Pneumonia         bool `json:"pneumonia"`
+	PulmonaryEmbolism bool `json:"pulmonary embolism"`
+	Asthma            bool `json:"asthma"`
+	Emphysema         bool `json:"emphysema"`
+	Stroke            bool `json:"stroke"`
+	Epilepsy          bool `json:"epilepsy"`
+	Cataracts         bool `json:"cataracts"`
+	KidneyDisease     bool `json:"kidney disease"`
+	KidneyStones      bool `json:"kidney stones"`
 
-	crohnsDisease  bool `json:"crohns disease"`
-	colitis        bool `json:"colitis"`
-	anemia         bool `json:"anemia"`
-	jaundice       bool `json:"jaundice"`
-	hepatitis      bool `json:"hepatitis"`
-	pepticUlcer    bool `json:"peptic ulcer"`
-	rheumaticFever bool `json:"rheumatic fever"`
-	tuberculosis   bool `json:"tuberculosis"`
-	aids           bool `json:"aids"`
+	CrohnsDisease  bool `json:"crohns disease"`
+	Colitis        bool `json:"colitis"`
+	Anemia         bool `json:"anemia"`
+	Jaundice       bool `json:"jaundice"`
+	Hepatitis      bool `json:"hepatitis"`
+	PepticUlcer    bool `json:"peptic ulcer"`
+	RheumaticFever bool `json:"rheumatic fever"`
+	Tuberculosis   bool `json:"tuberculosis"`
+	Aids           bool `json:"aids"`
 
-	others []string `json:"others"`
+	Others []string `json:"others"`
 }
 
-type personalHistory struct {
-	birthProblems    string       `json:"birth problems"`
-	placeOfBirth     string       `json:"place of birth"`
-	maritalStatus    MarriageEnum `json:"marital status"`
-	latestOccupation string       `json:"latest occupation"`
-	statusWorking    bool         `json:"currently working"`
-	hoursPerWeek     float32      `json:"hours per week"`
-	statusSSI        bool         `json:"SSI status"`
-	descSSI          string       `json:"SSI description"`
-	legalProblems    string       `json:"legal problems"`
-	religion         string       `json:"religion"`
+type PersonalHistory struct {
+	BirthProblems    string  `json:"birth problems"`
+	PlaceOfBirth     string  `json:"place of birth"`
+	MaritalStatus    int     `json:"marital status"` //need to change int to MarriageEnumm
+	LatestOccupation string  `json:"latest occupation"`
+	StatusWorking    bool    `json:"currently working"`
+	HoursPerWeek     float32 `json:"hours per week"`
+	StatusSSI        bool    `json:"SSI status"`
+	DescSSI          string  `json:"SSI description"`
+	LegalProblems    string  `json:"legal problems"`
+	Religion         string  `json:"religion"`
 }
 
-type familyHistory struct {
-	father                 familyMember   `json:"father history"`
-	mother                 familyMember   `json:"mother history"`
-	siblings               []familyMember `json:"siblings history"`
-	children               []familyMember `json:"children history"`
-	maternalRelativeIssues string         `json:"maternal relative problems"`
-	paternalRelativeIssues string         `json:"maternal relative problems"`
+type FamilyHistory struct {
+	Father                 FamilyMember   `json:"father history"`
+	Mother                 FamilyMember   `json:"mother history"`
+	Siblings               []FamilyMember `json:"siblings history"`
+	Children               []FamilyMember `json:"children history"`
+	MaternalRelativeIssues string         `json:"maternal relative problems"`
+	PaternalRelativeIssues string         `json:"paternal relative problems"`
 }
 
-type systemsReview struct {
-	PreviousSymptoms          previousSymptoms          `json:"previous symptoms"`
-	WomensReproductiveHistory womensReproductiveHistory `json:"womens reproductive history"`
+type SystemsReview struct {
+	PreviousSymptoms          PreviousSymptoms          `json:"previous symptoms"`
+	WomensReproductiveHistory WomensReproductiveHistory `json:"womens reproductive history"`
 }
 
-type substanceUse struct {
-	alcohol          substanceInfo   `json:"alcohol"`
-	cannabis         substanceInfo   `json:"cannabis"`
-	stimulantsA      substanceInfo   `json:"stimulants A"`
-	stimulantsB      substanceInfo   `json:"stimulants B"`
-	amphetamines     substanceInfo   `json:"amphetamines"`
-	tranquilizers    substanceInfo   `json:"tranquilizers"`
-	sedatives        substanceInfo   `json:"sedatives"`
-	heroin           substanceInfo   `json:"heroin"`
-	illicitMethadone substanceInfo   `json:"illicit methadone"`
-	otherOpioids     substanceInfo   `json:"other opioids"`
-	hallucinogens    substanceInfo   `json:"hallucinogens"`
-	inhalants        substanceInfo   `json:"inhalants"`
-	others           []substanceInfo `json:"other substances"`
+type SubstanceUse struct {
+	Alcohol          SubstanceInfo   `json:"alcohol"`
+	Cannabis         SubstanceInfo   `json:"cannabis"`
+	StimulantsA      SubstanceInfo   `json:"stimulants A"`
+	StimulantsB      SubstanceInfo   `json:"stimulants B"`
+	Amphetamines     SubstanceInfo   `json:"amphetamines"`
+	Tranquilizers    SubstanceInfo   `json:"tranquilizers"`
+	Sedatives        SubstanceInfo   `json:"sedatives"`
+	Heroin           SubstanceInfo   `json:"heroin"`
+	IllicitMethadone SubstanceInfo   `json:"illicit methadone"`
+	OtherOpioids     SubstanceInfo   `json:"other opioids"`
+	Hallucinogens    SubstanceInfo   `json:"hallucinogens"`
+	Inhalants        SubstanceInfo   `json:"inhalants"`
+	Others           []SubstanceInfo `json:"other substances"`
 }
+
+//type EMR struct {
+//	PersonalData       personalData       `json:"PersonalData"`
+//	CurrentMedications currentMedications `json:"CurrentMedications"`
+//	PastMedicalHistory pastMedicalHistory `json:"PastMedicalHistory"`
+//	PersonalHistory    personalHistory    `json:"PersonalHistory"`
+//	FamilyHistory      familyHistory      `json:"FamilyHistory"`
+//	SystemsReview      systemsReview      `json:"SystemsReview"`
+//	SubstanceUse       substanceUse       `json:"SubstanceUse"`
+//}
 
 type EMR struct {
-	PersonalData       personalData       `json:"personal"`
-	CurrentMedications currentMedications `json:"current medications"`
-	PastMedicalHistory pastMedicalHistory `json:"past medical history"`
-	PersonalHistory    personalHistory    `json:"personal history"`
-	FamilyHistory      familyHistory      `json:"family history"`
-	SystemsReview      systemsReview      `json:"systems review"`
-	SubstanceUse       substanceUse       `json:"substance use"`
+	PersonalData       PersonalData       `json:"PersonalData"`
+	CurrentMedications CurrentMedications `json:"CurrentMedications"`
+	PastMedicalHistory PastMedicalHistory `json:"PastMedicalHistory"`
+	PersonalHistory    PersonalHistory    `json:"PersonalHistory"`
+	FamilyHistory      FamilyHistory      `json:"FamilyHistory"`
+	SystemsReview      SystemsReview      `json:"SystemsReview"`
+	SubstanceUse       SubstanceUse       `json:"SubstanceUse"`
 }

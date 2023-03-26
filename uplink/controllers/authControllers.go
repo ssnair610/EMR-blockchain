@@ -45,6 +45,11 @@ func Regeister(app *fiber.Ctx) error {
 		return app.Status(fiber.StatusInternalServerError).JSON(responses.UserResponse{Status: fiber.StatusInternalServerError, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
+	err = SetUserDetails(newUser["Name"], newUser["Email"], result.InsertedID, app)
+	if err != nil {
+		log.Fatalln("Error in SetUserDetails , error : ", err)
+	}
+
 	return app.Status(fiber.StatusCreated).JSON(responses.UserResponse{Status: fiber.StatusCreated, Message: "success", Data: &fiber.Map{"data": result}})
 }
 

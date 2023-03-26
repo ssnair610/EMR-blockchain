@@ -2,7 +2,7 @@ import {
     Avatar,
     Box,
     Button,
-    Card,
+    Card, Center,
     Container,
     Divider,
     Flex,
@@ -72,6 +72,7 @@ export default function UserProfile() {
             setButtonData('Update details');
         }
     }
+    // @ts-ignore
     const submit = async (e: SyntheticEvent) => {
 
         e.preventDefault();
@@ -161,60 +162,60 @@ export default function UserProfile() {
                                         <Flex>
                                             <form onSubmit={submit}>
                                                 <FormControl isDisabled={inputDisabled}>
-                                                    <SimpleGrid p={2} columnGap={100} rowGap={5} columns={2}>
+                                                    <SimpleGrid p={2} columnGap={5} rowGap={5} columns={2}>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Name</FormLabel>
-                                                            <Input type='text' defaultValue={name} w='auto'
+                                                            <Input type='text' defaultValue={name}
                                                                    onChange={e => setName(e.target.value)}/>
                                                         </GridItem>
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Email address</FormLabel>
-                                                            <Input type='email' defaultValue={email} w='auto'
+                                                            <Input type='email' defaultValue={email}
                                                             />
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Age</FormLabel>
-                                                            <Input type='number' defaultValue={age} w='auto'
+                                                            <Input type='number' defaultValue={age}
                                                                    onChange={e => setAge(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Phone Number</FormLabel>
-                                                            <Input type='text' defaultValue={phoneNumber} w='auto'
+                                                            <Input type='text' defaultValue={phoneNumber}
                                                                    onChange={e => setPhoneNumber(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Gender</FormLabel>
-                                                            <Input type='text' defaultValue={gender} w='auto'
+                                                            <Input type='text' defaultValue={gender}
                                                                    onChange={e => setGender(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Doctor's Name</FormLabel>
-                                                            <Input type='text' defaultValue={doctorsName} w='auto'
+                                                            <Input type='text' defaultValue={doctorsName}
                                                                    onChange={e => setDoctorsName(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Ailments</FormLabel>
                                                             <Input type='text' defaultValue={ailments}
-                                                                   w='auto'
+
                                                                    onChange={e => setAilments(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Medications</FormLabel>
                                                             <Input type='text' defaultValue={medication}
-                                                                   w='auto'
+
                                                                    onChange={e => setMedication(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Address</FormLabel>
-                                                            <Input type='text' defaultValue={address} w='auto'
+                                                            <Input type='text' defaultValue={address}
                                                                    onChange={e => setAddress(e.target.value)}/>
                                                         </GridItem>
 
@@ -242,11 +243,13 @@ export default function UserProfile() {
 
 
                                     <GridItem colSpan={1}>
-                                        <Container maxW='container.xl' px={180}>
+                                        <Container maxW='container.xl' mx={30}>
                                             <Flex>
+                                                <Divider h='500'  orientation='vertical' />
 
 
-                                                <VStack align={'center'}>
+
+                                                <VStack align={'center'} mx={75}>
 
                                                     <WrapItem>
                                                         <Avatar size='xl' name='Christian Nwamba'
@@ -265,7 +268,9 @@ export default function UserProfile() {
                                         </Container>
 
 
+
                                     </GridItem>
+
                                 </SimpleGrid>
                             </WrapItem>
 

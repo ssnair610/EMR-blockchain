@@ -20,6 +20,52 @@ var (
 	userDetails = initializers.GetCollection(initializers.DB, "user", "details")
 )
 
+func SetUserDetails(name string, email string, id interface{}, app *fiber.Ctx) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+
+	defer cancel()
+
+	setUserData := bson.M{
+		"_id": id,
+
+		"name": name,
+
+		"email": email,
+
+		"phoneNumber": nil,
+
+		"doctorsName": nil,
+
+		"ailments": nil,
+
+		"medication": nil,
+
+		"address": nil,
+
+		"patientStatus": nil,
+
+		"gender": nil,
+
+		"Age": nil,
+	}
+
+	if _, err := userDetails.InsertOne(ctx, setUserData); err != nil {
+		if err == mongo.ErrNoDocuments {
+
+			// This error means your query did not match any documents.
+			return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Account doesnt exist wow	", Data: &fiber.Map{"data": err.Error()}})
+
+		}
+		fmt.Println("you shouldn't be here")
+		log.Fatal(err)
+	}
+
+	fmt.Println("Data is set")
+
+	return app.Status(fiber.StatusOK).JSON(responses.UserResponse{Status: fiber.StatusOK, Message: "Account Details Updated"})
+
+}
+
 func GetUserDetails(app *fiber.Ctx) error {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
