@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"model"
 )
 
@@ -38,5 +39,7 @@ func main() {
 	//}
 
 	//model.EncryptBlock()
-	model.JSONToEMR()
+
+	patientData := model.JSONToEMR("./arch/model/dummy.json")
+	fmt.Printf("%+v\n", patientData)
 }

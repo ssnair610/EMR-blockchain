@@ -1,24 +1,15 @@
-/*
-
-Author : Pranav
-Created on : 24-03-2023
-IDE : GoLand
-
-*/
-
 package model
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 )
 
-func JSONToEMR() {
+func JSONToEMR(JSONpath string) EMR {
 
 	// Opening JSON File
-	file, err := os.Open("./model/dummy.json")
+	file, err := os.Open(JSONpath)
 	if err != nil {
 		log.Fatalln("Error opening file:", err)
 	}
@@ -28,7 +19,6 @@ func JSONToEMR() {
 		err := file.Close()
 		if err != nil {
 			log.Fatalln("Error closing file:", err)
-
 		}
 	}(file)
 
@@ -37,23 +27,19 @@ func JSONToEMR() {
 	err = json.NewDecoder(file).Decode(&data)
 	if err != nil {
 		log.Fatalln("Error decoding file, error is :", err)
-
 	}
 
 	// Encode the JSON data in pretty format
 	prettyJSON, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
-		log.Fatalln("Error encoding JSON , error is :", err)
-
+		log.Fatalln("Error marshalling JSON, error is :", err)
 	}
 
 	var patientData EMR
 	if err := json.Unmarshal(prettyJSON, &patientData); err != nil {
 		// handle error
-		log.Fatalln("Error converting interface to Object , error is :", err)
-
+		log.Fatalln("Error converting interface to EMR, error is :", err)
 	}
 
-	//Printing Data in object format
-	fmt.Println(patientData)
+	return patientData
 }
