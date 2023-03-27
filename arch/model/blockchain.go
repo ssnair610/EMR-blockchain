@@ -2,9 +2,6 @@ package model
 
 import (
 	"bytes"
-	"encoding/hex"
-	"errors"
-	"strconv"
 )
 
 // A Blockchain facilitates processing of transactions through consensus of blocks.
@@ -33,30 +30,34 @@ func NewBlockchain(difficulty int) *Blockchain {
 }
 
 // Adding a block to the blockchain.
-func (blockchain *Blockchain) addBlock(blockData []Transaction) {
+func (blockchain *Blockchain) addBlock(blockData Transaction) {
 	statement := NewBlock(blockData, blockchain.Chain.Latest.Hash)
 	statement.Mine(blockchain.difficulty)
 	blockchain.Chain.Add(statement)
 }
 
 // AddTransactions Adds transactions to the blockchain.
-func (blockchain *Blockchain) AddTransactions(transactionData []Transaction) error {
-	if len(transactionData) == 100 {
-		return errors.New("transactionBuffer is full. Try processing pending transactions")
-	}
+func (blockchain *Blockchain) AddTransaction(transactionData Transaction) error {
+	blockchain.transactionBuffer = append(blockchain.transactionBuffer, transactionData)
+	return nil
+}
 
-	blockchain.transactionBuffer = append(blockchain.transactionBuffer, transactionData...)
-
+// AddTransactions Adds transactions to the blockchain.
+func (blockchain *Blockchain) AddTransactions(transactionsData []Transaction) error {
+	blockchain.transactionBuffer = append(blockchain.transactionBuffer, transactionsData...)
 	return nil
 }
 
 // ProcessPendingTransactions  , Processes the pending transactions. (Currently only supports PoW)
-func (blockchain *Blockchain) ProcessPendingTransactions(rewardAddress walletType) {
-	rewardTx := Transaction{"genesis rewards " + strconv.FormatFloat(float64(blockchain.reward), 'f', 2, 64) + " coin(s) to " + hex.EncodeToString(rewardAddress)}
-	blockchain.transactionBuffer = append(blockchain.transactionBuffer, rewardTx)
+func (blockchain *Blockchain) ProcessPendingTransactions(pocket *Wallet) {
+	reward := CurrencyType(0)
+	for _, transaction := range blockchain.transactionBuffer {
+		blockchain.addBlock(transaction)
+		reward += blockchain.reward
+	}
 
-	blockchain.addBlock(blockchain.transactionBuffer)
-	blockchain.transactionBuffer = blockchain.transactionBuffer[:0]
+	pocket.ballance += reward
+	blockchain.transactionBuffer = make([]Transaction, 0)
 }
 
 // IsChainValid Checking if the blockchain is valid.
