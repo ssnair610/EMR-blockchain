@@ -2,6 +2,7 @@ package model
 
 import (
 	"bytes"
+	"fmt"
 )
 
 // A Blockchain facilitates processing of transactions through consensus of blocks.
@@ -14,6 +15,7 @@ type Blockchain struct {
 	Chain             *ChainLinks
 	difficulty        int
 	transactionBuffer []Transaction
+	minStake		  CurrencyType
 	reward            CurrencyType
 }
 
@@ -23,7 +25,8 @@ func NewBlockchain(difficulty int) *Blockchain {
 		Chain:             NewChain(),
 		difficulty:        difficulty,
 		transactionBuffer: make([]Transaction, 0),
-		reward:            CurrencyType(1),
+		minStake: 		   CurrencyType(5),
+		reward:            CurrencyType(8),
 	}
 
 	return blockchain
@@ -49,15 +52,28 @@ func (blockchain *Blockchain) AddTransactions(transactionsData []Transaction) er
 }
 
 // ProcessPendingTransactions  , Processes the pending transactions. (Currently only supports PoW)
-func (blockchain *Blockchain) ProcessPendingTransactions(pocket *Wallet) {
+func (blockchain *Blockchain) ProcessPendingTransactions(pocket *Wallet, stake CurrencyType) error {
+
+	if stake < blockchain.minStake {
+		return fmt.Errorf("at least %v coins are required during staking", blockchain.minStake)
+	}
+
+	err := pocket.Debit(stake)
+
+	if err != nil {
+		return err
+	}
+
 	reward := CurrencyType(0)
 	for _, transaction := range blockchain.transactionBuffer {
 		blockchain.addBlock(transaction)
 		reward += blockchain.reward
 	}
 
-	pocket.ballance += reward
+	pocket.Credit(reward)
 	blockchain.transactionBuffer = make([]Transaction, 0)
+
+	return nil
 }
 
 // IsChainValid Checking if the blockchain is valid.

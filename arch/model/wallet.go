@@ -2,6 +2,7 @@ package model
 
 import (
 	"crypto/rand"
+	"fmt"
 )
 
 type walletType []byte
@@ -45,6 +46,14 @@ func (wallet *Wallet) Credit(amount CurrencyType) {
 }
 
 // Debit Subtracting the amount from the ballance of the wallet.
-func (wallet *Wallet) Debit(amount CurrencyType) {
-	wallet.ballance -= amount
+func (wallet *Wallet) Debit(amount CurrencyType) error {
+	remaining := wallet.ballance - amount
+
+	if remaining < CurrencyType(0) {
+		return fmt.Errorf("insufficient balance amount; expected %v, found %v", amount, wallet.ballance)
+	}
+
+	wallet.ballance = remaining
+
+	return nil
 }

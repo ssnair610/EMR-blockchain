@@ -18,6 +18,8 @@ func main() {
 	bc := model.NewBlockchain(1)
 	wallet := model.NewWallet()
 
+	wallet.Credit(7)
+
 	err := addFileDataToBlockchain("./arch/model/dummy.json", bc)
 
 	if err != nil {
@@ -27,7 +29,12 @@ func main() {
 
 	// Processing the pending transactions and rewarding walletID.
 	clock := time.Now()
-	bc.ProcessPendingTransactions(wallet)
+	err = bc.ProcessPendingTransactions(wallet, 6)
+
+	if err != nil {
+		fmt.Println("Block data processing failed:", err)
+	}
+
 	fmt.Println(time.Since(clock))
 	
 	for _, block := range bc.Chain.Links() {
@@ -38,6 +45,7 @@ func main() {
 		fmt.Println()
 	}
 
+	fmt.Println("Wallet ballance:", wallet.Balance(), "coins")
 	//model.EncryptBlock()
 
 	// patientData := model.JSONToEMR("./arch/model/dummy.json")
