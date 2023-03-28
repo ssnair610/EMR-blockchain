@@ -35,7 +35,7 @@ func main() {
 		fmt.Println("Block data processing failed:", err)
 	}
 
-	fmt.Println(time.Since(clock))
+	fmt.Println("Transactions processed in", time.Since(clock))
 	
 	for _, block := range bc.Chain.Links() {
 		if block.IsValid() {
@@ -46,8 +46,4 @@ func main() {
 	}
 
 	fmt.Println("Wallet ballance:", wallet.Balance(), "coins")
-	//model.EncryptBlock()
-
-	// patientData := model.JSONToEMR("./arch/model/dummy.json")
-	// fmt.Printf("%+v\n", patientData)
 }
