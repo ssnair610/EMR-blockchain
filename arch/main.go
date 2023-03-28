@@ -6,13 +6,6 @@ import (
 	"time"
 )
 
-func addFileDataToBlockchain(filepath string, blockchain *model.Blockchain) error {
-	emr := model.JSONToEMR(filepath)
-	err := blockchain.AddTransaction(model.Transaction{Record: emr})
-
-	return err
-}
-
 func main() {
 
 	bc := model.NewBlockchain(1)
@@ -20,7 +13,7 @@ func main() {
 
 	wallet.Credit(7)
 
-	err := addFileDataToBlockchain("./arch/model/dummy.json", bc)
+	err := bc.AddFromJSON("./arch/model/dummy.json")
 
 	if err != nil {
 		fmt.Println("Data file addition to blockchain failed:", err)
