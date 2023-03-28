@@ -26,7 +26,7 @@ func NewBlockchain(difficulty int) *Blockchain {
 		difficulty:        difficulty,
 		transactionBuffer: make([]Transaction, 0),
 		minStake: 		   CurrencyType(5),
-		reward:            CurrencyType(8),
+		reward:            CurrencyType(3),
 	}
 
 	return blockchain
@@ -64,13 +64,17 @@ func (blockchain *Blockchain) ProcessPendingTransactions(pocket *Wallet, stake C
 		return err
 	}
 
-	reward := CurrencyType(0)
+	reward := stake
 	for _, transaction := range blockchain.transactionBuffer {
 		blockchain.addBlock(transaction)
 		reward += blockchain.reward
 	}
 
-	pocket.Credit(reward)
+	// Wait for 51% agreement from other nodes
+	if true {
+		pocket.Credit(reward)
+	}
+
 	blockchain.transactionBuffer = make([]Transaction, 0)
 
 	return nil
