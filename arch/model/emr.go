@@ -86,7 +86,7 @@ type PreviousSymptoms struct {
 	// Throat
 	FrequentSoreThroats    bool `json:"frequent sore throats"`
 	ThroatHoarseness       bool `json:"throat hoarseness"`
-	DifficultyInSwallowing bool `json:"difficulty in swallowing"`
+	DifficultyInSwallowing bool `json:"DifficultyInSwallowing"`
 	PainInJaw              bool `json:"pain in jaw"`
 
 	// Heart and Lungs
@@ -142,7 +142,7 @@ type PreviousSymptoms struct {
 	DifficultyFallingAsleep       bool `json:"difficulty falling asleep"`
 	DifficultyStayingAsleep       bool `json:"difficulty staying asleep"`
 	DifficultiesWithSexualArousal bool `json:"difficulties with sexual arousal"`
-	PoorAppetite                  bool `json:"poor appetite"`
+	PoorAppetite                  bool `json:"PoorAppetite"`
 	FoodCravings                  bool `json:"food cravings"`
 	FrequentCrying                bool `json:"frequent crying"`
 	Sensitivity                   bool `json:"sensitivity"`
@@ -197,7 +197,7 @@ type PersonalData struct {
 
 type CurrentMedications struct {
 	DrugAllergies []string   `json:"drug allergies"`
-	Medications   []DrugInfo `json:"medications"`
+	Medications   []DrugInfo `json:"medications"` // needs to be implemented properly
 }
 
 type PastMedicalHistory struct {
@@ -206,7 +206,7 @@ type PastMedicalHistory struct {
 	HighCholesterol   bool   `json:"high cholesterol"`
 	Hypothyroidism    bool   `json:"hypothyroidism"`
 	Goiter            bool   `json:"goiter"`
-	CancerType        string `json:"cancer type"`
+	CancerType        string `json:"cancer type"` // needs to be implemented properly
 	Leukemia          bool   `json:"luekemia"`
 	Psoriasis         bool   `json:"psoriasis"`
 	Angina            bool   `json:"angina"`
@@ -239,7 +239,7 @@ type PastMedicalHistory struct {
 type PersonalHistory struct {
 	BirthProblems    string  `json:"birth problems"`
 	PlaceOfBirth     string  `json:"place of birth"`
-	MaritalStatus    int     `json:"marital status"` //need to change int to MarriageEnumm
+	MaritalStatus    string  `json:"marital status"` //need to change int(now string) to MarriageEnumm
 	LatestOccupation string  `json:"latest occupation"`
 	StatusWorking    bool    `json:"currently working"`
 	HoursPerWeek     float32 `json:"hours per week"`

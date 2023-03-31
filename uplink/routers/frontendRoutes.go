@@ -20,6 +20,7 @@ func FrontEndRoutes(app *fiber.App) {
 		"/DocSignUp",
 		"/docSettings",
 		"/AboutUs",
+		"/medicalHistory",
 	}
 
 	for _, route := range frontendRoutes { // for loop iterates through those valid paths
