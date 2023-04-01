@@ -55,19 +55,20 @@ const MedicalHistory = () => {
         RecentWeightGain: "",
         JointSwelling: "",
         OtherProblems: "",
-})
+    })
 
-    const [checkedItemsForPastMedicalHistory, setCheckedItemsForPastMedicalHistory] = useState<CheckboxItem[]>([]);
-    const [checkedItemsForPersonalHistory, setCheckedItemsForPersonalHistory] = useState<CheckboxItem[]>([]);
-    const [checkedItemsForSystemReview, setCheckedItemsForSystemReview] = useState<CheckboxItem[]>([]);
+    const [checkedItemsForPastMedicalHistory, setCheckedItemsForPastMedicalHistory] = useState<CheckboxItem[]>([]),
+        [checkedItemsForPersonalHistory, setCheckedItemsForPersonalHistory] = useState<CheckboxItem[]>([]),
+        [checkedItemsForSystemReview, setCheckedItemsForSystemReview] = useState<CheckboxItem[]>([]);
 
 
-     /*
-     TODO:
-         1.Add material status data to the EMR object
-         2.Add ui and backend for multiple children , sibling and all the properties which require an []
-         3.Sort out Current Medications panel
-      */
+    /*
+    TODO:
+        1.Add material status data to the EMR object
+        2.Add ui and backend for multiple children , sibling and all the properties which require an []
+        3.Sort out Current Medications panel
+        4.Add toasts to substance use , faimly history and over all properties
+     */
 
 
     const [BirthProblems, setBirthProblems] = useState(''),
@@ -79,9 +80,9 @@ const MedicalHistory = () => {
         [LegalProblems, setLegalProblems] = useState(''),
         [Religion, setReligion] = useState('');
 
-    let pastMedicalHistory;
-    let personalHistory;
-    let systemReview;
+    let pastMedicalHistory,
+        personalHistory,
+        systemReview;
 
     /*Will show an alert if the page is going to be refreshed as the data might not have been submitted */
     //const [showAlert, setShowAlert] = useState(false);
@@ -157,10 +158,16 @@ const MedicalHistory = () => {
     };
 
     const [FamilyHistory, setPatientFamilyDetails] = useState({});
+    const [SubstanceUse, setSubstanceUse] = useState({});
 
 
     const handleClick = obj => {
         setPatientFamilyDetails(emp => ({...emp, ...obj}));
+    }
+
+
+    const handleClickForSubstanceUse = obj => {
+        setSubstanceUse(emp => ({...emp, ...obj}));
     }
 
 
@@ -174,26 +181,14 @@ const MedicalHistory = () => {
         }, {});
 
         personalHistory = checkedItemsForPersonalHistory.reduce((obj, item) => {
-
             obj[item.value] = item.isChecked;
             return obj;
         }, {});
 
         systemReview = checkedItemsForSystemReview.reduce((obj, item) => {
-
             obj[item.value] = item.isChecked;
             return obj;
         }, {});
-
-
-
-        // setCheckedItemsForSystemReview({RecentWeightGain:recentWeightGain})
-
-        // systemReview = checkedItemsForSystemReview.reduce((obj, item) => {
-        //     obj[item.value] = item.isChecked;
-        //     return obj;
-        // }, {});
-
 
 
         formData = {
@@ -220,14 +215,11 @@ const MedicalHistory = () => {
             SystemsReview: {
                 PreviousSymptoms: formData
             },
-            // SubstanceUse:substanceUse,
+            SubstanceUse: SubstanceUse,
         }
 
         console.log(emrData);
 
-
-        // console.log(formData)
-        // console.log('Selected checkboxes:', checkboxValues);
 
     };
 
@@ -665,7 +657,8 @@ const MedicalHistory = () => {
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem colSpan={2}>
-                                                            <Input my={3} variant='outline' name='JointSwelling' onChange={handleInputChangeForSystemReview}
+                                                            <Input my={3} variant='outline' name='JointSwelling'
+                                                                   onChange={handleInputChangeForSystemReview}
                                                                    placeholder='Do you have any Joint Swelling ?'/>
                                                         </GridItem>
 
@@ -680,12 +673,14 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='RingingInEars'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='RingingInEars'>
                                                                 Do you feel any Ringing In Ears ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='LossOfHearing'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='LossOfHearing'>
                                                                 Do you feel any Loss Of Hearing ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -699,27 +694,32 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='EyePain'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='EyePain'>
                                                                 Do you feel any Eye Pain ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='EyeRedness'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='EyeRedness'>
                                                                 Do you have any Eye Redness ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='LossOfVision'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='LossOfVision'>
                                                                 Do you have any Loss Of Vision ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='BlurredVision'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='BlurredVision'>
                                                                 Do you have any Blur of Vision ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='EyeDryness'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='EyeDryness'>
                                                                 Do you have any Dryness of the eye ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -733,22 +733,26 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='FrequentSoreThroats'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='FrequentSoreThroats'>
                                                                 Do you get frequent sore throats ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='ThroatHoarseness'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='ThroatHoarseness'>
                                                                 Do you any strain in the throat?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='PainInJaw'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='PainInJaw'>
                                                                 Do you have any pain in jaw ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green'
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green'
                                                                       value='DifficultyInSwallowing'>
                                                                 Do you have any difficulty in swallowing ?
                                                             </Checkbox>
@@ -764,32 +768,38 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}  colorScheme='green' value='ChestPain'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='ChestPain'>
                                                                 Do you have/get any chest pain ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Palpitations'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Palpitations'>
                                                                 Do you get palpitations?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='ShortnessOfBreath'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='ShortnessOfBreath'>
                                                                 Do you feel shortness of breath ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Fainting'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Fainting'>
                                                                 Do you fell like you will faint ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='SwollenLegsOrFeet'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='SwollenLegsOrFeet'>
                                                                 Do you have swollen legs or feet?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Cough'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Cough'>
                                                                 Do you cough ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -807,27 +817,32 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Nausea'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Nausea'>
                                                                 Do you get frequent Nausea?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Dizziness'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Dizziness'>
                                                                 Do you get any Dizziness ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='LossOfConsciousness'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='LossOfConsciousness'>
                                                                 Any recent loss of consciousness?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Tingling'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Tingling'>
                                                                 Any tingling sensation ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='MemoryLoss'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='MemoryLoss'>
                                                                 Any memory loss ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -842,48 +857,57 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Headaches'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Headaches'>
                                                                 Do you get frequent Headaches ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Heartburn'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Heartburn'>
                                                                 Do you get any Heart burn ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='StomachPain'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='StomachPain'>
                                                                 Do you get frequent Stomach Pain ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Vomiting'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Vomiting'>
                                                                 Do you get frequent Vomiting ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='YellowJaundice'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='YellowJaundice'>
                                                                 Do you get frequent Yellow Jaundice ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green'
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green'
                                                                       value='IncreasingConstipation'>
                                                                 Do you have frequent Increasing Constipation ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='PersistentDiarrhea'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='PersistentDiarrhea'>
                                                                 Do you get Persistent Diarrhea ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='BloodInStools'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='BloodInStools'>
                                                                 Do you get frequent Blood In Stools ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='BlackStools'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='BlackStools'>
                                                                 Do you have Black Stools ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -901,27 +925,32 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='SkinRedness'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='SkinRedness'>
                                                                 Do you get frequent Skin Redness?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Rash'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Rash'>
                                                                 Do you get frequent Rashes ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Bumps'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Bumps'>
                                                                 Any skin bumps?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='HairLoss'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='HairLoss'>
                                                                 Any Hair Loss ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='ColorChanges'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='ColorChanges'>
                                                                 Any skin Color Changes ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -937,12 +966,14 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Anemia'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Anemia'>
                                                                 Do you have Anemia?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={2}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Clots'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Clots'>
                                                                 Do you get any Clots ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -958,12 +989,14 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='FrequentUrination'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='FrequentUrination'>
                                                                 Do you get frequently urinate ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={2}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='BloodInUrine'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='BloodInUrine'>
                                                                 Do you get any blood in your Urine ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -1039,87 +1072,106 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Depression'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='Depression'>
                                                                 Do you have Depression ?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='ExcessiveWorries'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='ExcessiveWorries'>
                                                                 Do you Worry Excessively?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green'
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green'
                                                                       value='DifficultyFallingAsleep'>
                                                                 Do you have difficulty falling asleep?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green'
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green'
                                                                       value='DifficultyStayingAsleep'>
                                                                 Do you have difficulty staying asleep?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green'
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green'
                                                                       value='DifficultiesWithSexualArousal'>
                                                                 Any difficulties with sexual arousal?
                                                             </Checkbox>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='PoorAppetite'>
+                                                            <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                      colorScheme='green' value='PoorAppetite'>
                                                                 Do you have Poor Appetite?
                                                             </Checkbox>
                                                         </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='FoodCravings'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='FoodCravings'>
                                                             Any food cravings?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='FrequentCrying'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='FrequentCrying'>
                                                             Do you cry frequently?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Sensitivity'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='Sensitivity'>
                                                             Are you highly sensitive?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='SuicidalThoughts'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='SuicidalThoughts'>
                                                             Do you get Suicidal Thoughts?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Stress'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='Stress'>
                                                             Any excess stress?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Irritability'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='Irritability'>
                                                             Low Iritation tolerance?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='PoorConcentration'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='PoorConcentration'>
                                                             Do you have poor concentration?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='RacingThoughts'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='RacingThoughts'>
                                                             Do you get any racing thoughts?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Hallucinations'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='Hallucinations'>
                                                             Any hallucinations?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='GuiltyThoughts'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='GuiltyThoughts'>
                                                             Any Guilty Thoughts?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='Paranoia'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='Paranoia'>
                                                             Do you get any Paranoia?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='RapidSpeech'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='RapidSpeech'>
                                                             Any Rapid Speech problems?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='MoodSwings'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='MoodSwings'>
                                                             Any Mood Swings?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
@@ -1127,7 +1179,8 @@ const MedicalHistory = () => {
                                                             Do you fell Anxious?
                                                         </Checkbox>
                                                     </GridItem><GridItem mx={3} colSpan={1}>
-                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview} colorScheme='green' value='RiskyBehavior'>
+                                                        <Checkbox onChange={handleCheckboxChangeForSystemReview}
+                                                                  colorScheme='green' value='RiskyBehavior'>
                                                             Any Risky Behavior?
                                                         </Checkbox>
                                                     </GridItem>
@@ -1155,141 +1208,151 @@ const MedicalHistory = () => {
                             {/*SubstanceUse*/}
                             <TabPanel>
 
+
+                                <Tabs
+                                    orientation="vertical"
+                                    size="md"
+                                    colorScheme="green"
+                                >
+
+                                    <TabList>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Alcohol</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Cannabis</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Stimulants A</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Stimulants B</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Amphetamines</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Tranquilizers</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Sedatives</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Heroin</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Illicit
+                                            Methadone</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Other Opioids</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Hallucinogens</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Inhalants</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Other</Tab>
+                                    </TabList>
+                                    <TabPanels>
+
+                                        {/*Alcohol*/}
+                                        <TabPanel>
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Alcohol'/>
+
+                                        </TabPanel>
+
+                                        {/*Cannabis*/}
+                                        <TabPanel>
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Cannabis'/>
+
+                                        </TabPanel>
+
+                                        {/*Stimulants A*/}
+                                        <TabPanel>
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Stimulants A'/>
+
+                                        </TabPanel>
+
+                                        {/*Stimulants B*/}
+                                        <TabPanel>
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Stimulants B'/>
+
+                                        </TabPanel>
+
+                                        {/*Amphetamines*/}
+                                        <TabPanel>
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Amphetamines'/>
+
+                                        </TabPanel>
+
+                                        {/*Tranquilizers*/}
+                                        <TabPanel>
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Tranquilizers'/>
+
+
+                                        </TabPanel>
+
+                                        {/*Sedatives*/}
+                                        <TabPanel>
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Sedatives'/>
+
+                                        </TabPanel>
+
+                                        {/*Heroin*/}
+                                        <TabPanel>
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Heroin'/>
+
+                                        </TabPanel>
+
+                                        {/*IllicitMethadone*/}
+                                        <TabPanel>
+
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Illicit Methadone'/>
+
+
+                                        </TabPanel>
+
+                                        {/*OtherOpioids*/}
+                                        <TabPanel>
+
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Other Opioids'/>
+
+
+                                        </TabPanel>
+
+                                        {/*Hallucinogens*/}
+                                        <TabPanel>
+
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Hallucinogens'/>
+
+
+                                        </TabPanel>
+
+                                        {/*Inhalants*/}
+                                        <TabPanel>
+
+
+                                            <SubStanceInfo handleClick={handleClickForSubstanceUse}
+                                                           substance='Inhalants'/>
+
+
+                                        </TabPanel>
+
+
+                                        {/*Other*/}
+                                        <TabPanel>
+
+                                            <FormLabel>Any other Substance addiction ?</FormLabel>
+                                            <Textarea h={250}/>
+
+
+                                        </TabPanel>
+
+
+                                    </TabPanels>
+
+                                </Tabs>
                                 <form onSubmit={handleSubmit}>
-
-                                    <Tabs
-                                        orientation="vertical"
-                                        size="md"
-                                        colorScheme="green"
-                                    >
-
-                                        <TabList>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Alcohol</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Cannabis</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Stimulants A</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Stimulants B</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Amphetamines</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Tranquilizers</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Sedatives</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Heroin</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Illicit
-                                                Methadone</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Other Opioids</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Hallucinogens</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Inhalants</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Other</Tab>
-                                        </TabList>
-                                        <TabPanels>
-
-                                            {/*Alcohol*/}
-                                            <TabPanel>
-
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Alcohol'/>
-                                                </FormControl>
-
-                                            </TabPanel>
-
-                                            {/*Cannabis*/}
-                                            <TabPanel>
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Cannabis'/>
-                                                </FormControl>
-                                            </TabPanel>
-
-                                            {/*Stimulants A*/}
-                                            <TabPanel>
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Stimulants A'/>
-                                                </FormControl>
-                                            </TabPanel>
-
-                                            {/*Stimulants B*/}
-                                            <TabPanel>
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Stimulants B'/>
-                                                </FormControl>
-                                            </TabPanel>
-
-                                            {/*Amphetamines*/}
-                                            <TabPanel>
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Amphetamines'/>
-                                                </FormControl>
-                                            </TabPanel>
-
-                                            {/*Tranquilizers*/}
-                                            <TabPanel>
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Tranquilizers'/>
-                                                </FormControl>
-
-                                            </TabPanel>
-
-                                            {/*Sedatives*/}
-                                            <TabPanel>
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Sedatives'/>
-                                                </FormControl>
-                                            </TabPanel>
-
-                                            {/*Heroin*/}
-                                            <TabPanel>
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Heroin'/>
-                                                </FormControl>
-                                            </TabPanel>
-
-                                            {/*IllicitMethadone*/}
-                                            <TabPanel>
-
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Illicit Methadone'/>
-                                                </FormControl>
-
-                                            </TabPanel>
-
-                                            {/*OtherOpioids*/}
-                                            <TabPanel>
-
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Other Opioids'/>
-                                                </FormControl>
-
-                                            </TabPanel>
-
-                                            {/*Hallucinogens*/}
-                                            <TabPanel>
-
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Hallucinogens'/>
-                                                </FormControl>
-
-                                            </TabPanel>
-
-                                            {/*Inhalants*/}
-                                            <TabPanel>
-
-                                                <FormControl display='flex' alignItems='center'>
-                                                    <SubStanceInfo substance='Inhalants'/>
-                                                </FormControl>
-
-                                            </TabPanel>
-
-
-                                            {/*Other*/}
-                                            <TabPanel>
-
-                                                <FormLabel>Any other Substance addiction ?</FormLabel>
-                                                <Textarea h={250}/>
-
-
-                                            </TabPanel>
-
-
-                                        </TabPanels>
-
-                                    </Tabs>
 
                                     <Button my={5} w='full' type="submit">Submit</Button>
                                 </form>
