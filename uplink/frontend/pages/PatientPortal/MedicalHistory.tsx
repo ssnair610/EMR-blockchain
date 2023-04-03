@@ -7,12 +7,16 @@ IDE : GoLand
 */
 
 import * as React from 'react';
-import {SyntheticEvent, useState} from 'react';
+import {SyntheticEvent, useEffect, useState} from 'react';
 import {
+    Alert,
+    AlertIcon,
     Button,
     Card,
+    Center,
     Checkbox,
     CheckboxGroup,
+    CloseButton,
     Container,
     Divider,
     FormControl,
@@ -20,6 +24,8 @@ import {
     GridItem,
     Heading,
     Input,
+    InputGroup,
+    InputRightElement,
     Select,
     SimpleGrid,
     Stack,
@@ -36,72 +42,81 @@ import SideDrawer from "../Props-TypeScript/SideDrawer";
 import NavBar from "../Props-TypeScript/NavBar";
 import Cookie from "../Props-TypeScript/Cookie";
 import SubStanceInfo from "../Props-TypeScript/SubStanceInfo";
+import {AddIcon} from "@chakra-ui/icons";
 import FamilyDetails from "../Props-TypeScript/FamilyDetails";
+import MedicationData from "../Props-TypeScript/MedicationData";
 
 interface CheckboxItem {
     value: string;
     isChecked: boolean;
 }
 
-
 const MedicalHistory = () => {
-
 
     const url = 'http://localhost:3000/api/user'
     let {name: name} = Cookie(url);
     const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
 
     let [formData, setFormData] = useState({
-        RecentWeightGain: "",
-        JointSwelling: "",
-        OtherProblems: "",
-    })
+            RecentWeightGain: "",
+            JointSwelling: "",
+            OtherProblems: "",
+        }),
+        pastMedicalHistory,
+        personalHistory,
+        systemReview;
+
 
     const [checkedItemsForPastMedicalHistory, setCheckedItemsForPastMedicalHistory] = useState<CheckboxItem[]>([]),
         [checkedItemsForPersonalHistory, setCheckedItemsForPersonalHistory] = useState<CheckboxItem[]>([]),
-        [checkedItemsForSystemReview, setCheckedItemsForSystemReview] = useState<CheckboxItem[]>([]);
-
-
-    /*
-    TODO:
-        1.Add material status data to the EMR object
-        2.Add ui and backend for multiple children , sibling and all the properties which require an []
-        3.Sort out Current Medications panel
-        4.Add toasts to substance use , faimly history and over all properties
-     */
-
-
-    const [BirthProblems, setBirthProblems] = useState(''),
+        [checkedItemsForSystemReview, setCheckedItemsForSystemReview] = useState<CheckboxItem[]>([]),
+        [siblings, setSiblings] = useState({}),
+        [SiblingsArray, setSiblingsArray] = useState([]),
+        [children, setChildren] = useState({}),
+        [ChildrenArray, setChildrenArray] = useState([]),
+        [componentCountSibling, setComponentCountSibling] = useState(0),
+        [componentCountChildren, setComponentCountChildren] = useState(0),
+        [componentCountMedicationData, setComponentCountMedicationData] = useState(0),
+        [componentCountSubStance, setComponentCountSubStance] = useState(0),
+        [Medication, setMedication] = useState({}),
+        [MedicationArray, setMedicationArray] = useState([]),
+        [Substance, setSubstance] = useState({}),
+        [SubstanceArray, setSubstanceArray] = useState([]),
+        [BirthProblems, setBirthProblems] = useState(''),
         [PlaceOfBirth, setPlaceOfBirth] = useState(''),
-        //[MaritalStatus, setMaritalStatus] = useState(''),
         [LatestOccupation, setLatestOccupation] = useState(''),
         [HoursPerWeek, setHoursPerWeek] = useState(''),
         [DescSSI, setDescSSI] = useState(''),
         [LegalProblems, setLegalProblems] = useState(''),
-        [Religion, setReligion] = useState('');
-
-    let pastMedicalHistory,
-        personalHistory,
-        systemReview;
+        [Religion, setReligion] = useState(''),
+        [DrugAllergies, setDrugAllergies] = useState(''),
+        [PastMedicalDataOther, setPastMedicalDataOther] = useState(''),
+        [selectedValue, setSelectedValue] = useState(""),
+        [showAlert, setShowAlert] = useState(false),
+        [MaternalRelativeIssues, setMaternalRelativeIssues] = useState(''),
+        [PaternalRelativeIssues, setPaternalRelativeIssues] = useState('');
+    /*
+    TODO:
+        4.Add toasts to substance use , faimly history and over all properties
+     */
 
     /*Will show an alert if the page is going to be refreshed as the data might not have been submitted */
-    //const [showAlert, setShowAlert] = useState(false);
 
-    // useEffect(() => {
-    //     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-    //         event.preventDefault();
-    //         event.returnValue = "";
-    //         setShowAlert(true);
-    //     };
-    //     window.addEventListener("beforeunload", handleBeforeUnload);
-    //     return () => {
-    //         window.removeEventListener("beforeunload", handleBeforeUnload);
-    //     };
-    // }, []);
-    //
-    // const handleClose = () => {
-    //     setShowAlert(false);
-    // };
+    useEffect(() => {
+        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+            event.preventDefault();
+            event.returnValue = "";
+            setShowAlert(true);
+        };
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        return () => {
+            window.removeEventListener("beforeunload", handleBeforeUnload);
+        };
+    }, []);
+
+    const handleClose = () => {
+        setShowAlert(false);
+    };
 
 
     const handleCheckboxChangeForPastMedicalHistory = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -171,6 +186,77 @@ const MedicalHistory = () => {
     }
 
 
+    const handleClickForSibling = obj => {
+        setSiblings(emp => ({...emp, ...obj}))
+        setSiblingsArray((prevSiblings) => [...prevSiblings, obj]);
+    }
+
+    const handleClickForChildren = obj => {
+        setChildren(emp => ({...emp, ...obj}))
+        setChildrenArray((prevSiblings) => [...prevSiblings, obj]);
+    }
+
+    const handleClickForMedication = obj => {
+        setMedication(emp => ({...emp, ...obj}))
+        setMedicationArray((prevSiblings) => [...prevSiblings, obj]);
+    }
+
+
+    const handleClickForSubstance = obj => {
+        setSubstance(emp => ({...emp, ...obj}))
+        setSubstanceArray((prevSiblings) => [...prevSiblings, obj]);
+    }
+
+    function handleButtonClick(mode) {
+
+        if (mode === 'Siblings') {
+            setComponentCountSibling(componentCountSibling + 1);
+        } else if (mode === 'Children') {
+            setComponentCountChildren(componentCountChildren + 1)
+        } else if (mode === 'medicationData') {
+            setComponentCountMedicationData(componentCountMedicationData + 1)
+        } else if (mode === 'Substance') {
+            setComponentCountSubStance(componentCountSubStance + 1)
+
+        }
+    }
+
+    const renderComponents = (mode: string) => {
+
+        if (mode === 'Siblings') {
+            const components = [];
+            for (let i = 0; i < componentCountSibling; i++) {
+                components.push(< FamilyDetails mode={mode} handleClick={handleClickForSibling} key={i}/>);
+            }
+            return components;
+        } else if (mode === 'Children') {
+            const components = [];
+            for (let i = 0; i < componentCountChildren; i++) {
+                components.push(< FamilyDetails mode={mode} handleClick={handleClickForChildren} key={i}/>);
+            }
+            return components;
+        } else if (mode === 'medicationData') {
+            const components = [];
+            for (let i = 0; i < componentCountMedicationData; i++) {
+                components.push(< MedicationData handleClick={handleClickForMedication} key={i}/>);
+            }
+            return components;
+
+        } else if (mode === 'Substance') {
+            const components = [];
+            for (let i = 0; i < componentCountSubStance; i++) {
+                components.push(< SubStanceInfo substance='Others' handleClick={handleClickForSubstance} key={i}/>);
+            }
+            return components;
+        }
+    };
+
+
+    const handleSelectChange = (event) => {
+        setSelectedValue(event.target.value);
+    };
+
+
     // @ts-ignore
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
@@ -190,19 +276,19 @@ const MedicalHistory = () => {
             return obj;
         }, {});
 
-
-        formData = {
-            ...formData,
-            ...systemReview,
-        };
-
         const emrData = {
-            // CurrentMedications: currentMedications,
-            PastMedicalHistory: pastMedicalHistory,
+            CurrentMedications: {
+                DrugAllergies: DrugAllergies.split(','),
+                Medications: MedicationArray
+            },
+            PastMedicalHistory: {
+                ...pastMedicalHistory,
+                Other: PastMedicalDataOther.split(',')
+            },
             PersonalHistory: {
                 BirthProblems: BirthProblems,
                 PlaceOfBirth: PlaceOfBirth,
-                //MaritalStatus: MaritalStatus,
+                MaritalStatus: selectedValue,
                 LatestOccupation: LatestOccupation,
                 StatusWorking: personalHistory.StatusWorking,
                 HoursPerWeek: HoursPerWeek,
@@ -211,11 +297,24 @@ const MedicalHistory = () => {
                 LegalProblems: LegalProblems,
                 Religion: Religion,
             },
-            FamilyHistory,
-            SystemsReview: {
-                PreviousSymptoms: formData
+            FamilyHistory: {
+                ...FamilyHistory,
+                Siblings: SiblingsArray,
+                Children: ChildrenArray,
+                MaternalRelativeIssues: MaternalRelativeIssues,
+                PaternalRelativeIssues: PaternalRelativeIssues
             },
-            SubstanceUse: SubstanceUse,
+            SystemsReview: {
+                PreviousSymptoms: {
+                    ...formData,
+                    ...systemReview
+                }
+            },
+            SubstanceUse: {
+                ...SubstanceUse,
+                Others: SubstanceArray
+
+            },
         }
 
         console.log(emrData);
@@ -226,13 +325,13 @@ const MedicalHistory = () => {
 
     return (
         <>
-            {/*{showAlert && (*/}
-            {/*    <Alert status="warning">*/}
-            {/*        <AlertIcon/>*/}
-            {/*        Are you sure you want to leave this page? All unsaved changes will be lost.*/}
-            {/*        <CloseButton position="absolute" right="8px" top="8px" onClick={handleClose}/>*/}
-            {/*    </Alert>*/}
-            {/*)}*/}
+            {showAlert && (
+                <Alert status="warning">
+                    <AlertIcon/>
+                    Are you sure you want to leave this page? All unsaved changes will be lost.
+                    <CloseButton position="absolute" right="8px" top="8px" onClick={handleClose}/>
+                </Alert>
+            )}
 
 
             <NavBar mode='patient' name={name}/>
@@ -263,139 +362,231 @@ const MedicalHistory = () => {
 
                             {/*Current Medication*/}
                             <TabPanel>
-                                <FormControl display='flex' alignItems='center'>
 
-                                    <SimpleGrid columns={1} spacing={5}>
+                                <Tabs
+                                    orientation="vertical"
+                                    size="md"
+                                    colorScheme="green"
+                                >
 
-                                        <GridItem>
+                                    <TabList>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Drug Allergies</Tab>
+                                        <Tab _focus={{outline: "none"}} fontWeight="semibold">Medications</Tab>
+                                    </TabList>
 
-                                            <FormLabel>Drug Allergies</FormLabel>
-                                            <Input my={3} variant='outline' placeholder='e.g: Skin Rash'/>
-                                        </GridItem>
-                                        <GridItem>
+                                    <TabPanels>
 
-                                            <FormLabel>Medications</FormLabel>
-                                            <Input my={3} variant='outline' placeholder='e.g: Insulin'/>
-                                        </GridItem>
-                                    </SimpleGrid>
-                                </FormControl>
+                                        {/*Drug Allergies*/}
+                                        <TabPanel>
+
+                                            <form onSubmit={handleSubmit}>
+                                                <FormControl display='flex' alignItems='center'>
+
+                                                    <SimpleGrid columns={3} spacing={5}>
+
+                                                        <GridItem colSpan={3}>
+
+                                                            <FormLabel>Drug Allergies</FormLabel>
+                                                            <Input my={3} variant='outline'
+                                                                   onChange={e => setDrugAllergies(e.target.value)}
+                                                                   placeholder='e.g: Skin Rash'/>
+                                                        </GridItem>
+                                                        <GridItem colSpan={3}>
+                                                            <Button my={5} w='full' type="submit">Submit</Button>
+                                                        </GridItem>
+
+                                                    </SimpleGrid>
+                                                </FormControl>
+                                            </form>
+
+
+                                        </TabPanel>
+                                        <TabPanel>
+
+
+                                            {renderComponents('medicationData')}
+                                            <Card p={5} bg={bgColor}>
+
+
+                                                <Center>
+                                                    <Button onClick={() => {
+                                                        handleButtonClick('medicationData')
+                                                    }}>
+                                                        <AddIcon/>
+                                                    </Button>
+                                                </Center>
+
+                                            </Card>
+
+
+                                        </TabPanel>
+                                    </TabPanels>
+
+                                </Tabs>
 
 
                             </TabPanel>
 
                             {/*PastMedicalHistory*/}
                             <TabPanel>
-                                <form onSubmit={handleSubmit}>
 
-                                    <FormControl display='flex' alignItems='center'>
+                                <FormControl display='flex' alignItems='center'>
 
-                                        <SimpleGrid columns={1} spacing={5}>
+                                    <SimpleGrid columns={1} spacing={5}>
 
-                                            <GridItem>
+                                        <GridItem>
 
-                                                <CheckboxGroup colorScheme='green'>
-                                                    <Stack spacing={[10, 10]} direction={['column', 'row']}>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Diabetes'>Diabetes</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='HighBloodPressure'>High Blood
-                                                            Pressure</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='HighCholesterol'>High Cholesterol</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Hypothyroidism '>Hypothyroidism </Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Goiter'>Goiter </Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Hepatitis'>Hepatitis</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Leukemia'>Leukemia </Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Psoriasis'>Psoriasis </Checkbox>
+                                            <CheckboxGroup colorScheme='green'>
+                                                <Stack spacing={[10, 10]} direction={['column', 'row']}>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Diabetes'>Diabetes</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='HighBloodPressure'>High Blood
+                                                        Pressure</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='HighCholesterol'>High Cholesterol</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Hypothyroidism '>Hypothyroidism </Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Goiter'>Goiter </Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Hepatitis'>Hepatitis</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Leukemia'>Leukemia </Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Psoriasis'>Psoriasis </Checkbox>
 
-                                                    </Stack>
-                                                </CheckboxGroup>
+                                                </Stack>
+                                            </CheckboxGroup>
 
-                                            </GridItem>
-                                            <GridItem my={3}>
+                                        </GridItem>
+                                        <GridItem my={3}>
 
-                                                <CheckboxGroup colorScheme='green'>
-                                                    <Stack spacing={[10, 10]} direction={['column', 'row']}>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Angina'>Angina </Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='HeartProblems'>Heart
-                                                            Problems</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='HeartMurmur'>Heart
-                                                            Murmur</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Pneumonia'>Pneumonia</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='PulmonaryEmbolism'>Pulmonary
-                                                            Embolism</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Asthma'>Asthma</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Emphysema'>Emphysema</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Stroke'>Stroke</Checkbox>
-                                                    </Stack>
-                                                </CheckboxGroup>
+                                            <CheckboxGroup colorScheme='green'>
+                                                <Stack spacing={[10, 10]} direction={['column', 'row']}>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Angina'>Angina </Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='HeartProblems'>Heart
+                                                        Problems</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='HeartMurmur'>Heart
+                                                        Murmur</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Pneumonia'>Pneumonia</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='PulmonaryEmbolism'>Pulmonary
+                                                        Embolism</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Asthma'>Asthma</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Emphysema'>Emphysema</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Stroke'>Stroke</Checkbox>
+                                                </Stack>
+                                            </CheckboxGroup>
 
-                                            </GridItem>
+                                        </GridItem>
 
-                                            <GridItem my={3}>
+                                        <GridItem my={3}>
 
-                                                <CheckboxGroup colorScheme='green'>
-                                                    <Stack spacing={[10, 10]} direction={['column', 'row']}>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Epilepsy'>Epilepsy </Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Cataracts'>Cataracts </Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='KidneyDisease'>Kidney
-                                                            Disease</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='KidneyStones'>Kidney
-                                                            Stones</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='CrohnsDisease'>Crohns
-                                                            Disease</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Colitis'>Colitis</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Anemia'>Anemia</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Jaundice'>Jaundice</Checkbox>
+                                            <CheckboxGroup colorScheme='green'>
+                                                <Stack spacing={[10, 10]} direction={['column', 'row']}>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Epilepsy'>Epilepsy </Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Cataracts'>Cataracts </Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='KidneyDisease'>Kidney
+                                                        Disease</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='KidneyStones'>Kidney
+                                                        Stones</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='CrohnsDisease'>Crohns
+                                                        Disease</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Colitis'>Colitis</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Anemia'>Anemia</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Jaundice'>Jaundice</Checkbox>
 
-                                                    </Stack>
-                                                </CheckboxGroup>
+                                                </Stack>
+                                            </CheckboxGroup>
 
-                                            </GridItem>
-                                            <GridItem my={3}>
+                                        </GridItem>
+                                        <GridItem my={3}>
 
-                                                <CheckboxGroup colorScheme='green'>
-                                                    <Stack spacing={[10, 10]} direction={['column', 'row']}>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='PepticUlcer'>Peptic
-                                                            Ulcer</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='RheumaticFever'>Rheumatic Fever</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Tuberculosis'>Tuberculosis</Checkbox>
-                                                        <Checkbox onChange={handleCheckboxChangeForPastMedicalHistory}
-                                                                  value='Aids'>Aids</Checkbox>
+                                            <CheckboxGroup colorScheme='green'>
+                                                <Stack spacing={[10, 10]} direction={['column', 'row']}>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='PepticUlcer'>Peptic
+                                                        Ulcer</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='RheumaticFever'>Rheumatic Fever</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Tuberculosis'>Tuberculosis</Checkbox>
+                                                    <Checkbox
+                                                        onChange={handleCheckboxChangeForPastMedicalHistory}
+                                                        value='Aids'>Aids</Checkbox>
 
 
-                                                    </Stack>
-                                                </CheckboxGroup>
+                                                </Stack>
+                                            </CheckboxGroup>
 
-                                            </GridItem>
+                                        </GridItem>
 
-                                        </SimpleGrid>
-                                    </FormControl>
-                                </form>
+
+                                        <GridItem colSpan={1}>
+                                            <form onSubmit={handleSubmit}>
+
+                                                <FormLabel>Other ?</FormLabel>
+
+                                                <InputGroup size='md'>
+                                                    <Input
+                                                        onChange={e => setPastMedicalDataOther(e.target.value)} my={3}
+                                                        variant='outline'
+                                                        placeholder='e.g: Inhalants'
+                                                    />
+                                                    <InputRightElement width='50' my={3}>
+                                                        <Button w='full' type="submit">Submit</Button>
+                                                    </InputRightElement>
+                                                </InputGroup>
+
+                                            </form>
+                                        </GridItem>
+
+
+                                    </SimpleGrid>
+                                </FormControl>
 
 
                             </TabPanel>
@@ -425,7 +616,8 @@ const MedicalHistory = () => {
                                             <GridItem mx={3} colSpan={1}>
 
                                                 <FormLabel>MaritalStatus</FormLabel>
-                                                <Select variant='filled' my={5}>
+                                                <Select placeholder="Marital status" onChange={handleSelectChange}
+                                                        variant='filled' my={5}>
                                                     <option value='Married'>Married</option>
                                                     <option value='Single'>Single</option>
                                                 </Select>
@@ -507,6 +699,7 @@ const MedicalHistory = () => {
                                     </TabList>
                                     <TabPanels>
 
+
                                         {/*Father*/}
                                         <TabPanel>
 
@@ -525,7 +718,19 @@ const MedicalHistory = () => {
                                         {/*Siblings*/}
                                         <TabPanel>
 
-                                            <FamilyDetails mode={'Sibling'} handleClick={handleClick}/>
+                                            {renderComponents('Siblings')}
+                                            <Card p={5} bg={bgColor}>
+
+
+                                                <Center>
+                                                    <Button onClick={() => {
+                                                        handleButtonClick('Siblings')
+                                                    }}>
+                                                        <AddIcon/>
+                                                    </Button>
+                                                </Center>
+
+                                            </Card>
 
 
                                         </TabPanel>
@@ -533,15 +738,44 @@ const MedicalHistory = () => {
                                         {/*Children*/}
                                         <TabPanel>
 
-                                            <FamilyDetails mode={'Children'} handleClick={handleClick}/>
 
+                                            {renderComponents('Children')}
+                                            <Card p={5} bg={bgColor}>
+
+
+                                                <Center>
+                                                    <Button onClick={() => {
+                                                        handleButtonClick('Children')
+                                                    }}>
+                                                        <AddIcon/>
+                                                    </Button>
+                                                </Center>
+
+                                            </Card>
 
                                         </TabPanel>
 
                                         {/*Maternal Relative Issues*/}
                                         <TabPanel>
 
-                                            <FamilyDetails mode={'Maternal Relative Issues'} handleClick={handleClick}/>
+                                            <form onSubmit={handleSubmit}>
+                                                <FormControl display='flex' alignItems='center'>
+
+                                                    <SimpleGrid columns={3} spacing={5}>
+
+                                                        <GridItem colSpan={3}>
+
+                                                            <Input my={3} variant='outline'
+                                                                   onChange={e => setMaternalRelativeIssues(e.target.value)}
+                                                                   placeholder='e.g: Skin Rash'/>
+                                                        </GridItem>
+                                                        <GridItem colSpan={3}>
+                                                            <Button my={5} w='full' type="submit">Submit</Button>
+                                                        </GridItem>
+
+                                                    </SimpleGrid>
+                                                </FormControl>
+                                            </form>
 
 
                                         </TabPanel>
@@ -549,7 +783,25 @@ const MedicalHistory = () => {
                                         {/*Paternal Relative Issues*/}
                                         <TabPanel>
 
-                                            <FamilyDetails mode={'Paternal Relative Issues'} handleClick={handleClick}/>
+
+                                            <form onSubmit={handleSubmit}>
+                                                <FormControl display='flex' alignItems='center'>
+
+                                                    <SimpleGrid columns={3} spacing={5}>
+
+                                                        <GridItem colSpan={3}>
+
+                                                            <Input my={3} variant='outline'
+                                                                   onChange={e => setPaternalRelativeIssues(e.target.value)}
+                                                                   placeholder='e.g: Skin Rash'/>
+                                                        </GridItem>
+                                                        <GridItem colSpan={3}>
+                                                            <Button my={5} w='full' type="submit">Submit</Button>
+                                                        </GridItem>
+
+                                                    </SimpleGrid>
+                                                </FormControl>
+                                            </form>
 
                                         </TabPanel>
 
@@ -576,8 +828,10 @@ const MedicalHistory = () => {
                                             <Tab _focus={{outline: "none"}} fontWeight="semibold">Ears</Tab>
                                             <Tab _focus={{outline: "none"}} fontWeight="semibold">Eyes</Tab>
                                             <Tab _focus={{outline: "none"}} fontWeight="semibold">Throat</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Heart and Lungs</Tab>
-                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Nervous System</Tab>
+                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Heart and
+                                                Lungs</Tab>
+                                            <Tab _focus={{outline: "none"}} fontWeight="semibold">Nervous
+                                                System</Tab>
                                             <Tab _focus={{outline: "none"}} fontWeight="semibold">Stomach and
                                                 Intestines</Tab>
                                             <Tab _focus={{outline: "none"}} fontWeight="semibold">Skin</Tab>
@@ -734,7 +988,8 @@ const MedicalHistory = () => {
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
                                                             <Checkbox onChange={handleCheckboxChangeForSystemReview}
-                                                                      colorScheme='green' value='FrequentSoreThroats'>
+                                                                      colorScheme='green'
+                                                                      value='FrequentSoreThroats'>
                                                                 Do you get frequent sore throats ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -830,7 +1085,8 @@ const MedicalHistory = () => {
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
                                                             <Checkbox onChange={handleCheckboxChangeForSystemReview}
-                                                                      colorScheme='green' value='LossOfConsciousness'>
+                                                                      colorScheme='green'
+                                                                      value='LossOfConsciousness'>
                                                                 Any recent loss of consciousness?
                                                             </Checkbox>
                                                         </GridItem>
@@ -895,7 +1151,8 @@ const MedicalHistory = () => {
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
                                                             <Checkbox onChange={handleCheckboxChangeForSystemReview}
-                                                                      colorScheme='green' value='PersistentDiarrhea'>
+                                                                      colorScheme='green'
+                                                                      value='PersistentDiarrhea'>
                                                                 Do you get Persistent Diarrhea ?
                                                             </Checkbox>
                                                         </GridItem>
@@ -1012,12 +1269,14 @@ const MedicalHistory = () => {
 
                                                     <SimpleGrid columns={3} spacing={5}>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <FormLabel>What was you age when you had your first periods
+                                                            <FormLabel>What was you age when you had your first
+                                                                periods
                                                                 ?</FormLabel>
                                                             <Input my={3} variant='outline' placeholder='e.g: 15'/>
                                                         </GridItem>
                                                         <GridItem mx={3} colSpan={1}>
-                                                            <FormLabel>How many times were you pregnant ?</FormLabel>
+                                                            <FormLabel>How many times were you pregnant
+                                                                ?</FormLabel>
                                                             <Input my={3} variant='outline' placeholder='e.g: 1'/>
                                                         </GridItem>
                                                         <GridItem mx={3} my={0} colSpan={1}>
@@ -1034,7 +1293,8 @@ const MedicalHistory = () => {
                                                             <Input my={3} variant='outline' placeholder='e.g: 60'/>
                                                         </GridItem>
                                                         <GridItem m={10} colSpan={1}>
-                                                            <Checkbox colorScheme='green' value='NightSweats '>Do you
+                                                            <Checkbox colorScheme='green' value='NightSweats '>Do
+                                                                you
                                                                 have
                                                                 Regular
                                                                 Periods?</Checkbox>
@@ -1342,8 +1602,20 @@ const MedicalHistory = () => {
                                         {/*Other*/}
                                         <TabPanel>
 
-                                            <FormLabel>Any other Substance addiction ?</FormLabel>
-                                            <Textarea h={250}/>
+
+                                            {renderComponents('Substance')}
+                                            <Card p={5} bg={bgColor}>
+
+
+                                                <Center>
+                                                    <Button onClick={() => {
+                                                        handleButtonClick('Substance')
+                                                    }}>
+                                                        <AddIcon/>
+                                                    </Button>
+                                                </Center>
+
+                                            </Card>
 
 
                                         </TabPanel>

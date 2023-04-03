@@ -21,16 +21,28 @@ const FamilyDetails = (props: { mode: string, handleClick: any }) => {
     // @ts-ignore
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
+        let data;
 
-        const data = {
-            [props.mode]: {
+        if (props.mode === 'Siblings' || props.mode === 'Children') {
+            data = {
                 Age: Age,
                 Health: Health,
                 AgeAtDeath: AgeAtDeath,
                 Cause: Cause,
-            },
-        };
+            }
+        } else {
+            data = {
+                [props.mode]: {
+                    Age: Age,
+                    Health: Health,
+                    AgeAtDeath: AgeAtDeath,
+                    Cause: Cause,
+                },
+            };
+        }
+
         props.handleClick(data)
+
 
     };
 
@@ -39,8 +51,6 @@ const FamilyDetails = (props: { mode: string, handleClick: any }) => {
         <>
             <form onSubmit={handleSubmit}>
                 <FormControl display='flex' alignItems='center'>
-
-
                     <SimpleGrid columns={3} spacing={5}>
 
                         <GridItem mx={3} colSpan={1}>
@@ -67,7 +77,6 @@ const FamilyDetails = (props: { mode: string, handleClick: any }) => {
                         <GridItem mx={3} colSpan={3}>
                             <Button my={5} w='full' type="submit">Submit</Button>
                         </GridItem>
-
 
                     </SimpleGrid>
                 </FormControl>

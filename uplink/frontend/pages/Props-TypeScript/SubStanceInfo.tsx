@@ -55,18 +55,38 @@ const SubStanceInfo = (props: { substance: string, handleClick: any }) => {
                 return obj;
             }, {});
 
+            let data;
 
-            const data = {
-                [props.substance]: {
-                    Category: Category,
-                    AgeOfFirstUsed: AgeOfFirstUsed,
-                    AmountAndFrequency: AmountAndFrequency,
-                    Duration: Duration,
-                    LastUsage: LastUsage,
-                    CurrentlyUsing: CurrentlyUsing,
-                    ...subStanceUse
-                },
-            };
+
+            if(props.substance === 'Others'){
+                data = {
+
+                        Category: Category,
+                        AgeOfFirstUsed: AgeOfFirstUsed,
+                        AmountAndFrequency: AmountAndFrequency,
+                        Duration: Duration,
+                        LastUsage: LastUsage,
+                        CurrentlyUsing: CurrentlyUsing,
+                        ...subStanceUse
+
+                }
+
+            }
+            else {
+                data = {
+                    [props.substance]: {
+                        Category: Category,
+                        AgeOfFirstUsed: AgeOfFirstUsed,
+                        AmountAndFrequency: AmountAndFrequency,
+                        Duration: Duration,
+                        LastUsage: LastUsage,
+                        CurrentlyUsing: CurrentlyUsing,
+                        ...subStanceUse
+                    },
+                };
+
+            }
+
 
             props.handleClick(data)
 
