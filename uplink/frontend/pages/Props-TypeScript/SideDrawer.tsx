@@ -75,8 +75,8 @@ const SideDrawer = (props: { mode: string }) => {
 
 
                 <GridItem colSpan={1}>
-                    <Link href={'/profile'} style={{textDecoration: 'none'}}><Button size='lg'
-                                                                                     w='full'>Profile</Button></Link>
+                    <Link href={'/medicalHistory'} style={{textDecoration: 'none'}}><Button size='lg'
+                                                                                     w='full'>Medical History</Button></Link>
                 </GridItem>
 
 
