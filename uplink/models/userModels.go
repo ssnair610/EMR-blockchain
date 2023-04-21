@@ -1,6 +1,9 @@
 package models
 
-import "go.mongodb.org/mongo-driver/bson/primitive"
+import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
+)
 
 type (
 	User struct {
@@ -10,16 +13,18 @@ type (
 		Password []byte             `json:"-"`
 	}
 	UserDetails struct {
-		ID            primitive.ObjectID `json:"ID,omitempty" bson:"_id,omitempty"`
-		Name          string             `json:"Name,omitempty"`
-		Email         string             `json:"Email,omitempty"`
-		Age           int64              `json:"Age,omitempty"`
-		PhoneNumber   string             `json:"PhoneNumber,omitempty"`
-		DoctorsName   string             `json:"DoctorsName,omitempty"`
-		Ailments      []string           `json:"Ailments,omitempty"`
-		Medication    []string           `json:"Medication,omitempty"`
-		Address       string             `json:"Address,omitempty"`
-		PatientStatus string             `json:"PatientStatus,omitempty"`
-		Gender        string             `json:"Gender,omitempty"`
+		ID                    primitive.ObjectID `json:"ID,omitempty" bson:"_id,omitempty"`
+		CreatedDate           time.Time          `json:"CreatedDate"`
+		Name                  string             `json:"Name"`
+		Birthdate             string             `json:"Birthdate"`
+		Age                   uint8              `json:"Age"`
+		Gender                string             `json:"Gender"`
+		ModeOfReach           string             `json:"ModeOfReach"`
+		SymptomsBrief         string             `json:"SymptomsBrief"`
+		PrevPractitioners     string             `json:"PrevPractitioners"`
+		PsychHospitalizations string             `json:"PsychHospitalizations"`
+		StatusECT             string             `json:"StatusECT"`
+		StatusPsychotherapy   string             `json:"StatusPsychotherapy"`
+		Email                 string             `json:"Email"`
 	}
 )

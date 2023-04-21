@@ -27,7 +27,7 @@ export default function Home() {
                     <SlideFade in={show} offsetX="-100px" transition={{enter: {duration: 0.8}}}>
                         <Card w='full' p={5}>
 
-                            <Heading my={3}>MediBlock</Heading>
+                            <Heading my={3}>Virtualica</Heading>
                             <Divider my={3}/>
                             <Text>
                                 Welcome to our company! We are excited to offer you a cutting-edge solution for

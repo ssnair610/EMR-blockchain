@@ -38,7 +38,7 @@ export default function Login() {
     const submit = async (e: SyntheticEvent) => {
 
         e.preventDefault();
-        const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch('http://localhost:3000/api/login', {
             body: JSON.stringify({
                     Email,
                     Password

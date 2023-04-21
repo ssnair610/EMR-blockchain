@@ -1,330 +1,314 @@
 {
   "PersonalData": {
-    "creation date": "2022-01-01T10:00:00Z",
-    "name": "John Doe",
-    "birthdate": {
-      "Year": 2001,
-      "Month": 6,
-      "Day": 26
+    "CreatedDate": "2022-03-31T10:15:30Z",
+    "Name": "John Doe",
+    "Birthdate": {
+      "Year": 1990,
+      "Month": 1,
+      "Day": 15
     },
-    "age": 32,
-    "gender": "male",
-    "mode of reach": "phone",
-    "symptoms brief": "Anxiety, depression",
-    "previous practitioners": "Dr. Smith",
-    "psychiatric hospitalizations": "none",
-    "ECT": false,
-    "Psychotherapy": true
+    "Age": 30,
+    "Gender": "Male",
+    "ModeOfReach": "Referral",
+    "SymptomsBrief": "Anxiety and depression",
+    "PrevPractitioners": "Dr. Smith",
+    "PsychHospitalizations": "None",
+    "StatusECT": false,
+    "StatusPsychotherapy": true
   },
   "CurrentMedications": {
-    "drug allergies": [
-      "penicillin",
-      "sulfa drugs"
+    "DrugAllergies": [
+      "Penicillin",
+      "Aspirin",
+      "Ibuprofen"
     ],
-    "medications": [
+    "Medications": [
       {
-        "drug name": "Lisinopril",
-        "dose": "10 mg",
-        "duration": "1 month"
+        "Name": "Lisinopril",
+        "Dose": "10mg",
+        "Duration": "1 week"
       },
       {
-        "drug name": "Metformin",
-        "dose": "500 mg",
-        "duration": "3 months"
+        "Name": "Metformin",
+        "Dose": "500mg",
+        "Duration": "2 times daily"
+      },
+      {
+        "Name": "Atorvastatin",
+        "Dose": "20mg",
+        "Duration": "1 month"
       }
     ]
   },
   "PastMedicalHistory": {
-    "diabetes": true,
-    "high blood pressure": false,
-    "high cholesterol": true,
-    "hypothyroidism": false,
-    "goiter": false,
-    "cancer type": "breast",
-    "luekemia": false,
-    "psoriasis": true,
-    "angina": false,
-    "heart problems": true,
-    "heart murmur": false,
-    "pneumonia": false,
-    "pulmonary embolism": true,
-    "asthma": true,
-    "emphysema": false,
-    "stroke": false,
-    "epilepsy": true,
-    "cataracts": false,
-    "kidney disease": true,
-    "kidney stones": false,
-    "crohns disease": false,
-    "colitis": true,
-    "anemia": false,
-    "jaundice": true,
-    "hepatitis": false,
-    "peptic ulcer": false,
-    "rheumatic fever": true,
-    "tuberculosis": false,
-    "aids": false,
-    "others": [
-      "migraines",
-      "allergies"
+    "Diabetes": true,
+    "HighBloodPressure": false,
+    "HighCholesterol": true,
+    "Hypothyroidism": false,
+    "Goiter": false,
+    "CancerType": "Breast",
+    "Leukemia": true,
+    "Psoriasis": false,
+    "Angina": true,
+    "HeartProblems": false,
+    "HeartMurmur": true,
+    "Pneumonia": false,
+    "PulmonaryEmbolism": false,
+    "Asthma": true,
+    "Emphysema": false,
+    "Stroke": true,
+    "Epilepsy": false,
+    "Cataracts": true,
+    "KidneyDisease": false,
+    "KidneyStones": true,
+    "CrohnsDisease": false,
+    "Colitis": true,
+    "Anemia": false,
+    "Jaundice": true,
+    "Hepatitis": false,
+    "PepticUlcer": true,
+    "RheumaticFever": false,
+    "Tuberculosis": true,
+    "Aids": false,
+    "Others": [
+      "Allergy",
+      "Migraine"
     ]
   },
   "PersonalHistory": {
-    "birth problems": "none",
-    "place of birth": "New York, NY",
-    "marital status": 1,
-    "latest occupation": "software engineer",
-    "currently working": true,
-    "hours per week": 40.5,
-    "SSI status": false,
-    "SSI description": "",
-    "legal problems": "none",
-    "religion": "Christian"
+    "BirthProblems": "Some Birth Problems",
+    "PlaceOfBirth": "Some Place of Birth",
+    "MaritalStatus": "Married",
+    "LatestOccupation": "Software Engineer",
+    "StatusWorking": true,
+    "HoursPerWeek": "40",
+    "StatusSSI": false,
+    "DescSSI": "",
+    "LegalProblems": "Some Legal Problems",
+    "Religion": "Christianity"
   },
   "FamilyHistory": {
-    "father history": {
-      "member age": 68,
-      "health and psychiatric": "hypertension",
-      "age at death": 78,
-      "cause": "heart attack"
+    "Father": {
+      "Age": 60,
+      "HealthAndPsychiatric": "No significant health or psychiatric issues",
+      "AgeAtDeath": 75,
+      "Cause": "Natural causes"
     },
-    "mother history": {
-      "member age": 70,
-      "health and psychiatric": "diabetes",
-      "age at death": 72,
-      "cause": "cancer"
+    "Mother": {
+      "Age": 55,
+      "HealthAndPsychiatric": "Diagnosed with diabetes",
+      "AgeAtDeath": 65,
+      "Cause": "Heart attack"
     },
-    "siblings history": [
+    "Siblings": [
       {
-        "member age": 42,
-        "health and psychiatric": "asthma",
-        "age at death": 0,
-        "cause": "n/a"
+        "Age": 40,
+        "HealthAndPsychiatric": "No known health or psychiatric issues",
+        "AgeAtDeath": 0,
+        "Cause": ""
       },
       {
-        "member age": 45,
-        "health and psychiatric": "none",
-        "age at death": 0,
-        "cause": "n/a"
+        "Age": 35,
+        "HealthAndPsychiatric": "Diagnosed with hypertension",
+        "AgeAtDeath": 0,
+        "Cause": ""
       }
     ],
-    "children history": [
+    "Children": [
       {
-        "member age": 30,
-        "health and psychiatric": "none",
-        "age at death": 0,
-        "cause": "n/a"
-      },
-      {
-        "member age": 35,
-        "health and psychiatric": "depression",
-        "age at death": 0,
-        "cause": "n/a"
+        "Age": 30,
+        "HealthAndPsychiatric": "No significant health or psychiatric issues",
+        "AgeAtDeath": 0,
+        "Cause": ""
       }
     ],
-    "maternal relative problems": "none",
-    "paternal relative problems": "none"
+    "MaternalRelativeIssues": "Family history of breast cancer",
+    "PaternalRelativeIssues": ""
   },
   "SystemsReview": {
-    "previous symptoms": {
-      "recent weight gain": 5.7,
-      "fatigue": true,
-      "weakness": false,
-      "fever": true,
-      "night sweats": false,
-      "numbness": true,
-      "joint pain": false,
-      "muscle weakness": true,
-      "joint swelling": "left knee",
-      "ringing in the ears": false,
-      "loss of hearing": true,
-      "eye pain": false,
-      "eye redness": true,
-      "loss of vision": false,
-      "blurred vision": true,
-      "eye dryness": false,
-      "frequent sore throats": true,
-      "throat hoarseness": false,
-      "difficulty in swallowing": true,
-      "pain in jaw": false,
-      "chest pain": true,
-      "palpitations": false,
-      "shortness of breath": true,
-      "fainting": false,
-      "swollen legs or feet": true,
-      "cough": false,
-      "headaches": true,
-      "dizziness": false,
-      "loss of consciousness": true,
-      "tingling": false,
-      "memory loss": true,
-      "nausea": false,
-      "heartburn": true,
-      "stomach pain": false,
-      "vomiting": true,
-      "yellow jaundice": false,
-      "increasing constipation": true,
-      "persistent diarrhea": false,
-      "blood in stools": true,
-      "black stools": false,
-      "skin redness": true,
-      "rash": false,
-      "bumps": true,
-      "hair loss": false,
-      "color changes": true,
-      "anemia": false,
-      "clots": true,
-      "frequent urination": false,
-      "blood in urine": true,
-      "abnormal pap smear": false,
-      "irregular periods": true,
-      "bleeding between periods": false,
-      "PMS": true,
-      "depression": false,
-      "excessive worries": true,
-      "difficulty falling asleep": false,
-      "difficulty staying asleep": true,
-      "difficulties with sexual arousal": false,
-      "poor appetite": true,
-      "food cravings": false,
-      "frequent crying": true,
-      "sensitivity": false,
-      "suicidal thoughts": true,
-      "stress": false,
-      "irritability": true,
-      "poor concentration": false,
-      "racing thoughts": true,
-      "hallucinations": false,
-      "rapid speech": true,
-      "guilty thoughts": false,
-      "paranoia": true,
-      "mood swings": false,
-      "anxiety": true,
-      "risky behavior": false,
-      "other problems": "none"
+    "PreviousSymptoms": {
+      "RecentWeightGain": "Yes",
+      "Fatigue": true,
+      "Weakness": false,
+      "Fever": true,
+      "NightSweats": false,
+      "Numbness": true,
+      "JointPain": false,
+      "MuscleWeakness": true,
+      "JointSwelling": "No",
+      "RingingInTheEars": false,
+      "LossOfHearing": true,
+      "EyePain": false,
+      "EyeRedness": true,
+      "LossOfVision": false,
+      "BlurredVision": true,
+      "EyeDryness": false,
+      "FrequentSoreThroats": true,
+      "ThroatHoarseness": false,
+      "DifficultyInSwallowing": true,
+      "PainInJaw": false,
+      "ChestPain": true,
+      "Palpitations": false,
+      "ShortnessOfBreath": true,
+      "Fainting": false,
+      "SwollenLegsOrFeet": true,
+      "Cough": false,
+      "Headaches": true,
+      "Dizziness": false,
+      "LossOfConsciousness": true,
+      "Tingling": false,
+      "MemoryLoss": true,
+      "Nausea": false,
+      "Heartburn": true,
+      "Stomach pain": false,
+      "Vomiting": true,
+      "YellowJaundice": false,
+      "IncreasingConstipation": true,
+      "PersistentDiarrhea": false,
+      "BloodInStools": true,
+      "Blackstools": false,
+      "SkinRedness": true,
+      "Rash": false,
+      "Bumps": true,
+      "HairLoss": false,
+      "ColorChanges": true,
+      "Anemia": false,
+      "Clots": true,
+      "FrequentUrination": false,
+      "BloodInUrine": true,
+      "AbnormalPapSmear": false,
+      "IrregularPeriods": true,
+      "BleedingBetweenPeriods": false,
+      "Pms": true,
+      "Depression": false,
+      "ExcessiveWorries": true,
+      "DifficultyFallingAsleep": false,
+      "DifficultyStayingAsleep": true,
+      "DifficultiesWithSexualArousal": false,
+      "PoorAppetite": true,
+      "FoodCravings": false,
+      "FrequentCrying": true,
+      "Sensitivity": false,
+      "SuicidalThoughts": true,
+      "Stress": false,
+      "Irritability": true,
+      "PoorConcentration": false,
+      "RacingThoughts": true,
+      "Hallucinations": false,
+      "RapidSpeech": true,
+      "GuiltyThoughts": false,
+      "Paranoia": true,
+      "MoodSwings": false,
+      "Anxiety": true,
+      "RiskyBehavior": false,
+      "OtherProblems": "None"
     },
-    "womens reproductive history": {
-      "age of first period": 12,
-      "number of pregnancies": 2,
-      "number of miscarriages": 0,
-      "number of abortions": 1,
-      "menopause age": 50,
-      "regular periods": true
+    "WomensReproductiveHistory": {
+      "AgeOfFirstPeriod": 12,
+      "NumberOfPregancies": 2,
+      "NumberOfMiscarriages": 1,
+      "NumberOfAbortions": 0,
+      "MenopauseAge": 45,
+      "RegularPeriods": true
     }
   },
   "SubstanceUse": {
-    "alcohol": {
-      "drug category": "alcohol",
-      "age when you first used this": 21,
-      "amount and frequency": "2 drinks per week",
-      "duration": "1 year",
-      "last usage": "2 weeks ago",
-      "currently using": true
+    "Alcohol": {
+      "Category": "Alcohol",
+      "AgeOfFirstUsed": 16,
+      "AmountAndFrequency": "Moderate, 2-3 times a week",
+      "Duration": "2 years",
+      "LastUsage": "1 month ago",
+      "CurrentlyUsing": false
     },
-    "cannabis": {
-      "drug category": "cannabis",
-      "age when you first used this": 25,
-      "amount and frequency": "1 joint per day",
-      "duration": "6 months",
-      "last usage": "yesterday",
-      "currently using": true
+    "Cannabis": {
+      "Category": "Cannabis",
+      "AgeOfFirstUsed": 18,
+      "AmountAndFrequency": "Occasional, once a month",
+      "Duration": "5 years",
+      "LastUsage": "2 weeks ago",
+      "CurrentlyUsing": true
     },
-    "stimulants A": {
-      "drug category": "stimulants A",
-      "age when you first used this": 18,
-      "amount and frequency": "1 pill per week",
-      "duration": "3 years",
-      "last usage": "1 month ago",
-      "currently using": false
+    "StimulantsA": {
+      "Category": "StimulantsA",
+      "AgeOfFirstUsed": 20,
+      "AmountAndFrequency": "High, daily",
+      "Duration": "1 year",
+      "LastUsage": "3 days ago",
+      "CurrentlyUsing": true
     },
-    "stimulants B": {
-      "drug category": "stimulants B",
-      "age when you first used this": 19,
-      "amount and frequency": "2 pills per day",
-      "duration": "2 months",
-      "last usage": "2 weeks ago",
-      "currently using": true
+    "StimulantsB": {
+      "Category": "StimulantsB",
+      "AgeOfFirstUsed": 22,
+      "AmountAndFrequency": "Low, weekly",
+      "Duration": "3 months",
+      "LastUsage": "1 week ago",
+      "CurrentlyUsing": false
     },
-    "amphetamines": {
-      "drug category": "amphetamines",
-      "age when you first used this": 23,
-      "amount and frequency": "1 gram per week",
-      "duration": "1 year",
-      "last usage": "3 months ago",
-      "currently using": false
+    "Amphetamines": {
+      "Category": "Amphetamines",
+      "AgeOfFirstUsed": 24,
+      "AmountAndFrequency": "None",
+      "Duration": "",
+      "LastUsage": "",
+      "CurrentlyUsing": false
     },
-    "tranquilizers": {
-      "drug category": "tranquilizers",
-      "age when you first used this": 20,
-      "amount and frequency": "2 pills per day",
-      "duration": "2 years",
-      "last usage": "2 days ago",
-      "currently using": true
+    "Tranquilizers": {
+      "Category": "Tranquilizers",
+      "AgeOfFirstUsed": 19,
+      "AmountAndFrequency": "Low, as needed",
+      "Duration": "2 years",
+      "LastUsage": "3 months ago",
+      "CurrentlyUsing": false
     },
-    "sedatives": {
-      "drug category": "sedatives",
-      "age when you first used this": 22,
-      "amount and frequency": "1 pill per day",
-      "duration": "6 months",
-      "last usage": "1 week ago",
-      "currently using": true
+    "Sedatives": {
+      "Category": "Sedatives",
+      "AgeOfFirstUsed": 25,
+      "AmountAndFrequency": "None",
+      "Duration": "",
+      "LastUsage": "",
+      "CurrentlyUsing": false
     },
-    "heroin": {
-      "drug category": "heroin",
-      "age when you first used this": 27,
-      "amount and frequency": "1 gram per week",
-      "duration": "3 years",
-      "last usage": "1 day ago",
-      "currently using": true
+    "Heroin": {
+      "Category": "Heroin",
+      "AgeOfFirstUsed": 28,
+      "AmountAndFrequency": "None",
+      "Duration": "",
+      "LastUsage": "",
+      "CurrentlyUsing": false
     },
-    "illicit methadone": {
-      "drug category": "illicit methadone",
-      "age when you first used this": 24,
-      "amount and frequency": "1 pill per day",
-      "duration": "1 year",
-      "last usage": "1 week ago",
-      "currently using": true
+    "OtherOpioids": {
+      "Category": "IllicitMethadone",
+      "AgeOfFirstUsed": 26,
+      "AmountAndFrequency": "None",
+      "Duration": "",
+      "LastUsage": "",
+      "CurrentlyUsing": false
     },
-    "other opioids": {
-      "drug category": "other opioids",
-      "age when you first used this": 26,
-      "amount and frequency": "1 pill per week",
-      "duration": "2 years",
-      "last usage": "2 months ago",
-      "currently using": false
+    "Hallucinogens": {
+      "Category": "OtherOpioids",
+      "AgeOfFirstUsed": 21,
+      "AmountAndFrequency": "Low, occasionally",
+      "Duration": "1 year",
+      "LastUsage": "3 months ago",
+      "CurrentlyUsing": false
     },
-    "hallucinogens": {
-      "drug category": "hallucinogens",
-      "age when you first used this": 21,
-      "amount and frequency": "1 dose per month",
-      "duration": "1 year",
-      "last usage": "6 months ago",
-      "currently using": false
+    "Inhalants": {
+      "Category": "Hallucinogens",
+      "AgeOfFirstUsed": 23,
+      "AmountAndFrequency": "None",
+      "Duration": "",
+      "LastUsage": "",
+      "CurrentlyUsing": false
     },
-    "inhalants": {
-      "drug category": "Solvents and gases",
-      "age when you first used this": 15,
-      "amount and frequency": "Occasional use, once or twice a month",
-      "duration": "2 years",
-      "last usage": "2 months ago",
-      "currently using": false
-    },
-    "other substances": [
+    "Others": [
       {
-        "drug category": "Prescription opioids",
-        "age when you first used this": 20,
-        "amount and frequency": "Daily use, 30mg per day",
-        "duration": "1 year",
-        "last usage": "1 month ago",
-        "currently using": true
-      },
-      {
-        "drug category": "Benzodiazepines",
-        "age when you first used this": 22,
-        "amount and frequency": "Occasional use, once or twice a week",
-        "duration": "6 months",
-        "last usage": "1 week ago",
-        "currently using": true
+        "Category": "Inhalants",
+        "AgeOfFirstUsed": 30,
+        "AmountAndFrequency": "None",
+        "Duration": "",
+        "LastUsage": "",
+        "CurrentlyUsing": false
       }
     ]
   }

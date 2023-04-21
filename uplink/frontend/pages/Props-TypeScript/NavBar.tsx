@@ -24,6 +24,7 @@ import {
 import {CloseIcon, HamburgerIcon, MoonIcon, SunIcon} from '@chakra-ui/icons';
 import {Logo} from "./Logo";
 import {useNavigate} from "react-router-dom";
+import SearchPage from "./SearchPage";
 
 
 const NavLink = ({children}: { children: ReactNode }) => (
@@ -141,6 +142,9 @@ export default function withAction(props: { name: string, mode: string }) {
                             <Link style={{textDecoration: 'none'}} href='/AboutUs'>About Us</Link>
                         </HStack>
                     </HStack>
+
+                    <SearchPage/>
+
                     <Flex alignItems={'center'} gap='2'>
                         <Button onClick={toggleColorMode}>
                             {colorMode === 'light' ? <MoonIcon/> : <SunIcon/>}
@@ -151,7 +155,7 @@ export default function withAction(props: { name: string, mode: string }) {
 
                 {isOpen ? (
                     <Box pb={4} display={{md: 'none'}}>
-                        <Stack as={'nav'} spacing={4}>
+                        <Stack as={'nav'} spacing={5}>
                             <Link style={{textDecoration: 'none'}} href='/'>Home</Link>
                             <Link style={{textDecoration: 'none'}} href='/AboutUs'>About Us</Link>
                         </Stack>

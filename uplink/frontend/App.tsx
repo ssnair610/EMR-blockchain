@@ -15,7 +15,9 @@ import DocMainPage from "./pages/DoctorPortal/DocMainPage";
 import DocSignUp from "./pages/DoctorPortal/DocSignUp";
 import DocSettings from "./pages/DoctorPortal/DocSettings";
 import AboutUs from "./pages/PatientPortal/AboutUs";
+
 import MedicalHistory from "./pages/PatientPortal/MedicalHistory";
+import DocPatientDetailsRead from "./pages/DoctorPortal/DocPatientDetailsRead";
 
 const App = () => {
 
@@ -38,6 +40,7 @@ const App = () => {
                         <Route path="/profile" element={<UserProfile/>}/>
                         <Route path="/upLoadData" element={<UpLoadData/>}/>
                         <Route path="/medicalHistory" element={<MedicalHistory/>}/>
+                        <Route path="/patientDetails" element={<DocPatientDetailsRead/>}/>
                         <Route path="/settings" element={<Settings/>}/>
                         <Route path="/docSettings" element={<DocSettings/>}/>
                         <Route path="/AboutUs" element={<AboutUs/>}/>
