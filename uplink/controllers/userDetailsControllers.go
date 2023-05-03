@@ -26,27 +26,18 @@ func SetUserDetails(name string, email string, id interface{}, app *fiber.Ctx) e
 	defer cancel()
 
 	setUserData := bson.M{
-		"_id": id,
-
-		"name": name,
-
-		"email": email,
-
-		"phoneNumber": nil,
-
-		"doctorsName": nil,
-
-		"ailments": nil,
-
-		"medication": nil,
-
-		"address": nil,
-
-		"patientStatus": nil,
-
-		"gender": nil,
-
-		"Age": nil,
+		"_id":                   id,
+		"name":                  name,
+		"email":                 email,
+		"modeOfReach":           nil,
+		"symptomsBrief":         nil,
+		"prevPractitioners":     nil,
+		"psychHospitalizations": nil,
+		"statusECT":             nil,
+		"statusPsychotherapy":   nil,
+		"gender":                nil,
+		"age":                   nil,
+		"birthDay":              nil,
 	}
 
 	if _, err := userDetails.InsertOne(ctx, setUserData); err != nil {
@@ -56,7 +47,7 @@ func SetUserDetails(name string, email string, id interface{}, app *fiber.Ctx) e
 			return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Account doesnt exist wow	", Data: &fiber.Map{"data": err.Error()}})
 
 		}
-		fmt.Println("you shouldn't be here")
+		//fmt.Println("you shouldn't be here")
 		log.Fatal(err)
 	}
 
@@ -112,6 +103,7 @@ func UpdateUserDetails(app *fiber.Ctx) error {
 	defer cancel()
 
 	if err := app.BodyParser(&setData); err != nil {
+		fmt.Println("1")
 		return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "error", Data: &fiber.Map{"data": err.Error()}})
 	}
 
@@ -128,34 +120,15 @@ func UpdateUserDetails(app *fiber.Ctx) error {
 	objectId, err := primitive.ObjectIDFromHex(claims.Issuer)
 
 	if err != nil {
+		fmt.Println("2")
 		return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Document not found in Database", Data: &fiber.Map{"data": err.Error()}})
 	}
 
 	age, _ := strconv.ParseInt(setData["Age"], 10, 64)
-	ailments := []string{setData["Ailments"]}
-	medication := []string{setData["Medication"]}
 
 	setUserData := bson.D{
 		{
 			"name", setData["Name"],
-		},
-		{
-			"phoneNumber", setData["PhoneNumber"],
-		},
-		{
-			"doctorsName", setData["DoctorsName"],
-		},
-		{
-			"ailments", ailments,
-		},
-		{
-			"medication", medication,
-		},
-		{
-			"address", setData["Address"],
-		},
-		{
-			"patientStatus", setData["PatientStatus"],
 		},
 		{
 			"gender", setData["Gender"],
@@ -163,6 +136,22 @@ func UpdateUserDetails(app *fiber.Ctx) error {
 		{
 			"Age", age,
 		},
+		{
+			"birthdate", setData["Birthdate"],
+		},
+		{
+			"modeOfReach", setData["ModeOfReach"],
+		},
+		{
+			"symptomsBrief", setData["SymptomsBrief"]},
+
+		{"prevPractitioners", setData["PrevPractitioners"]},
+
+		{"psychHospitalizations", setData["PsychHospitalizations"]},
+
+		{"statusECT", setData["StatusECT"]},
+
+		{"statusPsychotherapy", setData["StatusPsychotherapy"]},
 	}
 
 	filter := bson.M{"_id": objectId}
@@ -171,16 +160,14 @@ func UpdateUserDetails(app *fiber.Ctx) error {
 
 	if _, err := userDetails.UpdateOne(ctx, filter, update); err != nil {
 		if err == mongo.ErrNoDocuments {
+			fmt.Println("3")
 
 			// This error means your query did not match any documents.
 			return app.Status(fiber.StatusBadRequest).JSON(responses.UserResponse{Status: fiber.StatusBadRequest, Message: "Account doesnt exist wow	", Data: &fiber.Map{"data": err.Error()}})
 
 		}
-		fmt.Println("you shouldn't be here")
 		log.Fatal(err)
 	}
-
-	fmt.Println("Data is updated")
 
 	return app.Status(fiber.StatusOK).JSON(responses.UserResponse{Status: fiber.StatusOK, Message: "Account Details Updated"})
 }

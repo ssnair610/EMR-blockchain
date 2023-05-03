@@ -2,7 +2,7 @@ import {
     Avatar,
     Box,
     Button,
-    Card, Center,
+    Card,
     Container,
     Divider,
     Flex,
@@ -11,7 +11,6 @@ import {
     GridItem,
     Heading,
     Input,
-    Select,
     SimpleGrid,
     Text,
     useColorModeValue,
@@ -31,31 +30,36 @@ export default function UserProfile() {
     const url = 'http://localhost:3000/api/getUserDetails'
     let {
         name,
-        email,
-        address,
-        phoneNumber,
-        doctorsName,
-        medication,
-        ailments,
-        patientStatus,
+        birthdate,
+        age,
         gender,
-        age
+        modeOfReach,
+        symptomsBrief,
+        prevPractitioners,
+        psychHospitalizations,
+        statusECT,
+        statusPsychotherapy,
+        email,
 
     } = Cookie(url);
 
-    const [Name, setName] = useState(''),
-        [Address, setAddress] = useState(''),
-        [PhoneNumber, setPhoneNumber] = useState(''),
-        [DoctorsName, setDoctorsName] = useState(''),
-        [Medication, setMedication] = useState(''),
-        [Ailments, setAilments] = useState(''),
-        [PatientStatus, setPatientStatus] = useState(''),
-        [Gender, setGender] = useState(''),
+
+    const [CreatedDate, setCreatedDate] = useState(''),
+        [Name, setName] = useState(''),
         [Age, setAge] = useState(''),
+        [Gender, setGender] = useState(''),
+        [ModeOfReach, setModeOfReach] = useState(''),
+        [SymptomsBrief, setSymptomsBrief] = useState(''),
+        [PrevPractitioners, setPrevPractitioners] = useState(''),
+        [PsychHospitalizations, setPsychHospitalizations] = useState(''),
+        [StatusECT, setStatusECT] = useState(''),
+        [StatusPsychotherapy, setStatusPsychotherapy] = useState(''),
+        [Birthday, setBirthday] = useState(''),
         toast = useToast();
 
 
-    let Toast
+    let
+        Toast
 
     let [inputDisabled, isInputDisabled] = useState(true);
     let [buttonData, setButtonData] = useState('Update details');
@@ -79,25 +83,28 @@ export default function UserProfile() {
 
         if (inputDisabled === true) {
 
+
+
             const response = await fetch('http://localhost:3000/api/updateUserDetails', {
                 body: JSON.stringify({
-                        Name,
-                        Age,
-                        PhoneNumber,
-                        DoctorsName,
-                        Ailments,
-                        Medication,
-                        Address,
-                        PatientStatus,
-                        Gender,
+                    CreatedDate,
+                    Name,
+                    Birthday,
+                    Age,
+                    Gender,
+                    ModeOfReach,
+                    SymptomsBrief,
+                    PrevPractitioners,
+                    PsychHospitalizations,
+                    StatusECT,
+                    StatusPsychotherapy,
+
                     }
                 ),
                 // credentials: 'include',
                 headers: {'Content-Type': 'application/json'},
                 method: 'POST'
             });
-
-            console.log(response);
 
             //
             if (response.status === 200) {
@@ -182,11 +189,10 @@ export default function UserProfile() {
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
-                                                            <FormLabel>Phone Number</FormLabel>
-                                                            <Input type='text' defaultValue={phoneNumber}
-                                                                   onChange={e => setPhoneNumber(e.target.value)}/>
+                                                            <FormLabel>Date of Birth</FormLabel>
+                                                            <Input type='text' defaultValue={Birthday}
+                                                                   onChange={e => setBirthday(e.target.value)}/>
                                                         </GridItem>
-
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Gender</FormLabel>
                                                             <Input type='text' defaultValue={gender}
@@ -194,39 +200,42 @@ export default function UserProfile() {
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
-                                                            <FormLabel>Doctor's Name</FormLabel>
-                                                            <Input type='text' defaultValue={doctorsName}
-                                                                   onChange={e => setDoctorsName(e.target.value)}/>
+                                                            <FormLabel>Mode Of Reach</FormLabel>
+                                                            <Input type='text' defaultValue={modeOfReach}
+                                                                   onChange={e => setModeOfReach(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <FormLabel>Ailments</FormLabel>
-                                                            <Input type='text' defaultValue={ailments}
+                                                            <Input type='text' defaultValue={symptomsBrief}
 
-                                                                   onChange={e => setAilments(e.target.value)}/>
+                                                                   onChange={e => setSymptomsBrief(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
-                                                            <FormLabel>Medications</FormLabel>
-                                                            <Input type='text' defaultValue={medication}
+                                                            <FormLabel>Prev Practitioners</FormLabel>
+                                                            <Input type='text' defaultValue={prevPractitioners}
 
-                                                                   onChange={e => setMedication(e.target.value)}/>
+                                                                   onChange={e => setPrevPractitioners(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
-                                                            <FormLabel>Address</FormLabel>
-                                                            <Input type='text' defaultValue={address}
-                                                                   onChange={e => setAddress(e.target.value)}/>
+                                                            <FormLabel>Psych Hospitalizations</FormLabel>
+                                                            <Input type='text' defaultValue={psychHospitalizations}
+                                                                   onChange={e => setPsychHospitalizations(e.target.value)}/>
                                                         </GridItem>
 
                                                         <GridItem colSpan={1}>
-                                                            <FormLabel>Status</FormLabel>
-                                                            <Select>
-                                                                <option>Alive</option>
-                                                                <option>Dead 💀</option>
-                                                            </Select>
-                                                        </GridItem>
+                                                            <FormLabel>ECT Status</FormLabel>
+                                                            <Input type='text' defaultValue={statusECT}
+                                                                   onChange={e => setStatusECT(e.target.value)}/>
+                                                        </GridItem><
 
+                                                        GridItem colSpan={2}>
+                                                        <FormLabel>Psychotherapy Status </FormLabel>
+                                                        <Input type='text' defaultValue={statusPsychotherapy}
+                                                               onChange={e => setStatusPsychotherapy(e.target.value)}/>
+                                                    </GridItem>
 
                                                         <GridItem colSpan={1}>
                                                             <Button size='md' w='full' colorScheme='brand' type='submit'
@@ -245,8 +254,7 @@ export default function UserProfile() {
                                     <GridItem colSpan={1}>
                                         <Container maxW='container.xl' mx={30}>
                                             <Flex>
-                                                <Divider h='500'  orientation='vertical' />
-
+                                                <Divider h='500' orientation='vertical'/>
 
 
                                                 <VStack align={'center'} mx={75}>
@@ -257,7 +265,6 @@ export default function UserProfile() {
                                                     </WrapItem>
                                                     <Text>{name}</Text>
                                                     <Text>{email}</Text>
-                                                    <Text>{phoneNumber}</Text>
                                                     <Divider orientation='horizontal' w={100}/>
                                                     <Button py={4} size='md' w='full' colorScheme='brand'>
                                                         Generate Report
@@ -266,7 +273,6 @@ export default function UserProfile() {
                                                 </VStack>
                                             </Flex>
                                         </Container>
-
 
 
                                     </GridItem>

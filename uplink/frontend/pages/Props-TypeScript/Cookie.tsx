@@ -8,22 +8,23 @@ const Cookie = (url: string) => {
     const navigate = useNavigate(),
         toast = useToast(),
         [name, getName] = useState(``),
-        [email, getEmail] = useState(''),
-        [address, getAddress] = useState(''),
-        [phoneNumber, getPhoneNumber] = useState(''),
-        [doctorsName, getDoctorsName] = useState(''),
-        [medication, getMedication] = useState(''),
-        [ailments, getAilments] = useState(''),
-        [patientStatus, getPatientStatus] = useState(''),
         [gender, getGender] = useState(``),
-        [age, getAge] = useState(``);
+        [age, getAge] = useState(``),
+        [ID, getID] = useState(``),
+        [modeOfReach, getModeOfReach] = useState(''),
+        [symptomsBrief, getSymptomsBrief] = useState(''),
+        [prevPractitioners, getPrevPractitioners] = useState(''),
+        [psychHospitalizations, getPsychHospitalizations] = useState(''),
+        [statusECT, getStatusECT] = useState(''),
+        [statusPsychotherapy, getStatusPsychotherapy] = useState(''),
+        [birthdate, getBirthdate] = useState(''),
+        [email, getEmail] = useState('');
 
 
     useEffect(() => {
             (
                 // @ts-ignore
                 async () => {
-
 
                     const response = await fetch(url, {
                         credentials: 'include',
@@ -34,18 +35,21 @@ const Cookie = (url: string) => {
 
 
                     getName(content.Name)
-                    getEmail(content.Email)
-                    getPhoneNumber(content.PhoneNumber)
-                    getDoctorsName(content.DoctorsName)
-                    getAddress(content.Address);
-                    getMedication(content.Medication)
-                    getAilments(content.Ailments)
-                    getPatientStatus(content.PatientStatus)
+
                     getGender(content.Gender)
                     getAge(content.Age)
+                    getID(content.ID)
+                    getBirthdate(content.Birthdate)
+                    getEmail(content.Email)
+                    getStatusECT(content.StatusECT)
+                    getStatusPsychotherapy(content.StatusPsychotherapy)
+                    getPrevPractitioners(content.PrevPractitioners)
+                    getPsychHospitalizations(content.PsychHospitalizations)
+                    getSymptomsBrief(content.SymptomsBrief)
+                    getModeOfReach(content.ModeOfReach)
 
 
-                    if (content.ID === undefined) {
+                    if (ID === undefined) {
                         toast({
                             title: 'Not authorized',
                             description: 'You must be logged in',
@@ -66,15 +70,17 @@ const Cookie = (url: string) => {
 
     return {
         name: name,
-        email: email,
-        address: address,
-        phoneNumber: phoneNumber,
-        doctorsName: doctorsName,
-        medication: medication,
-        ailments: ailments,
-        patientStatus: patientStatus,
-        gender: gender,
+        birthdate: birthdate,
         age: age,
+        gender: gender,
+        modeOfReach: modeOfReach,
+        symptomsBrief: symptomsBrief,
+        prevPractitioners: prevPractitioners,
+        psychHospitalizations: psychHospitalizations,
+        statusECT: statusECT,
+        statusPsychotherapy: statusPsychotherapy,
+        ID: ID,
+        email: email,
     }
 
 

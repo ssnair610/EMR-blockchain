@@ -19,12 +19,26 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 
+import { useNavigate } from "react-router-dom";
+
 
 const DocMainPage = () => {
 
     const url = 'http://localhost:3000/api/DocUser'
     let {name: name} = Cookie(url);
     const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
+
+    let navigate = useNavigate();
+
+
+    function routeChange (patientName){
+        let path = `/patientDetails`;
+        let data = { id: 123, name: patientName }; // data to be passed
+        navigate(path , {state : data});
+    }
+
+
+
 
     return (
         <>
@@ -63,10 +77,10 @@ const DocMainPage = () => {
                                 <Divider/>
                                 <CardFooter>
                                     <ButtonGroup spacing='2'>
-                                        <Button variant='solid' colorScheme='blue'>
+                                        <Button variant='solid' onClick={()=>routeChange("Bob")} colorScheme='blue'>
                                             More Information
                                         </Button>
-                                        <Button variant='ghost' colorScheme='blue'>
+                                        <Button variant='ghost'  colorScheme='blue'>
                                             Share
                                         </Button>
                                     </ButtonGroup>

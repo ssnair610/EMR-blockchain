@@ -36,7 +36,8 @@ import {
     Tabs,
     Text,
     Textarea,
-    useColorModeValue
+    useColorModeValue,
+    useToast
 } from "@chakra-ui/react";
 import SideDrawer from "../Props-TypeScript/SideDrawer";
 import NavBar from "../Props-TypeScript/NavBar";
@@ -53,8 +54,21 @@ interface CheckboxItem {
 
 const MedicalHistory = () => {
 
-    const url = 'http://localhost:3000/api/user'
-    let {name: name} = Cookie(url);
+    const url = 'http://localhost:3000/api/getUserDetails'
+    let {
+        name: name,
+        birthdate: birthdate,
+        age: age,
+        gender: gender,
+        modeOfReach: modeOfReach,
+        symptomsBrief: symptomsBrief,
+        prevPractitioners: prevPractitioners,
+        psychHospitalizations: psychHospitalizations,
+        statusECT: statusECT,
+        statusPsychotherapy: statusPsychotherapy,
+        email: email,
+    } = Cookie(url);
+
     const bgColor = useColorModeValue('gray.50', 'whiteAlpha.50');
 
     let [formData, setFormData] = useState({
@@ -64,13 +78,13 @@ const MedicalHistory = () => {
         }),
         pastMedicalHistory,
         personalHistory,
-        systemReview;
-
+        systemReview,
+        Toast;
 
     const [checkedItemsForPastMedicalHistory, setCheckedItemsForPastMedicalHistory] = useState<CheckboxItem[]>([]),
         [checkedItemsForPersonalHistory, setCheckedItemsForPersonalHistory] = useState<CheckboxItem[]>([]),
         [checkedItemsForSystemReview, setCheckedItemsForSystemReview] = useState<CheckboxItem[]>([]),
-        [siblings, setSiblings] = useState({}),
+        [, setSiblings] = useState({}),
         [SiblingsArray, setSiblingsArray] = useState([]),
         [children, setChildren] = useState({}),
         [ChildrenArray, setChildrenArray] = useState([]),
@@ -94,7 +108,12 @@ const MedicalHistory = () => {
         [selectedValue, setSelectedValue] = useState(""),
         [showAlert, setShowAlert] = useState(false),
         [MaternalRelativeIssues, setMaternalRelativeIssues] = useState(''),
-        [PaternalRelativeIssues, setPaternalRelativeIssues] = useState('');
+        [PaternalRelativeIssues, setPaternalRelativeIssues] = useState(''),
+        [FamilyHistory, setPatientFamilyDetails] = useState({}),
+        [SubstanceUse, setSubstanceUse] = useState({}),
+        toast = useToast();
+
+
     /*
     TODO:
         4.Add toasts to substance use , faimly history and over all properties
@@ -171,10 +190,6 @@ const MedicalHistory = () => {
 
 
     };
-
-    const [FamilyHistory, setPatientFamilyDetails] = useState({});
-    const [SubstanceUse, setSubstanceUse] = useState({});
-
 
     const handleClick = obj => {
         setPatientFamilyDetails(emp => ({...emp, ...obj}));
@@ -256,6 +271,7 @@ const MedicalHistory = () => {
         setSelectedValue(event.target.value);
     };
 
+    let emrData;
 
     // @ts-ignore
     const handleSubmit = async (e: SyntheticEvent) => {
@@ -276,7 +292,22 @@ const MedicalHistory = () => {
             return obj;
         }, {});
 
-        const emrData = {
+        emrData = {
+            PersonalData: {
+                // CreatedDate:,
+                Name: name,
+                Birthdate: birthdate,
+                Age: age,
+                Gender: gender,
+                ModeOfReach: modeOfReach,
+                SymptomsBrief: symptomsBrief,
+                PrevPractitioners: prevPractitioners,
+                PsychHospitalizations: psychHospitalizations,
+                StatusECT: statusECT,
+                StatusPsychotherapy: statusPsychotherapy,
+                Email: email
+
+            },
             CurrentMedications: {
                 DrugAllergies: DrugAllergies.split(','),
                 Medications: MedicationArray
@@ -317,10 +348,50 @@ const MedicalHistory = () => {
             },
         }
 
-        console.log(emrData);
-
 
     };
+
+
+    // @ts-ignore
+    const uploadData = async (e: SyntheticEvent) => {
+
+        e.preventDefault();
+
+        const response = await fetch('http://localhost:3000/api/uploadEMR', {
+            body: JSON.stringify({
+                    ...emrData
+                }
+            ),
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+            method: 'POST'
+        });
+
+
+        if (response.status === 202) {
+            Toast = (toast({
+                title: 'Successfully Uploaded the data',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+            }))
+
+        } else if (response.status === 400 || response.status === 406 || response.status === 401) {
+            Toast = (
+                toast({
+                    title: 'Something went wrong',
+                    description: 'Please try again later !!',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                })
+            )
+
+
+        }
+
+
+    }
 
 
     return (
@@ -1624,9 +1695,9 @@ const MedicalHistory = () => {
                                     </TabPanels>
 
                                 </Tabs>
-                                <form onSubmit={handleSubmit}>
+                                <form onSubmit={uploadData}>
 
-                                    <Button my={5} w='full' type="submit">Submit</Button>
+                                    <Button my={5} w='full' type="submit">Submit to blockchain</Button>
                                 </form>
 
                             </TabPanel>
